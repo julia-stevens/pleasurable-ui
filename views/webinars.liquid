@@ -1,0 +1,11 @@
+{% render "partials/head.liquid" %}
+
+    <h1>Webinars</h1>
+
+    {% for webinar in webinars %}
+        <ul>
+            <li><a href="/webinars/{{ webinar.slug }}">{{ webinar.slug }}</a></li>
+        </ul>
+    {% endfor %}
+
+{% render "partials/foot.liquid" %}
