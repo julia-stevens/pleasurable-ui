@@ -1,0 +1,99 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+  
+  /* FONT FACE */
+@font-face {
+    font-family: "Ubuntu-regular";
+    src: url(./fonts/Ubuntu-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: "Ubuntu-bold";
+    src: url(./fonts/Ubuntu-bold.ttf) format('truetype');
+}
+
+body {
+    background-color: var(--secondary-background);
+
+    /* MARK: COLORS */
+    --primary-background: #00193F;
+    --secondary-background: #E5EBF7;
+    --primary-highlight: #19B2A2;
+
+    /* TEXT COLORS */
+    --primary-text: #000A1A;
+    --secondary-text: #ffff;
+
+    /* MARK: FONTS */
+    --header-font: 'Ubuntu-bold', sans-serif;
+    --font-paragraph: 'Ubuntu-regular', sans-serif;
+
+    /* TEXT SIZES */
+    --font-size-xs: 0.5em;
+    --font-size-sm: 0.75em;
+    --font-size-md: 1em;
+    --font-size-5: 1.5em;
+    --font-size-4: 1.8em;
+    --font-size-3: 2.1rem;
+    --font-size-2: 2.5em;
+    --font-size-1: 2.8em;
+
+    /* MARK: OVERIG */
+    /* PADDING */
+    --padding-button: 8px 16px;
+    --padding-label: 6px;
+
+    /* BORDER RADIUS */
+    --border-radius-sm: 7px;
+    --border-radius-md: 15px;
+  }
+
+    /* MARK: FOCUS */
+*:focus-visible {
+    outline: 3px dashed var(--primary-highlight);
+    outline-offset: 4px;
+}
+
+/* MARK: TEXT DECO */
+h1, h2, h3, h4, h5 {
+    font-family: var(--header-font);
+    margin: 0em 0em 1em 0em;
+    padding: 0;
+}
+
+    h1 {
+        font-size: var(--font-size-1);
+    }
+
+    h2 {
+        font-size: var(--font-size-2);
+    }
+
+    h3 {
+        font-size: var(--font-size-3);
+    }
+
+    h4 {
+        font-size: var(--font-size-4);
+    }
+
+    h5 {
+        font-size: var(--font-size-5);
+    }
+
+p {
+    font-size: var(--font-size-md);
+}
+
+ul {
+    font-size: var(--border-radius-md);
+    font-family: var(--font-paragraph);
+}
+
+ol {
+    font-size: var(--border-radius-md);
+    font-family: var(--font-paragraph);
+}
