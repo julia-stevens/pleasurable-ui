@@ -19,8 +19,8 @@ body {
     background-color: var(--secondary-background);
 
     /* MARK: COLORS */
-    --primary-background: #00193F;
-    --secondary-background: #E5EBF7;
+    --primary-dark: #00193F;
+    --secondary-light: #E5EBF7;
     --primary-highlight: #19B2A2;
 
     /* TEXT COLORS */
@@ -97,3 +97,40 @@ ol {
     font-size: var(--border-radius-md);
     font-family: var(--font-paragraph);
 }
+
+/* MARK: UI COMPONENTS */
+
+/* BUTTON GREEN & HOVER */
+.button-green {
+    background-color: var(--primary-highlight);
+    color: var(--primary-dark);
+    font-family: var(--font-paragraph);
+    font-size: var(--border-radius-md);
+    padding: var(--padding-button);
+    border-radius: var(--border-radius-sm);
+    transition: 0.2s ease-in-out;
+    align-self: baseline;
+}
+    .button-green:hover {
+        background-color: var(--primary-dark);
+        color: var(--secondary-text);
+        transition: 0.2s ease-in-out;
+    }
+
+/* BUTTON WHITE & HOVER */
+.button-white {
+    background-color: var(--secondary-light);
+    color: var(--primary-text);
+    font-family: var(--font-paragraph);
+    font-size: var(--border-radius-md);
+    padding: var(--padding-button);
+    border-radius: var(--border-radius-sm);
+    transition: 0.2s ease-in-out;
+    align-self: baseline;
+}
+    .button-green:hover {
+        background-color: var(--primary-highlight);
+        color: var(--primary-text);
+        transition: 0.2s ease-in-out;
+    }
+
