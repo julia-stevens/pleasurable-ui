@@ -28,13 +28,14 @@ app.get('/', async function (request, response) {
   response.render('index.liquid')
 })
 
+app.get('/amber', async function (request, response) {
+  response.render('amber.liquid')
 
 app.get('/julia', async function (request, response) {
   response.render('julia.liquid')
 
 app.get('/anouk', async function (request, response) {
   response.render('anouk.liquid')
-
 })
 
 // Stel het poortnummer in waar Express op moet gaan luisteren
