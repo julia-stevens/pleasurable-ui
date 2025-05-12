@@ -31,20 +31,7 @@ const webinarsDetailsEndpoint = "/webinars?fields=*,speakers.*.*,resources.*.*,c
 
 // Routes
 app.get('/', async function (request, response) {
-  const speakersResponse = await fetch(`${api}${speakersEndpoint}`)
-  const speakersResponseJSON = await speakersResponse.json()
-
-app.get('/amber', async function (request, response) {
-  response.render('amber.liquid')
-})
-  console.log(speakersResponseJSON)
-
-app.get('/julia', async function (request, response) {
-  response.render('julia.liquid')
-})
-
-app.get('/anouk', async function (request, response) {
-  response.render('anouk.liquid')
+  response.render('index.liquid')
 })
 
 // Port
