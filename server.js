@@ -18,6 +18,17 @@ app.engine('liquid', engine.express())
 // Views
 app.set('views', './views')
 
+// API links
+const api = "https://fdnd-agency.directus.app/items/avl_"
+const categoriesEndpoint = "categories"
+const commentsEndpoint = "comments"
+const contouringsEndpoint = "contourings"
+const speakersEndpoint = "speakers"
+const usersEndpoint = "users"
+const webinarsEndpoint = "webinars"
+const messagesEndpoint = "messages"
+const webinarsDetailsEndpoint = "/webinars?fields=*,speakers.*.*,resources.*.*,categories.*.*"
+
 // Routes
 app.get('/', async function (request, response) {
   response.render('index.liquid')
