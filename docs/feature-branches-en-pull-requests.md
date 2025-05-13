@@ -2,7 +2,7 @@
 
 ## Feature branches & Pull requests
 
-Deze week hebben we _Branches_ en _Pull Requests_ geïntroduceerd. Door deze manier van werken te gebruiken in een Git(Hub) repository, maak je jezelf klaar voor het bedrijfsleven. Zodra je in een team werkt, zeker als junior developer, kan je werk op deze manier makkelijk, snel en goed gereviewed worden.
+Deze week hebben we _Branches_ en _Pull Requests_ geïntroduceerd. Door deze manier van werken in een Git(Hub) repository, maak je jezelf klaar voor het bedrijfsleven. Zodra je in een team werkt—zeker als junior developer—kan je werk op deze manier makkelijk, snel en goed gereviewed worden.
 
 ## Richtlijnen voor feature branches
 
