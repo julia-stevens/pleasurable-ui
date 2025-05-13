@@ -14,7 +14,9 @@ Je kunt hierdoor aan verschillende features (issues) tegelijk werken, in verschi
 
 Probeer niet te lang in dezelfde branch te werken (maximaal een paar dagen), zodat je _Short-Lived Feature Branches_ krijgt. Als je te lang in dezelfde branch aan het werk bent, is dat een teken dat je issue te groot was. Waarschijnlijk is het dan slim om dat op te splitsen, zodat het werk beter behapbaar wordt.
 
-Een andere richtlijn is dat je branches weggooit en opschoont, zodra ze gemerged zijn naar de `main` branch. Hiermee hou je je repository netjes en overzichtelijk, en kun je snel zien welke features in ontwikkeling zijn. Tijdens een standup met je team is het overzicht van branches een handige manier om te vertellen waar je mee bezig bent, waar je vastloopt en waar je hulp nodig hebt.
+Een andere richtlijn is dat je branches weggooit en opschoont, zodra ze gemerged zijn naar de `main` branch. Hiermee hou je je repository netjes en overzichtelijk, en kun je snel zien welke features in ontwikkeling zijn.
+
+Tijdens een standup met je team is het overzicht van branches een handige manier om te vertellen waar je mee bezig bent, waar je vastloopt en waar je hulp nodig hebt.
 
 ### Bronnen
 
@@ -22,8 +24,14 @@ Een andere richtlijn is dat je branches weggooit en opschoont, zodra ze gemerged
 - [Creating and deleting branches within your repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)
 
 ## Pull Requests aanmaken
+
+
+### Bronnen
+
+- [About pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
+- [Creating a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request?tool=webui)
+
 <!--
-## Aanpak
 
 Leren hoe je dit kan mergen met een pull request en review
 Hoe schrijf je een nette pull request?
