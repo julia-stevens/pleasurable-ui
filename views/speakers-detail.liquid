@@ -1,0 +1,9 @@
+{% render "partials/head.liquid" %}
+
+    <h1>Speakers detail</h1>
+
+    {% for speaker in speakers %}
+        <p>{{ speaker.slug }}</p>
+    {% endfor %}
+
+{% render "partials/foot.liquid" %}

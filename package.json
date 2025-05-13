@@ -8,7 +8,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,10 @@
   "homepage": "https://github.com/fdnd-task/pleasurable-ui#readme",
   "dependencies": {
     "express": "^5.0.1",
-    "liquidjs": "^10.21.0"
+    "liquidjs": "^10.21.0",
+    "method-override": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
