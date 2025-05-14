@@ -160,19 +160,16 @@ De Pull Requests die gemerged zijn vind je op GitHub.com terug in een overzicht 
 
 <!-- Tijdens een standup met je team is het overzicht van branches een handige manier om te vertellen waar je mee bezig bent, waar je vastloopt en waar je hulp nodig hebt. -->
 
-
-
 ## Daily Standup
 
-Elke dag begin je met een _Standup_. Een goede manier om elkaar op de hoogte te houden van vorderingen of vastlopers. De Standup duurt nooit langer dan 15 minuten. De standup doe staand en zonder computer. Het beste doe je dit niet bij je bureau.  Je lost problemen niet op, dat kan je daarna doen. 
+Als je samenwerkt begin je elke dag begin met een _Standup_. Een goede manier om elkaar op de hoogte te houden van vorderingen of vastlopers. De Standup duurt nooit langer dan 15 minuten, daarom doe je een standup ook staand en zonder computer. Ook is het verstandig om dit niet bij je bureau te doen, zo zorg je ervoor dat je niet naar code gaat kijken of gaat debuggen. Je lost problemen niet op, dat kan je daarna doen.
 
 In de standup beantwoord je altijd 3 vragen
 1. Wat heb ik gedaan sinds de vorige standup?
 2. Wat ga ik vandaag doen?
 3. Welke knelpunten verwacht je, en kan het team je daarbij helpen?
 
-
-👉 Doe een standup met je team voordat je weer in de code duikt!
+👉 Doe vandaag eerst een standup met je team voordat je weer in de code duikt!
 
 ### Bronnen
 - [De Daily standup meeting: uitleg en tips](https://scrumguide.nl/daily-standup-meeting/)
