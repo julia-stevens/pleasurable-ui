@@ -172,7 +172,7 @@ Elke dag begin je met een _Standup_. Een goede manier om elkaar op de hoogte te 
 In de standup beantwoord je altijd 3 vragen
 1. Wat heb ik gedaan sinds de vorige standup?
 2. Wat ga ik vandaag doen?
-3. Welke knelpunten verwacht je, en kan het team me daarbij helpen?
+3. Welke knelpunten verwacht je, en kan het team je daarbij helpen?
 
 
 👉 Doe een standup met je team voordat je weer in de code duikt!
