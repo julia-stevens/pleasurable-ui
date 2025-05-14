@@ -85,6 +85,7 @@ h1, h2, h3, h4, h5 {
     }
 
 p {
+    font-family: var(--font-paragraph);
     font-size: var(--font-size-md);
 }
 
@@ -128,9 +129,11 @@ ol {
     transition: 0.2s ease-in-out;
     align-self: baseline;
 }
-    .button-green:hover {
+    .button-white:hover {
         background-color: var(--primary-highlight);
         color: var(--primary-text);
         transition: 0.2s ease-in-out;
     }
+
+
 
