@@ -50,6 +50,16 @@
                 list-style-type: none;
                 display: flex;
 
+                 &:nth-of-type(4) {
+                    display: none;
+                 }
+
+                @media screen and (min-width: 1020px) {
+                    &:nth-of-type(4) {
+                        display: unset;
+                    }
+                }
+
                 a {
                     display: flex;
                     flex-direction: column;
