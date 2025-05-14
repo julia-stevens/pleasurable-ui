@@ -1,9 +1,51 @@
 {% render "partials/head.liquid" %}
 
-    <h1>Speakers detail</h1>
+    {% comment %} {% include "partials/header.liquid" %} {% endcomment %}
 
     {% for speaker in speakers %}
-        <p>{{ speaker.slug }}</p>
+        <main class="speaker-main">
+            <section class="speaker-introduction">
+                <div class="speaker-introduction-titles">
+                    <span class="speaker-meet-highlight">Meet</span>
+                    <h1 class="speaker-name">{{ speaker.fullname }}</h1>
+                    <p class="speaker-entitle">{{ speaker.entitle }}</p>
+                </div>
+
+                <div class="speaker-picture">
+                    <img src="https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}" width="200" height="200" alt="" style="object-fit:cover;">
+                </div>
+
+                <!-- Bookmark formulier -->
+                <form method="post" class="speaker-bookmark">
+                    <input type="hidden" name="textField" value="{{ speaker.id }}">
+                    <button type="submit">
+                        <span>Bookmark speaker</span>
+                        {% render "public/assets-speaker/bookmark-icon.liquid" %}
+                    </button>
+                </form>
+            </section>
+
+            <section class="speaker-about">
+                <div class="speaker-section-title">
+                    <h2>About</h2>
+                </div>
+                <div class="speaker-about-content">
+                    <p>{{ speaker.about }}</p>
+                </div>
+            </section>
+
+            <section class="speaker-featured-webinars">
+                <div class="speaker-section-title">
+                    <h2>Webinars from this speaker</h2>
+                </div>   
+                <div class="speaker-featured-webinars-overview">
+                    {{ speaker.webinars }}
+                    <!-- Hier de webinar card partial -->
+                </div>             
+            </section>
+        </main>
     {% endfor %}
+
+    {% comment %} {% include "partials/footer.liquid" %} {% endcomment %}
 
 {% render "partials/foot.liquid" %}
