@@ -11,7 +11,7 @@ Met een _Branch_ maak je een afsplitsing van de _main_, je kopieert alles mee ma
 
 Op GitHub.com en in de Github Desktop App kan je zien welke Branches er op een repository zijn en welke actief is. Hier kan je ook een nieuwe branch aanmaken of wisselen tussen branches.
 
-👉 Check in jullie project welke branches er nu zijn in jullie teamproject. Maak met je team een schematische tekening van hoe jullie repository er nu uitziet, welke branches zijn er, hoe heten ze, wie werkt in welke branch, en/of welke branches zijn al gemerged met de main?
+👉 Check op GitHub welke branches er nu zijn in jullie teamproject. Maak met je team een schematische tekening op het whiteboard van hoe jullie repository er nu uitziet, welke branches zijn er, hoe heten ze, wie werkt in welke branch, en/of welke branches zijn al gemerged met de main?
 
 
 <!-- ### Naamgeving van branches -->
@@ -51,7 +51,7 @@ git checkout name_of_the_branch
 Om jouw _branch_ weer samen te voegen naar _main_ doe je een _pull-request_. Met een _pull-request_ vraag je of iemand anders jouw aanpassing wil checken en toe wil voegen aan de _main branch_.
 
 _Pull-requests_ doe je het beste op GitHub.com.
-(het kan in de Github Desktop App of in de Terminal maar dat is een gedoe)
+(het kan in de Github Desktop App of in de Terminal, maar dat is een gedoe)
 
 ALs je een Pull Request klaarzet schrijf je instructies voor de reviewers. Schrijf wat jouw branche doet, wat het is, en geef instructies voor de reviewer. 
 
@@ -64,7 +64,6 @@ ALs je een Pull Request klaarzet schrijf je instructies voor de reviewers. Schri
 
 
 ### Merge
-
 Bij een merge voeg je twee branches samen zodat je verder kunt werken op één punt.
 
 Je kunt mergen in GH Desktop of in de Terminal. 
@@ -78,7 +77,6 @@ Je kunt mergen in GH Desktop of in de Terminal.
 -->
 
 #### Merge conflicts
-
 Als je 2 versies van hetzelfde bestand samenvoegt kan er een probleem optreden. Een zogenaamd merge conflict.
 Je kunt handmatig het merge-conflict oplossen of het in de vs-code interface uitvoeren.
 
@@ -86,12 +84,12 @@ Je kunt handmatig het merge-conflict oplossen of het in de vs-code interface uit
 
 
 ## Github workflows
-Er zijn verschillende manier hoe je met een team kan samenwerken. 
+Er zijn verschillende manier hoe je met een team kan samenwerken met Git/GitHub. 
 
 ### Centralized workflow
 Deze manier van samenwerken hebben jullie al gedaan in sprint 7. 
 
-Met je team werk je op 1 repository en push je wijzigen direct naar Github. 
+Met je team werk je op 1 repository en push je wijzigen direct naar het originele project. 
 
 <img src="workflow-centralized.svg" width="300">
 
@@ -108,7 +106,6 @@ We maken deze sprint gebruik van de Feature branch Workflow.
 
 Teamleden maken per feature een branch en mergen deze met een pull Request naar Github. Je kunt hierdoor aan verschillende features (issues) tegelijk werken, in verschillende branches. 
 
-
 <img src="workflow-feature-branche.svg" width="300">
 
 - Maak een repository aan op GitHub
@@ -124,7 +121,7 @@ git push -u origin new-feature push jouw feature naar GitHub…
 … doe een pull-request op GitHub -->
 
 ### Forking workflow
-In semster 3 ga je leren werken met de forking workflow. 
+In semester 3 ga je leren werken met de forking workflow. 
 
 Alle teamleden forken de repository, maken wijzigingen in branches op hun eigen fork en met een pull-request gaan de wijzigingen naar het originele project. 
 
