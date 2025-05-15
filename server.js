@@ -35,7 +35,7 @@ const slugFilter = "?filter[slug][_eq]=";
 // Home
 app.get("/", async function (req, res) {
   // req + res plss T-T
-  response.render("index.liquid");
+  res.render("index.liquid");
 });
 
 // webinars
