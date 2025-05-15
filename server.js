@@ -35,14 +35,14 @@ const slugFilter = "?filter[slug][_eq]=";
 // Home
 app.get("/", async function (req, res) {
   // req + res plss T-T
-  response.render("index.liquid");
+  res.render("index.liquid");
 });
 
 // webinars
 
 app.get("/webinars", async (req, res) => {
   const webinarsDetailResponse = await fetch(
-    `${webinarsEndpoint}${"webinars?fields=*,speakers.*.*,resources.*.*,categories.*.*"}`
+    `${webinarsEndpoint}?fields=*,speakers.*.*,resources.*.*,categories.*.*`
   );
   const { data: webinarsDetailResponseJson } =
     await webinarsDetailResponse.json();
@@ -83,7 +83,7 @@ app.get("/contourings/:slug", async (req, res) => {
   const { data: contouringsDetailResponseJSON } =
     await contouringsDetailResponse.json();
 
-  response.render("contourings-detail.liquid", {
+  res.render("contourings-detail.liquid", {
     contourings: contouringsDetailResponseJSON,
   });
 });
