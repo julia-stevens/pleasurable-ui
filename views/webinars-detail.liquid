@@ -1,9 +1,63 @@
 {% render "partials/head.liquid" %}
 
-    <h1>Webinars detail</h1>
+<head>
+    <link rel="stylesheet" type="text/css" href="/styles/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/styles/webinar-detail.css">
+</head>
 
-    {% for webinar in webinars %}
-        <p>{{ webinar.slug }}</p>
-    {% endfor %}
+<section class="web-detail-main">
+{% for webinar in webinars %}
 
+        <h1>{{ webinar.title }}</h1>
+
+        {% if webinar.video %}
+            <video controls width="250">
+                <source src="https://fdnd-agency.directus.app/assets/{{ webinar.video }}" width="380px"/>
+            </video>
+        {% endif %}
+
+        <section class="web-detail-watch-info">
+            <p class="web-detail-vieuws"> <img src="" alt=""> {{ webinar.views }} </p>
+            <p class="web-detail-date"> <img src="" alt="">{{ webinar.date }} </p>
+
+            {% for category in webinar.categories %}
+                <p class="web-detail-category">{{ category.avl_categories_id.name }}</p>
+            {% endfor %}
+        </section>
+
+        <section class="web-detail-algemeen-description">
+            <h2>Description</h2>
+                <details class="web-detail-description">
+                    <summary>Read description</summary>
+                    <div>
+                        <p> {{ webinar.description }} </p>
+                    </div>
+                </details>
+        </section>
+
+        <section class="web-detail-geheel-q-en-a">
+        <h2>Q & A</h2>
+            <h3>Comments</h3>
+            <section class="web-detail-comments">
+                {% for comment in comments %} 
+                        <p class="comment"> {{  comment.content }}</p>
+                {% endfor %}  
+            </section>
+
+            <h3>Ask a question</h3>
+            <section class="web-detail-q-en-a">
+                    <form action="/webinars/{{ webinar.slug }}/{{ webinar.id }}" method="post" data-enhanced="form-{{ webinar.id }}">
+                        <input type="text" name="comment" placeholder="Ask your question here..." />
+                        <button type="submit" class="button-green">Send</button>
+                    </form>
+            </section>
+
+            <section class="web-detail-geheel-speaker">
+                <h2>The speaker</h2>
+                <!-- Partial Speaker card mobile en desktop toevoegen zodra deze bestaan -->
+            </section>
+    </section>
+
+{% endfor %}
+</section>
 {% render "partials/foot.liquid" %}
