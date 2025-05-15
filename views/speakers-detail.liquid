@@ -41,8 +41,9 @@
                     <h2>Webinars from this speaker</h2>
                 </div>   
                 <div class="speaker-featured-webinars-overview">
-                    {{ speaker.webinars }}
-                    <!-- Hier de webinar card partial -->
+                    {% for webinar in speaker.webinars %}
+                        <p>{{ webinar.avl_webinars_id.title }}</p>
+                    {% endfor %} 
                 </div>             
             </section>
         </main>
