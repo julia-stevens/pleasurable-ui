@@ -27,6 +27,7 @@ const speakersEndpoint = "speakers"
 const usersEndpoint = "users"
 const webinarsEndpoint = "webinars"
 const messagesEndpoint = "messages"
+const messagesFilter = "?filter[for][_eq]=Bookmark webinar"
 const webinarsDetailsEndpoint = "webinars?fields=*,speakers.*.*,resources.*.*,categories.*.*"
 const slugFilter = "?filter[slug][_eq]="
 
@@ -38,11 +39,46 @@ app.get('/', async function (request, response) {
 
 // Webinars
 app.get('/webinars', async function (request, response) {
-  const webinarsDetailResponse = await fetch(`${api}${webinarsEndpoint}`)
+  const webinarsDetailResponse = await fetch(`${api}${webinarsDetailsEndpoint}`)
   const webinarsDetailResponseJSON = await webinarsDetailResponse.json()
 
+  const categoriesResponse = await fetch(`${api}${categoriesEndpoint}`)
+  const categoriesResponseJSON = await categoriesResponse.json()
+
+  const bookmarkResponse = await fetch(`${api}${messagesEndpoint}${messagesFilter}`)
+  const bookmarkResponseJSON = await bookmarkResponse.json()
+
+  const categoryFilter = request.query.category || ""; 
+  const sortOption = request.query.sort || "new-old";
+  const filtersActive = categoryFilter !== "" || sortOption !== "new-old";
+
+  let filteredWebinars = webinarsDetailResponseJSON.data;
+
+  if (categoryFilter) {
+    // Filter de webinars op basis van de opgegeven categorie.
+    filteredWebinars = filteredWebinars.filter(webinar => 
+      // Controleer of het webinar minstens 1 categorie heeft die overeenkomt met categoryFilter.
+      // Some geeft true als 1 of meer categorieën voldoen.
+      webinar.categories.some(category => category.avl_categories_id.name === categoryFilter)
+    );
+  }
+
+  // Sorteren op datum
+  filteredWebinars.sort((a, b) => {
+    const dateA = new Date(a.date); // Zet datum van webinar A om naar een Date-object
+    const dateB = new Date(b.date); // Zet datum van webinar B om naar een Date-object
+
+    // Als sorteeroptie "new-old" is: nieuw eerst (dateB - dateA)
+    // Anders: oud eerst (dateA - dateB)
+    return sortOption === "new-old" ? dateB - dateA : dateA - dateB;
+  });
+
   response.render('webinars.liquid', {
-    webinars: webinarsDetailResponseJSON.data
+    webinars: filteredWebinars,
+    categories: categoriesResponseJSON.data,
+    selectedCategory: categoryFilter, // Zorgt dat de juiste radio button gecheckt blijft
+    selectedSort: sortOption,
+    filtersActive
   })
 })
 
