@@ -7,7 +7,7 @@
 }
 
 .speaker-introduction {
-    padding: 0 0 2rem 0;
+    padding: 2rem 0 2rem 0;
     position: relative; 
     width: 100%;
 
@@ -23,7 +23,7 @@
         z-index: -1;
     }
 
-    @media (min-width: 1000px) {
+    @media (min-width: 1200px) {
         .speaker-introduction {
             position: relative;
         }
@@ -42,7 +42,7 @@
         .speaker-picture img {
             position: absolute;
             right: 10vw;
-            top: 0%;
+            top: 2rem;
         }
     }
 
