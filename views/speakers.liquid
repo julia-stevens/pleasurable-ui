@@ -1,11 +1,73 @@
 {% render "partials/head.liquid" %}
+    {% comment %} {% include "partials/header.liquid" %} {% endcomment %}
 
-    <h1>Speakers</h1>
+    <main class="main-speakers components-alignment-vertical">
+        <section class="speakers-introduction">
+            <div class="speakers-section-title">
+                <h1>Speakers</h1>
+            </div>
+            <div class="speakers-introduction-description">
+                <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Enim ipsum non egestas; primis luctus cubilia. Donec ut venenatis.</p>
+            </div>
+        </section>
 
-    {% for speaker in speakers %}
-        <ul>
-            <li><a href="/speakers/{{ speaker.slug }}">{{ speaker.slug }}</a></li>
-        </ul>
-    {% endfor %}
+        <section class="speakers-sort-filter">
+            <div class="speakers-section-title">
+                <h2>Filter</h2>
+            </div>
 
+            <!-- Filter formulier -->
+            <form class="speakers-filter">
+                <label>
+                    View all speakers or use the filter to view your bookmarked speakers.
+                    <select name="filter">
+                        <option value="all">All</option>
+                        <option value="bookmarked-speakers">Bookmarked speakers</option>
+                    </select>
+                </label>
+                <button type="submit" class="speakers-submit button-green">Filter speakers</button>
+            </form>
+        </section>
+
+        <section class="speakers-overview components-alignment-vertical">
+            <div class="speakers-section-title">
+                <h2>All</h2> 
+            </div>
+
+            <div class="speakers-container components-alignment-vertical">
+                <!-- Article voor elke speaker -->
+                {% for speaker in speakers %}
+                    <article class="speaker-card components-alignment-vertical">
+                        <div class="speaker-card-main components-alignment-horizontal">
+                            <div class="speaker-card-profile-picture">
+                                <img src="https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}" alt="" width="200" height="200" style="object-fit:cover;">
+                            </div>
+                            <div class="speaker-card-name-entitle">
+                                <h3>{{ speaker.fullname }}</h3>
+                                <p>{{ speaker.entitle }}</p>                       
+                            </div>
+                        </div>
+
+                        <div class="speaker-card-link">
+                            <a href="/speakers/{{ speaker.slug }}" class="components-alignment-horizontal">
+                                <span>View speaker</span>
+                                {% render "public/assets-speakers/arrow-right.liquid" %}
+                            </a>
+                        </div>
+
+                        <!-- Bookmark formulier -->
+                        <form method="post" class="speaker-bookmark">
+                            <input type="hidden" name="textField" value="{{ speaker.id }}">
+                            <button type="submit" class="button-green button-speaker-bookmark components-alignment-horizontal">
+                                <span>Bookmark speaker</span>
+                                {% render "public/assets-speakers/bookmark-icon.liquid" %}
+                            </button>
+                        </form>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    {% comment %} {% include "partials/footer.liquid" %} {% endcomment %}
 {% render "partials/foot.liquid" %}
