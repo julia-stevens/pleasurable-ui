@@ -3,8 +3,8 @@
 <section class="hero-webinars">
 
     <ul class="breadcrumb-webinars">
-        <li><a href="/">Home</a></li>
-        <li><a href="/webinars">Webinaes</a></li>
+        <li><a href="/">Home &rsaquo;</a></li>
+        <li><a href="/webinars">Webinars</a></li>
     </ul>
 
     <h1>Webinars</h1>
@@ -15,8 +15,9 @@
 
 </section>
 
-<section class="webinars">
+<section class="filter-webinars">
     <h2>Filter</h2>
+    <p>Filter webinars on category or sort on date.</p>
 
     <form action="/webinars" method="GET">
         <select name="category" id="category" class="filter-select">
@@ -35,17 +36,18 @@
             <option value="old-new" {% if selectedSort=="old-new" %}selected{% endif %}>Old to New</option>
         </select>
 
-        <button type="submit">Filter webinars</button>
+        <button class="button-green" type="submit">Filter webinars</button>
     </form>
 </section>
 
-<section>
+<section class="webinars">
     <h2>Results</h2>
 
-    {% for webinar in webinars %}
-    <ul>
-        <li>
-            <article>
+    <div class="divider-webinars"></div>
+
+    <ul class="webinar-cards">
+        {% for webinar in webinars %}
+        <li class="card">
                 <div class="wrapper-card">
                     <img class="banner" src="https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}?width=450&height=338&fit=cover"
                         alt="{{ webinar.title }}" width="350" height="300">
@@ -54,8 +56,8 @@
                         <input type="hidden" name="textField" value="{{ webinar.id }}">
                         <input type="hidden" name="forField" value="Bookmark webinar">
                         <button class="bookmark-btn" type="submit">
-                            <img src="/assets-webinars/icon-bookmark.svg" width="15" height="15" alt="">
                             <span>Add to bookmarks</span>
+                            <img src="/assets-webinars/icon-bookmark.svg" width="15" height="15" alt="">
                         </button>
                     </form>
                 </div>
@@ -74,13 +76,11 @@
                         {{ speaker.avl_speakers_id.fullname }}
                         {% endfor %}
                     </p>
-                    <a href="/webinars/{{ webinar.slug }}">View webinar <img src="/assets-webinars" alt=""></a>
+                    <a href="/webinars/{{ webinar.slug }}">View webinar<img src="/assets-webinars/icon-arrow-right.svg" alt=""></a>
                 </section>
-
-            </article>
         </li>
+            {% endfor %}
     </ul>
-    {% endfor %}
 </section>
 
 {% render "partials/foot.liquid" %}
