@@ -3,26 +3,28 @@
     {% comment %} {% include "partials/header.liquid" %} {% endcomment %}
 
     {% for speaker in speakers %}
-        <main class="speaker-main">
-            <section class="speaker-introduction">
-                <div class="speaker-introduction-titles">
+        <main class="speaker-main components-alignment-vertical">
+            <section class="speaker-introduction components-alignment-vertical">
+                <div class="speaker-introduction-titles components-alignment-vertical">
                     <span class="speaker-meet-highlight">Meet</span>
                     <h1 class="speaker-name">{{ speaker.fullname }}</h1>
                     <p class="speaker-entitle">{{ speaker.entitle }}</p>
                 </div>
 
-                <div class="speaker-picture">
-                    <img src="https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}" width="200" height="200" alt="" style="object-fit:cover;">
-                </div>
+                <div class="speaker-picture-bookmark components-alignment-vertical">
+                    <div class="speaker-picture">
+                        <img src="https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}" width="200" height="200" alt="" style="object-fit:cover;">
+                    </div>
 
-                <!-- Bookmark formulier -->
-                <form method="post" class="speaker-bookmark">
-                    <input type="hidden" name="textField" value="{{ speaker.id }}">
-                    <button type="submit">
-                        <span>Bookmark speaker</span>
-                        {% render "public/assets-speaker/bookmark-icon.liquid" %}
-                    </button>
-                </form>
+                    <!-- Bookmark formulier -->
+                    <form method="post" class="speaker-bookmark">
+                        <input type="hidden" name="textField" value="{{ speaker.id }}">
+                        <button type="submit" class="button-green button-speaker-bookmark components-alignment-horizontal">
+                            <span>Bookmark speaker</span>
+                            {% render "public/assets-speaker/bookmark-icon.liquid" %}
+                        </button>
+                    </form>
+                </div>
             </section>
 
             <section class="speaker-about">
