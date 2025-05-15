@@ -200,3 +200,30 @@
         }
     }
 }
+
+/* -------- Loading animation webinar en form ----------- */
+
+.bookmark-webinar-form.loading span {
+    display: none;
+}
+
+.bookmark-webinar-form.loading button::before {
+    content: 'Loading..';
+}
+
+
+.bookmark-webinar-form.loading button img {
+    content: url('/assets-webinars/icon-loading.svg');
+    font-size: 14px;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -7,7 +7,7 @@
                 alt="{{ webinar.title }}" width="350" height="300">
             <p class="duration">{{ webinar.duration }}</p>
             {% assign webinarIdString = webinar.id | string | strip %}
-            <form class="bookmark-webinar-form" method="POST" action="/webinars">
+            <form class="bookmark-webinar-form" method="POST" action="/webinars" data-enhanced="form-{{ webinar.id}}">
                 <input type="hidden" name="textField" value="{{ webinar.id }}">
                 <input type="hidden" name="forField" value="Bookmark webinar">
                 <button type="submit">
