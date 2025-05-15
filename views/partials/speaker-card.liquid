@@ -1,0 +1,27 @@
+<article class="speaker-card components-alignment-vertical">
+    <div class="speaker-card-main components-alignment-horizontal">
+        <div class="speaker-card-profile-picture">
+            <img src="https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}" alt="" width="200" height="200" style="object-fit:cover;">
+        </div>
+        <div class="speaker-card-name-entitle">
+            <h3>{{ speaker.fullname }}</h3>
+            <p>{{ speaker.entitle }}</p>                       
+        </div>
+    </div>
+
+    <div class="speaker-card-link">
+        <a href="/speakers/{{ speaker.slug }}" class="components-alignment-horizontal">
+            <span>View speaker</span>
+            {% render "public/assets-speakers/arrow-right.liquid" %}
+        </a>
+    </div>
+
+    <!-- Bookmark formulier -->
+    <form method="post" class="speaker-bookmark">
+        <input type="hidden" name="textField" value="{{ speaker.id }}">
+        <button type="submit" class="button-green button-speaker-bookmark components-alignment-horizontal">
+            <span>Bookmark speaker</span>
+            {% render "public/assets-speakers/bookmark-icon.liquid" %}
+        </button>
+    </form>
+</article>
