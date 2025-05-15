@@ -7,12 +7,12 @@
   /* FONT FACE */
 @font-face {
     font-family: "Ubuntu-regular";
-    src: url(./font/Ubuntu-Regular.ttf) format('truetype');
+    src: url(/font/Ubuntu-Regular.ttf) format('truetype');
 }
 
 @font-face {
     font-family: "Ubuntu-bold";
-    src: url(./font/Ubuntu-bold.ttf) format('truetype');
+    src: url(/font/Ubuntu-bold.ttf) format('truetype');
 }
 
 body {
