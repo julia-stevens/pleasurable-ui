@@ -1,0 +1,171 @@
+/* MARK: Alignment herhalende componenten */
+.components-alignment-horizontal {
+    display: flex; 
+    align-items: center;
+    gap: .5rem;
+}
+
+.components-alignment-vertical {
+    display: flex; 
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* MARK: Knoppen styling */
+button {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+}
+
+.button-speaker-bookmark {
+    svg,path,circle {
+        transition: .2s ease-in-out;
+    }
+
+    &:hover {
+        path:first-of-type {
+            fill: white;
+            stroke: white;
+        }
+        circle {
+            fill: white; 
+            stroke: #000A1A; 
+        }
+        path:nth-of-type(2) {
+            fill: #000A1A; 
+        }
+    }
+}
+
+/* MARK: Main */
+.main-speakers {
+    gap: 2rem;
+}
+
+/* MARK: Speakers introduction */
+.speakers-introduction {
+    .speakers-section-title {
+        h1 {
+            margin: 0 0 1rem 0;
+        }
+    }
+    .speakers-introduction-description {
+        max-width: 575px;
+    }
+}
+
+/* MARK: Speakers filter */
+.speakers-sort-filter {
+    background-color: var(--secondary-light);
+    padding: 1rem 0;
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+    @media (min-width: 1000px) {
+        padding: 1rem;
+        max-width: max-content;
+        border-radius: var(--border-radius-md);
+    }
+}
+
+.speakers-filter {
+    label {
+        font-family: var(--font-paragraph); 
+    }
+
+    select {
+        display: block; 
+        margin: 1rem 0;
+    }
+}
+
+
+/* MARK: Speakers overview */
+.speakers-container {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    container-type: inline-size;
+    container-name: speaker-card; 
+}
+
+@container speaker-card (width > 870px) {
+    .speaker-card-main {
+        flex-direction: column;
+    }
+}
+
+.speakers-overview {  
+    .speakers-section-title {
+        h2 {
+            margin: 0; 
+        }
+    }
+}
+
+/* MARK: Styling speaker card */
+.speaker-card {
+    position: relative;
+    background-color: var(--secondary-light);
+    border-radius: var(--border-radius-md);
+    padding: calc(35px + 1rem) 1rem 1rem 1rem;
+    width: 100%;
+    max-width: 390px;
+
+    .speaker-card-main {
+        gap: 1rem;
+
+        .speaker-card-name-entitle {
+            h3 {
+                font-size: var(--font-size-5);
+                margin: 0;
+            }
+            p {
+                font-size: var(--font-size-md);
+            }
+        }
+        .speaker-card-profile-picture {
+            img {
+                object-fit: cover;
+                border-radius: 50%;
+                width: 20cqw;
+                height: 20cqw;
+                min-width: 80px;
+                min-height: 80px;
+                max-width: 200px;
+                max-height: 200px;
+            }
+        }
+    }
+
+    .speaker-card-link {
+        display: flex; 
+        justify-content: flex-end;
+
+        a {
+            width: max-content;
+            transition: .2s ease-in-out;
+
+            svg, path {
+                transition: .2s ease-in-out;
+            }
+            &:hover {
+                path {
+                    fill: var(--primary-highlight); 
+                }
+                svg {
+                    translate: 50% 0%;
+                }
+            }
+        }
+    }
+
+    .speaker-bookmark {
+        position: absolute; 
+        top: 0;
+        right: 0;
+    }
+}
