@@ -3,17 +3,6 @@
     margin: 0;
     padding: 0;
 }
-  
-  /* FONT FACE */
-@font-face {
-    font-family: "Ubuntu-regular";
-    src: url(./fonts/Ubuntu-Regular.ttf) format('truetype');
-}
-
-@font-face {
-    font-family: "Ubuntu-bold";
-    src: url(./fonts/Ubuntu-bold.ttf) format('truetype');
-}
 
 body {
     background-color: var(--secondary-background);
@@ -28,13 +17,21 @@ body {
     --secondary-text: #ffff;
 
     /* MARK: FONTS */
-    --header-font: 'Ubuntu-bold', sans-serif;
-    --font-paragraph: 'Ubuntu-regular', sans-serif;
+    --header-font: 'Ubuntu', sans-serif;
+    --font-paragraph: 'Ubuntu', sans-serif;
+
+    /* FONT WEIGHT */
+    --font-weight-300: 300; 
+    --font-weight-400: 400; 
+    --font-weight-500: 500; 
+    --font-weight-700: 700; 
 
     /* TEXT SIZES */
     --font-size-xs: 0.5em;
     --font-size-sm: 0.75em;
     --font-size-md: 1em;
+    
+    --font-size-6: 1.1em;
     --font-size-5: 1.5em;
     --font-size-4: 1.8em;
     --font-size-3: 2.1em;
@@ -57,8 +54,9 @@ body {
     outline-offset: 4px;
 }
 
+
 /* MARK: TEXT DECO */
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, h6 {
     font-family: var(--header-font);
     margin: 0em 0em 1em 0em;
     padding: 0;
@@ -82,6 +80,10 @@ h1, h2, h3, h4, h5 {
 
     h5 {
         font-size: var(--font-size-5);
+    }
+
+    h6 {
+        font-size: var(--font-size-6);
     }
 
 p {
