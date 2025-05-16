@@ -59,11 +59,11 @@ body {
 }
 
 /* MARK: TEXT DECO */
-h1, h2, h3, h4, h5, h6 {
+/* h1, h2, h3, h4, h5, h6 {
     font-family: var(--header-font);
     margin: 0em 0em 1em 0em;
     padding: 0;
-}
+} */
 
     h1 {
         font-size: var(--font-size-1);
