@@ -3,8 +3,8 @@
     margin: 0;
     padding: 0;
 }
-  
-  /* FONT FACE */
+
+/* FONT FACE */
 @font-face {
     font-family: "Ubuntu-regular";
     src: url(./fonts/Ubuntu-Regular.ttf) format('truetype');
@@ -50,44 +50,44 @@ body {
     /* BORDER RADIUS */
     --border-radius-sm: 7px;
     --border-radius-md: 15px;
-  }
+}
 
-    /* MARK: FOCUS */
+/* MARK: FOCUS */
 *:focus-visible {
     outline: 3px dashed var(--primary-highlight);
     outline-offset: 4px;
 }
 
 /* MARK: TEXT DECO */
-h1, h2, h3, h4, h5, h6 {
+/* h1, h2, h3, h4, h5, h6 {
     font-family: var(--header-font);
     margin: 0em 0em 1em 0em;
     padding: 0;
+} */
+
+h1 {
+    font-size: var(--font-size-1);
 }
 
-    h1 {
-        font-size: var(--font-size-1);
-    }
+h2 {
+    font-size: var(--font-size-2);
+}
 
-    h2 {
-        font-size: var(--font-size-2);
-    }
+h3 {
+    font-size: var(--font-size-3);
+}
 
-    h3 {
-        font-size: var(--font-size-3);
-    }
+h4 {
+    font-size: var(--font-size-4);
+}
 
-    h4 {
-        font-size: var(--font-size-4);
-    }
+h5 {
+    font-size: var(--font-size-5);
+}
 
-    h5 {
-        font-size: var(--font-size-5);
-    }
-
-    h6 {
-        font-size: var(--font-size-6);
-    }
+h6 {
+    font-size: var(--font-size-6);
+}
 
 p {
     font-family: var(--font-paragraph);
@@ -117,11 +117,12 @@ ol {
     transition: 0.2s ease-in-out;
     align-self: baseline;
 }
-    .button-green:hover {
-        background-color: var(--primary-dark);
-        color: var(--secondary-text);
-        transition: 0.2s ease-in-out;
-    }
+
+.button-green:hover {
+    background-color: var(--primary-dark);
+    color: var(--secondary-text);
+    transition: 0.2s ease-in-out;
+}
 
 /* BUTTON WHITE & HOVER */
 .button-white {
@@ -134,11 +135,9 @@ ol {
     transition: 0.2s ease-in-out;
     align-self: baseline;
 }
-    .button-white:hover {
-        background-color: var(--primary-highlight);
-        color: var(--primary-text);
-        transition: 0.2s ease-in-out;
-    }
 
-
-
+.button-white:hover {
+    background-color: var(--primary-highlight);
+    color: var(--primary-text);
+    transition: 0.2s ease-in-out;
+}
