@@ -135,7 +135,7 @@ app.get("/speakers", async (req, res) => {
 app.get("/speakers/:slug", async (req, res) => {
   const slug = req.params.slug;
   const speakersDetailResponse = await fetch(
-    `${speakersEndpoint}${slugFilter}${slug}`
+    `${speakersEndpoint}${slugFilter}${slug}&fields=*,webinars.*.*`
   );
   const { data: speakersDetailResponseJSON } =
     await speakersDetailResponse.json();
