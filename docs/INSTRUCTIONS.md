@@ -14,7 +14,7 @@ Zorg dat je duidelijke afspraken maakt en elkaar dagelijks op de hoogte houdt va
 
 
 - [Sprint Planning](sprint-planning.md)
-- [Feature brances & Pull requests](feature-branches-en-pull-requests.md)
+- [Feature branches & Pull requests](feature-branches-en-pull-requests.md)
 - [Code/Design review - Week 1](code-design-review-week-1.md)
 - [Pleasurable is in the details](pleasurable-is-in-the-details.md)
 - [Client-Side Scripting for UX](client-side-scripting-for-ux.md)
@@ -29,7 +29,7 @@ Deze opdracht is done als:
 - [ ] Je hebt je website samen ontworpen en gemaakt en de website is online gepubliceerd
 - [ ] Je hebt met een team met feature branches verschillende versies gemaakt en gemerged
 - [ ] Je hebt gestructureerd samengewerkt met een projectboard, issues, MoSCoW, assignees en Pull Requests
-- [ ] Je hebt feedback gegeven en gekregen via Pull Request en de feedback verwerkt
+- [ ] Je hebt feedback gegeven en gekregen via Pull Requests en de feedback verwerkt
 - [ ] Je hebt feedback en taken van de vorige sprints opgepakt en verwerkt
 - [ ] Je hebt het eindresultaat gepresenteerd aan de opdrachtgever en ontwerpkeuzes beschreven in de Readme
 - [ ] Je hebt client-side scripting technieken gebruikt voor een “Pleasurable User Interface”
