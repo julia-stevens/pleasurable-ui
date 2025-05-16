@@ -1,0 +1,106 @@
+body {
+  background-color: #f4f6fa;
+}
+
+.contourings-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+@media (min-width: 37.5rem) {
+  .contourings-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 56.25rem) {
+  .contourings-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.contouring-card {
+  background: #ffffff; /* white */
+  border-radius: 0.2rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(11, 29, 74, 0.1); /* subtle dark blue tint */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e0e6f0;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.contouring-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.contouring-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+
+.contouring-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  color: #0d0d2a; /* primary text */
+}
+
+.contouring-user {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-name {
+  font-size: 0.875rem;
+  color: #777777; /* secondary text */
+  margin: 0;
+}
+
+.look-now-button {
+  margin-top: auto;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  background: #1ab1a2; /* primary highlight */
+  color: #ffffff; /* white text */
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  align-self: flex-start;
+  transition: background 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.look-now-button:hover {
+  background: #14887f; /* darker turquoise for hover */
+}
+
+/* Optional arrow icon for "Look now ->" */
+
+.look-now-button::after {
+  content: "→";
+  font-weight: 700;
+}

@@ -1,11 +1,45 @@
 {% render "partials/head.liquid" %}
 
-    <h1>Contourings</h1>
-
+<body>
+    
+</body>
+<section class="contourings-wrapper">
+  <div class="contourings-grid">
     {% for contouring in contourings %}
-        <ul>
-            <li><a href="/contourings/{{ contouring.slug }}">{{ contouring.slug }}</a></li>
-        </ul>
-    {% endfor %}
+      <article class="contouring-card">
+        {% if contouring.image_scan %}
+          <img
+            src="https://fdnd-agency.directus.app/assets/{{ contouring.image_scan }}"
+            alt="{{ contouring.title }}"
+            class="contouring-image"
+            loading="lazy"
+          >
+        {% endif %}
 
-{% render "partials/foot.liquid" %}
+        <div class="contouring-content">
+          <h2 class="contouring-title">{{ contouring.title }}</h2>
+
+          {% comment %} <div class="contouring-user">
+            {% if contouring.user_picture %}
+              <img
+                src="https://fdnd-agency.directus.app/assets/{{ contouring.user_picture }}"
+                alt="{{ contouring.user_fullname }}"
+                class="user-avatar"
+                loading="lazy"
+              >
+            {% endif %}
+            <p class="user-name">{{ contouring.user_fullname }}</p>
+          </div> {% endcomment %}
+
+          <a 
+            href="/contourings/{{ contouring.slug }}" 
+            class="look-now-button{% if request.path == '/contourings/' | append: contouring.slug %} active{% endif %}"
+          >
+            Look now
+          </a>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
