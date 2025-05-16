@@ -65,30 +65,33 @@ app.get("/webinars/:slug", async (req, res) => {
 });
 
 // Contourings
+// app.get("/contourings", async (req, res) => {
+//   const contouringsResponse = await fetch(
+//     contouringsEndpoint +
+//
+//   );
+//   const { data: contourings } = await contouringsResponse.json(); // fetch and json can be a helper function
+
+//   res.render("contourings.liquid", {
+//     contourings,
+//   });
+// });
+
 app.get("/contourings", async (req, res) => {
-  const contouringsResponse = await fetch(
-    contouringsEndpoint +
-      "?fields=user_id.*.*,id,title,slug,image_scan,used_literature.*.*,categories.*.*"
-  );
-  const { data: contourings } = await contouringsResponse.json(); // fetch and json can be a helper function
+  try {
+    const contouringsResponse = await fetch(
+      `${contouringsEndpoint}${"?fields=user_id,id,title,slug,image_scan,used_literature.*.*,categories.*.*"}`
+    );
 
-  res.render("contourings.liquid", {
-    contourings,
-  });
-});
+    const { data: contourings } = await contouringsResponse.json();
 
-// Contourings detail
-app.get("/contourings/:slug", async (req, res) => {
-  const slug = req.params.slug;
-  const contouringsDetailResponse = await fetch(
-    `${contouringsEndpoint}${slugFilter}${slug}`
-  );
-  const { data: contouringsDetailResponseJSON } =
-    await contouringsDetailResponse.json();
-
-  res.render("contourings-detail.liquid", {
-    contourings: contouringsDetailResponseJSON,
-  });
+    res.render("contourings.liquid", {
+      contourings,
+    });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).send("Server error");
+  }
 });
 
 // Speakers
