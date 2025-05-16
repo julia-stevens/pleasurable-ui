@@ -140,5 +140,14 @@ ol {
         transition: 0.2s ease-in-out;
     }
 
-
+/* LINKS */
+a {
+    font-family: var(--font-paragraph);
+    font-size: var(--font-size-md);
+    color: var(--primary-text);
+    text-decoration: none;
+  }
+    a:hover {
+        color: var(--primary-highlight);
+    }
 
