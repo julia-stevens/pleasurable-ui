@@ -54,7 +54,7 @@ app.get("/webinars", async (req, res) => {
 app.get("/webinars/:slug", async (req, res) => {
   const slug = req.params.slug;
 
-  const webinarDetailResponse = await fetch(`${webinarsEndpoint}${slugFilter}${slug}`);
+  const webinarDetailResponse = await fetch(`${webinarsEndpoint}${slugFilter}${slug}&fields=*,speakers.*.*,resources.*.*,categories.*.*`);
   const { data: webinarDetailResponseJSON } = await webinarDetailResponse.json();
 
   const categoriesDetailResponse = await fetch(`${categoriesEndpoint}`);
