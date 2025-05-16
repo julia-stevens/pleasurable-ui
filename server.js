@@ -80,14 +80,20 @@ app.get("/webinars", async (req, res) => {
 // Webinars detail
 app.get("/webinars/:slug", async (req, res) => {
   const slug = req.params.slug;
-  const webinarDetailResponse = await fetch(
-    `${webinarsEndpoint}${slugFilter}${slug}`
-  );
-  const { data: webinarDetailResponseJSON } =
-    await webinarDetailResponse.json();
+
+  const webinarDetailResponse = await fetch(`${webinarsEndpoint}${slugFilter}${slug}&fields=*,speakers.*.*,resources.*.*,categories.*.*`);
+  const { data: webinarDetailResponseJSON } = await webinarDetailResponse.json();
+
+  const categoriesDetailResponse = await fetch(`${categoriesEndpoint}`);
+  const { data: categoriesDetailResponseJSON } = await categoriesDetailResponse.json();
+
+  const commentsDetailResponse = await fetch(`${commentsEndpoint}`);
+  const { data: commentsDetailResponseJSON } = await commentsDetailResponse.json();
 
   res.render("webinars-detail.liquid", {
     webinars: webinarDetailResponseJSON,
+    categories: categoriesDetailResponseJSON,
+    comments: commentsDetailResponseJSON,
   });
 });
 
