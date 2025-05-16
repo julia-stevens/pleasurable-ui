@@ -3,7 +3,8 @@
     display: flex;
 
     @media screen and (min-width: 1020px) {
-        position: fixed;
+        position: sticky;
+        z-index: 99;
         top: 0;
         background-color: var(--primary-dark);
         border-radius: 0 0 1em 1em;
@@ -22,6 +23,7 @@
 
     .menu {
         position: fixed;
+        z-index: 99;
         bottom: 0;
         background-color: var(--primary-dark);
         border-radius: 1em 1em 0em 0em;
@@ -143,7 +145,7 @@
     }
 
     .nav-logo-mobile {
-        position: fixed;
+        position: sticky;
         top: 0;
         background-color: var(--primary-dark);
         width: 100%;

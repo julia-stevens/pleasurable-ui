@@ -39,15 +39,42 @@ app.get("/", async function (req, res) {
 });
 
 // webinars
-
 app.get("/webinars", async (req, res) => {
+  const categoryFilter = req.query.category || "";
+  const sortOption = req.query.sort || "new-old";
+  const filtersActive = categoryFilter !== "" || sortOption !== "new-old";
+
   const webinarsDetailResponse = await fetch(
     `${webinarsEndpoint}?fields=*,speakers.*.*,resources.*.*,categories.*.*`
   );
-  const { data: webinarsDetailResponseJson } =
-    await webinarsDetailResponse.json();
+  const { data: webinars } = await webinarsDetailResponse.json();
 
-  res.render("webinars.liquid", { webinars: webinarsDetailResponseJson });
+  const categoriesResponse = await fetch(`${categoriesEndpoint}`);
+  const { data: categories } = await categoriesResponse.json();
+
+  let filteredWebinars = webinars;
+
+  if (categoryFilter) {
+    filteredWebinars = filteredWebinars.filter((webinar) =>
+      webinar.categories.some(
+        (cat) => cat.avl_categories_id.name === categoryFilter
+      )
+    );
+  }
+
+  filteredWebinars.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    return sortOption === "new-old" ? dateB - dateA : dateA - dateB;
+  });
+
+  res.render("webinars.liquid", {
+    webinars: filteredWebinars,
+    categories,
+    selectedCategory: categoryFilter,
+    selectedSort: sortOption,
+    filtersActive,
+  });
 });
 
 // Webinars detail
