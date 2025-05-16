@@ -1,0 +1,167 @@
+.main-header {
+    width: 100%;
+    display: flex;
+
+    @media screen and (min-width: 1020px) {
+        position: sticky;
+        z-index: 99;
+        top: 0;
+        background-color: var(--primary-dark);
+        border-radius: 0 0 1em 1em;
+        display: flex;
+        align-items: center;
+        padding: 1em 7em 1em 7em;
+    }
+
+    .logo-nav {
+        display: none;
+
+        @media screen and (min-width: 1020px) {
+            display: flex;
+        }
+    }
+
+    .menu {
+        position: fixed;
+        z-index: 99;
+        bottom: 0;
+        background-color: var(--primary-dark);
+        border-radius: 1em 1em 0em 0em;
+        width: 100%;
+        padding: 1em;
+
+        @media screen and (min-width: 1020px) {
+            position: unset;
+            top: 0;
+            bottom: unset;
+            background-color: unset;
+            padding: 0;
+        }
+
+        .menu-items {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            @media screen and (min-width: 720px) {
+                justify-content: center;
+                gap: 3em;
+            }
+
+            @media screen and (min-width: 1020px) {
+                justify-content: end;
+                gap: 3.5em;
+            }
+
+            li {
+                list-style-type: none;
+                display: flex;
+
+                 &:nth-of-type(4) {
+                    display: none;
+                 }
+
+                @media screen and (min-width: 1020px) {
+                    &:nth-of-type(4) {
+                        display: unset;
+                    }
+                }
+
+                a {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    font-size: 16px;
+                    text-decoration: none;
+                    color: var(--secondary-text);
+                    transition: 0.2s ease-in-out;
+
+                    svg path {
+                        fill: #fff;
+                    }
+
+                    &:hover svg path {
+                        fill: var(--primary-highlight);
+                    }
+
+                    @media screen and (min-width: 1020px) {
+                        color: var(--secondary-text);
+                    }
+
+                    &:hover {
+                        color: var(--primary-highlight);
+                        transition: 0.2s ease-in-out;
+                    }
+
+                    svg {
+                        @media screen and (min-width: 1020px) {
+                            display: none;
+                        }
+                    }
+                }
+
+                .profile-link {
+                    @media screen and (min-width: 1020px) {
+                        background-color: var(--primary-highlight);
+                        color: var(--primary-dark);
+                        font-family: var(--font-paragraph);
+                        font-size: var(--border-radius-md);
+                        border-radius: var(--border-radius-sm);
+                        transition: 0.2s ease-in-out;
+                        align-self: baseline;
+                        padding: .6em 1em;
+                        display: flex;
+                        flex-direction: row;
+                        gap: .5em;
+                        border: 1px solid var(--primary-highlight);
+                        font-size: 16px;
+                    }
+
+                    &:hover svg path {
+                        fill: var(--primary-highlight);
+                    }
+
+                    &:hover {
+                        color: var(--primary-highlight);
+                        background-color: unset;
+                    }
+
+                    svg {
+                        @media screen and (min-width: 1020px) {
+                            display: unset;
+                        }
+                    }
+
+                    svg path {
+                        fill: #fff;
+
+                         @media screen and (min-width: 1020px) {
+                            fill: var(--primary-dark);
+                         }
+                    }
+                }
+            }
+        }
+    }
+
+    .nav-logo-mobile {
+        position: sticky;
+        top: 0;
+        background-color: var(--primary-dark);
+        width: 100%;
+        padding: 1em 1em .5em 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0 0 1em 1em;
+
+        @media screen and (min-width: 1020px) {
+            display: none;
+        }
+
+        img {
+            width: 8em;
+            height: auto;
+        }
+    }
+}

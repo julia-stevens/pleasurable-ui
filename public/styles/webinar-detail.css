@@ -1,0 +1,11 @@
+.web-detail-main {
+    margin-top: 100px;
+}
+
+.web-detail-algemeen-description {
+    background-color: var(--secondary-light);
+}
+
+.web-detail-geheel-speaker {
+    background-color: var(--secondary-light);
+}
