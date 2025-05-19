@@ -118,10 +118,57 @@
     }
 }
 
-
-
-
-
+/* MARK: WEBINARS */
 .home-webinars {
     background-color: var(--secondary-light);
+    padding: 3em 1em 6em 1em;
+    gap: .5em;
+
+    p {
+        max-width: 80ch;
+        line-height: 1.4em;
+        padding-right: .5em;
+    }
+
+    .green-button {
+        margin: 1em 0em 1em 0em;
+    }
+
+}
+
+.home-contourings {
+    padding: 3em 1em 6em 1em;
+    gap: .5em;
+
+    p {
+        max-width: 80ch;
+        line-height: 1.4em;
+        padding-right: .5em;
+    }
+
+    .green-button {
+        margin: 1em 0em 1em 0em;
+    }
+
+}
+
+@media screen and (min-width: 720px) {    
+    .home-webinars-contourings {
+        background-color: var(--secondary-light);
+        padding: 5em 8em 6em 8em;
+        gap: 5em;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .home-webinars {
+        background-color: white;
+        border-radius: var(--border-radius-sm);
+    }
+
+    .home-contourings {
+        background-color: white;
+        border-radius: var(--border-radius-sm);
+    }
+
 }
