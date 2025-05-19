@@ -4,7 +4,7 @@
     gap: .5em;
 
     @media screen and (min-width: 720px) {
-        padding: 5em 8em 10em 8em;
+        padding: 5em 8em 6em 8em;
     }
 
     .home-about-position {
@@ -36,10 +36,53 @@
     }
 }
 
-
-
+/* MARK: DOCTORS */
 .home-doctors {
     background-color: var(--secondary-light);
+    padding: 3em 1em 6em 1em;
+    gap: .5em;
+
+    @media screen and (min-width: 720px) {
+        padding: 5em 8em 6em 8em;
+    }
+
+    .home-doctors-position {
+        display: flex;
+        flex-direction: column;
+        gap: 4em;
+
+        @media (width > 65em) {
+            flex-direction: row-reverse;
+        } 
+
+        .home-doctors-p {
+            max-width: 80ch;
+            min-width: 40ch;
+            line-height: 1.4em;
+            padding-right: .5em;
+        }
+
+        .home-team {
+            display: flex;
+            flex-direction: column;
+            gap:1em;
+            min-width: 40%;
+
+            @media (width > 65em) {
+                flex-direction: row;
+                max-width: 480px;
+                overflow: scroll;
+            }  
+            
+            .home-team-card {
+                width: 200px;
+                background-color: white;
+                padding: 3em 1em 3em 1em;
+                border-radius: var(--border-radius-sm);
+                justify-items: center;
+            }
+        }
+    }
 }
 
 .home-webinars {
