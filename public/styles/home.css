@@ -85,6 +85,43 @@
     }
 }
 
+/* MARK: PARTNERS */
+.home-partners {
+    padding: 3em 1em 6em 1em;
+    gap: .5em;
+
+    @media screen and (min-width: 720px) {
+        padding: 5em 8em 6em 8em;
+    }
+
+    .home-partners-postion {
+        display: flex;
+        flex-direction: column;
+        gap: 4em;
+
+        @media (width > 65em) {
+            flex-direction: row;
+        } 
+
+        p {
+            max-width: 80ch;
+            line-height: 1.4em;
+            padding-right: .5em;
+        }
+
+        .scroller {
+            width: 380px;
+            min-width: 40%;
+            height: 200px;
+            overflow: scroll;
+        }
+    }
+}
+
+
+
+
+
 .home-webinars {
     background-color: var(--secondary-light);
 }
