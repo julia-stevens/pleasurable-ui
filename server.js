@@ -28,6 +28,9 @@ const commentsEndpoint = `${directusApiBaseUrl}/avl_comments`;
 const usersEndpoint = `${directusApiBaseUrl}/avl_users`;
 const categoriesEndpoint = `${directusApiBaseUrl}/avl_categories`;
 const messagesEndpoint = `${directusApiBaseUrl}/avl_messages`;
+const teamEndpoint = `${directusApiBaseUrl}/avl_team`;
+const partnerLogosEndpoint = `${directusApiBaseUrl}/avl_logos`;
+const contentEndpoint = `${directusApiBaseUrl}/avl_content`;
 
 const slugFilter = "?filter[slug][_eq]=";
 const bookmarkFilter = "?filter[for][_eq]=Bookmark webinar"
@@ -161,7 +164,17 @@ app.get("/speakers/:slug", async (req, res) => {
 
 // About us
 app.get("/about-us", async (req, res) => {
-  res.render("about-us.liquid");
+
+const teamResponse = await fetch(teamEndpoint + "?fields=role,name,photo")
+const { data: teams } = await teamResponse.json();
+
+const logoResponse = await fetch(partnerLogosEndpoint)
+const { data: partnerLogos } = await logoResponse.json();
+
+const contentResponse = await fetch(contentEndpoint)
+const { data: aboutUsContent } = await contentResponse.json();
+
+  res.render("about-us.liquid", { teams, });
 });
 
 // Profile
