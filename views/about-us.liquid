@@ -1,5 +1,36 @@
 {% render "partials/head.liquid" %}
 
-    <h1>About us</h1>
+<h1>About us</h1>
+
+{% comment %} Dit zorgt ervoor dat de key's uit de API worden opgesplitst ipv onder elkaar getoond. Hierdoor kan de team
+section ertussen worden weergeven. {% endcomment %}
+{%- assign top_item = aboutUsContent | where: "key", "about-us-top" | first -%}
+{%- assign bottom_item = aboutUsContent | where: "key", "about-us-bottom" | first -%}
+
+{% comment %} About us top content uit API {% endcomment %}
+<section id="about-us-intro-section">
+    <h2>{{ top_item.heading }}</h2>
+    <p>{{ top_item.text }}</p>
+</section>
+
+{% comment %} Team content uit API {% endcomment %}
+<section class="about-us-team-section">
+    {% for team in teams %}
+    <h2>{{ team.name }}</h2>
+    <p>{{ team.role }}</p>
+    <img src="https://fdnd-agency.directus.app/assets/{{ team.photo }}" width="200" height="200" alt=""
+        style="object-fit:cover;">
+    {% endfor %}
+</section>
+
+{% comment %} About us bottom content uit API {% endcomment %}
+<section id="about-us-partner-section">
+    <h2>{{ bottom_item.heading }}</h2>
+    <p>{{ bottom_item.text }}</p>
+    {% for logo in partnerLogos %}
+    <img src="https://fdnd-agency.directus.app/assets/{{ logo.logo }}" width="150" height="auto" alt=""
+        style="object-fit:cover;">
+    {% endfor %}
+</section>
 
 {% render "partials/foot.liquid" %}
