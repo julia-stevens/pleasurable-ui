@@ -174,7 +174,9 @@ const { data: partnerLogos } = await logoResponse.json();
 const contentResponse = await fetch(contentEndpoint)
 const { data: aboutUsContent } = await contentResponse.json();
 
-  res.render("about-us.liquid", { teams, });
+console.log(aboutUsContent)
+
+res.render("about-us.liquid", { teams, partnerLogos, aboutUsContent });
 });
 
 // Profile
