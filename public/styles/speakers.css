@@ -45,10 +45,13 @@ button {
     gap: 2rem;
     width: 85vw;
     margin: 0 auto;
+    padding: 2rem 0 5rem 0;
+    position: relative;
 }
 
 /* MARK: Speakers introduction */
 .speakers-introduction {
+    position: relative; 
     .speakers-section-title {
         h1 {
             margin: 0 0 1rem 0;
@@ -56,6 +59,16 @@ button {
     }
     .speakers-introduction-description {
         max-width: 575px;
+    }
+    .breadcrumbs-speakers {
+        padding: 1rem 0;
+        li {
+            list-style-type: none;
+    
+            &:first-of-type {
+                font-weight: bold; 
+            }
+        }
     }
 }
 
@@ -108,8 +121,8 @@ button {
 /* MARK: Speakers overview */
 .speakers-container {
     width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
     container-type: inline-size;
     container-name: speaker-card; 
 }
