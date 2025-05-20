@@ -3,54 +3,65 @@
 <section class="web-detail-main">
 {% for webinar in webinars %}
 
+    <section class="webinar-detail-hero">
+
+        <ul class="webinar-detail-breadcrumb">
+            <li><a href="/">Home &rsaquo;</a></li>
+            <li><a href="/webinars">Webinars &rsaquo;</a></li>
+            <li><a href="/webinar-detail"> {{ webinar.title }} </a></li>
+
+        </ul>
+
         <h1>{{ webinar.title }}</h1>
 
-        {% if webinar.video %}
-            <video controls width="250">
-                <source src="https://fdnd-agency.directus.app/assets/{{ webinar.video }}" width="380px"/>
-            </video>
-        {% endif %}
+    </section>
 
-        <section class="web-detail-watch-info">
-            <p class="web-detail-vieuws"> <img src="" alt=""> {{ webinar.views }} </p>
-            <p class="web-detail-date"> <img src="" alt="">{{ webinar.date }} </p>
+    {% if webinar.video %}
+        <video class="webinar-detail-video" controls width="250">
+            <source src="https://fdnd-agency.directus.app/assets/{{ webinar.video }}" width="380px"/>
+        </video>
+    {% endif %}
 
-            {% for category in webinar.categories %}
-                <p class="web-detail-category">{{ category.avl_categories_id.name }}</p>
-            {% endfor %}
+    <div class="web-detail-watch-info">
+        <p class="web-detail-vieuws"> <img src="/assets-webinar-detail/eye.svg" alt="vieuws"> {{ webinar.views }} </p>
+        <p class="web-detail-date"> <img src="/assets-webinar-detail/calendar-alt.svg" alt="date">{{ webinar.date }} </p>
+
+        {% for category in webinar.categories %}
+            <p class="web-detail-category">{{ category.avl_categories_id.name }}</p>
+        {% endfor %}
+    </div>
+
+    <section class="web-detail-description">
+        <h2>Description</h2>
+            <details class="web-detail-description-position">
+                <summary>Read description</summary>
+                <div>
+                    <p> {{ webinar.description }} </p>
+                </div>
+            </details>
+    </section>
+
+    <section class="web-detail-geheel-q-en-a">
+    <h2>Q & A</h2>
+        <h3>Comments</h3>
+        <section class="web-detail-comments">
+            {% for comment in comments %} 
+                    <p class="comment"> {{  comment.content }}</p>
+            {% endfor %}  
         </section>
 
-        <section class="web-detail-algemeen-description">
-            <h2>Description</h2>
-                <details class="web-detail-description">
-                    <summary>Read description</summary>
-                    <div>
-                        <p> {{ webinar.description }} </p>
-                    </div>
-                </details>
+        <h3>Ask a question</h3>
+        <section class="web-detail-q-en-a">
+                <form action="/webinars/{{ webinar.slug }}/{{ webinar.id }}" method="post" data-enhanced="form-{{ webinar.id }}">
+                    <input type="text" name="comment" placeholder="Ask your question here..." />
+                    <button type="submit" class="button-green">Send</button>
+                </form>
         </section>
 
-        <section class="web-detail-geheel-q-en-a">
-        <h2>Q & A</h2>
-            <h3>Comments</h3>
-            <section class="web-detail-comments">
-                {% for comment in comments %} 
-                        <p class="comment"> {{  comment.content }}</p>
-                {% endfor %}  
-            </section>
-
-            <h3>Ask a question</h3>
-            <section class="web-detail-q-en-a">
-                    <form action="/webinars/{{ webinar.slug }}/{{ webinar.id }}" method="post" data-enhanced="form-{{ webinar.id }}">
-                        <input type="text" name="comment" placeholder="Ask your question here..." />
-                        <button type="submit" class="button-green">Send</button>
-                    </form>
-            </section>
-
-            <section class="web-detail-geheel-speaker">
-                <h2>The speaker</h2>
-                <!-- Partial Speaker card mobile en desktop toevoegen zodra deze bestaan -->
-            </section>
+        <section class="web-detail-geheel-speaker">
+            <h2>The speaker</h2>
+            <!-- Partial Speaker card mobile en desktop toevoegen zodra deze bestaan -->
+        </section>
     </section>
 
 {% endfor %}

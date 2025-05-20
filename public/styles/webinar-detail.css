@@ -1,9 +1,100 @@
-.web-detail-main {
-    margin-top: 100px;
+/* MARK: HERO */
+.webinar-detail-hero {
+    background-color: var(--secondary-light);
+    padding: 3em 1em 3em 1em;
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+
+    @media screen and (min-width: 720px) {
+        padding: 5em 8em 5em 8em;
+    }
+
+    ul {
+        display: flex;
+        gap: .5em;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        li {
+            list-style-type: none; 
+            
+            &:nth-of-type(1) a {
+                font-weight: bold;
+            }
+        }
+    }
+
+    .web-detail-breadcrumb {
+        width: 350px;
+        text-overflow: ellipsis;
+    
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    p {
+        line-height: 26px;
+
+         @media screen and (min-width: 720px) {
+            width: 50%;
+         }
+    }
 }
 
-.web-detail-algemeen-description {
+/* MARK: VIDEO */
+.webinar-detail-video {
+    padding: .5em;
+    width: 100%;
+
+    @media screen and (min-width: 720px) {
+        width: 60%;
+        margin: 2em 8em 0em 8em;
+    }
+}
+
+/* MARK: DETAILS */
+.web-detail-watch-info {
+    padding: .5em 1em 3em 1em;
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    height: fit-content;
+
+    @media screen and (min-width: 720px) {
+        flex-direction: row;
+        padding: .5em 8em 2em 8em;
+        gap: 2em;
+    }
+}
+    .web-detail-vieuws,
+    .web-detail-date,
+    .web-detail-category {
+        background-color: var(--secondary-light);
+        padding: var(--padding-button);
+        border-radius: var(--border-radius-sm);
+        display: flex;
+        align-items: center;
+        line-height: 26px;
+        gap: .5em;
+        width: fit-content;
+        text-transform: capitalize;
+    }
+
+
+.web-detail-description {
     background-color: var(--secondary-light);
+    padding: 3em 1em 3em 1em;
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+
+    @media screen and (min-width: 720px) {
+        padding: 5em 8em 5em 8em;
+    }
 }
 
 .web-detail-geheel-speaker {
