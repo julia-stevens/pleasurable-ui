@@ -1,11 +1,54 @@
 {% render "partials/head.liquid" %}
 
+<section class="hero-webinars">
+
+    <ul class="breadcrumb-webinars">
+        <li><a href="/">Home &rsaquo;</a></li>
+        <li><a href="/webinars">Webinars</a></li>
+    </ul>
+
     <h1>Webinars</h1>
 
-    {% for webinar in webinars %}
-        <ul>
-            <li><a href="/webinars/{{ webinar.slug }}">{{ webinar.slug }}</a></li>
-        </ul>
-    {% endfor %}
+    <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Enim ipsum non egestas; primis luctus cubilia. Donec ut
+        venenatis.
+        Lorem ipsum odor amet.</p>
+
+</section>
+
+<section class="filter-webinars">
+    <h2>Filter</h2>
+    <p>Filter webinars on category or sort on date.</p>
+
+    <form action="/webinars" method="GET">
+        <select name="category" id="category" class="filter-select">
+            <!-- Wanneer 'All' geselecteerd wordt en er is geen categorie geselecteerd of als de geselecteerde categorie een lege waarde heeft. -->
+            <option value="" {% if not selectedCategory or selectedCategory=="" %}selected{% endif %}>All</option>
+            {% for category in categories %}
+            <!-- Als de selectedCategory gelijk is aan de category.name selecteer dan de juiste categorie -->
+            <option value="{{ category.name }}" {% if selectedCategory==category.name %}selected{% endif %}>
+                {{ category.name }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <select name="sort" class="filter-select">
+            <option value="new-old" {% if selectedSort=="new-old" %}selected{% endif %}>New to Old</option>
+            <option value="old-new" {% if selectedSort=="old-new" %}selected{% endif %}>Old to New</option>
+        </select>
+
+        <button class="button-green" type="submit">Filter webinars</button>
+    </form>
+</section>
+
+<section class="webinars">
+    <h2>Results</h2>
+
+    <div class="divider-webinars"></div>
+
+    {% render "partials/webinar-card.liquid", webinars: webinars, bookmarkIds: bookmarkIds %}
+
+</section>
+
+<script src="/script-webinar.js"></script>
 
 {% render "partials/foot.liquid" %}

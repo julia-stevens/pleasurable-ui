@@ -30,6 +30,7 @@ const categoriesEndpoint = `${directusApiBaseUrl}/avl_categories`;
 const messagesEndpoint = `${directusApiBaseUrl}/avl_messages`;
 
 const slugFilter = "?filter[slug][_eq]=";
+const bookmarkFilter = "?filter[for][_eq]=Bookmark webinar"
 
 // Routes
 // Home
@@ -39,28 +40,74 @@ app.get("/", async function (req, res) {
 });
 
 // webinars
-
 app.get("/webinars", async (req, res) => {
+  const categoryFilter = req.query.category || "";
+  const sortOption = req.query.sort || "new-old";
+  const filtersActive = categoryFilter !== "" || sortOption !== "new-old";
+
+  // Webinars ophalen
   const webinarsDetailResponse = await fetch(
     `${webinarsEndpoint}?fields=*,speakers.*.*,resources.*.*,categories.*.*`
   );
-  const { data: webinarsDetailResponseJson } =
-    await webinarsDetailResponse.json();
+  const { data: webinars } = await webinarsDetailResponse.json();
 
-  res.render("webinars.liquid", { webinars: webinarsDetailResponseJson });
+  // Categorieën ophalen
+  const categoriesResponse = await fetch(`${categoriesEndpoint}`);
+  const { data: categories } = await categoriesResponse.json();
+
+  // Bookmarks ophalen
+  const bookmarkResponse = await fetch(`${messagesEndpoint}${bookmarkFilter}`);
+  const bookmarkResponseJSON = await bookmarkResponse.json();
+
+  // Zet bookmarks om naar array van webinar-ids (strings)
+  const bookmarkIds = new Set(
+    bookmarkResponseJSON.data.map((item) => String(item.text))
+  );
+  const bookmarkArray = Array.from(bookmarkIds);
+
+  let filteredWebinars = webinars;
+
+  if (categoryFilter) {
+    filteredWebinars = filteredWebinars.filter((webinar) =>
+      webinar.categories.some(
+        (cat) => cat.avl_categories_id.name === categoryFilter
+      )
+    );
+  }
+
+  filteredWebinars.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    return sortOption === "new-old" ? dateB - dateA : dateA - dateB;
+  });
+
+  res.render("webinars.liquid", {
+    webinars: filteredWebinars,
+    categories,
+    selectedCategory: categoryFilter,
+    selectedSort: sortOption,
+    filtersActive,
+    bookmarkIds: bookmarkArray
+  });
 });
 
 // Webinars detail
 app.get("/webinars/:slug", async (req, res) => {
   const slug = req.params.slug;
-  const webinarDetailResponse = await fetch(
-    `${webinarsEndpoint}${slugFilter}${slug}`
-  );
-  const { data: webinarDetailResponseJSON } =
-    await webinarDetailResponse.json();
+
+  const webinarDetailResponse = await fetch(`${webinarsEndpoint}${slugFilter}${slug}&fields=*,speakers.*.*,resources.*.*,categories.*.*`);
+  const { data: webinarDetailResponseJSON } = await webinarDetailResponse.json();
+
+  const categoriesDetailResponse = await fetch(`${categoriesEndpoint}`);
+  const { data: categoriesDetailResponseJSON } = await categoriesDetailResponse.json();
+
+  const commentsDetailResponse = await fetch(`${commentsEndpoint}`);
+  const { data: commentsDetailResponseJSON } = await commentsDetailResponse.json();
 
   res.render("webinars-detail.liquid", {
     webinars: webinarDetailResponseJSON,
+    categories: categoriesDetailResponseJSON,
+    comments: commentsDetailResponseJSON,
   });
 });
 
@@ -235,6 +282,51 @@ app.get("/profile", async (req, res) => {
 // Profile bookmarks
 app.get("/profile/bookmarks", async (req, res) => {
   res.render("profile-bookmarks.liquid");
+});
+
+  // POST voor url /webinars
+app.post("/webinars", async function (req, res) {
+  // Haal de textField (webinar.id) en forField uit de request body
+  const { textField, forField } = req.body;
+
+  try {
+    // Haal de bookmarks op
+    const bookmarkResponse = await fetch(`${messagesEndpoint}`)
+  const bookmarkResponseJSON = await bookmarkResponse.json()
+
+    // Zoek in de bookmarks of het item al bestaat door te controleren op textField (webinar.id)
+    const existingItem = bookmarkResponseJSON.data.find(item => item.text === textField);
+
+    if (existingItem) {
+      // Als het item al bestaat in de bookmarks, verwijder het dan
+      await fetch(`${messagesEndpoint}/${existingItem.id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      });
+      console.log(`Verwijderd uit bookmarks webinars: ${textField}`);
+    } else {
+      // Voeg het item toe als het niet bestaat
+      await fetch(`${messagesEndpoint}`, {
+        method: "POST",
+        body: JSON.stringify({
+          text: textField,
+          for: forField
+        }),
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      });
+      console.log(`Toegevoegd aan bookmarks webinar: ${textField}`);
+    }
+
+    // Stuur de gebruiker terug naar de bookmarks pagina
+    res.redirect(303, "/webinars");
+  } catch (error) {
+    console.error("Fout bij toggle van de bookmarks webinar:", error);
+    res.status(500).send("Er is een fout opgetreden.");
+  }
 });
 
 // Port
