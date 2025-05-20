@@ -137,36 +137,34 @@ app.get("/contourings/:slug", async (req, res) => {
 
 app.get("/speakers", async (req, res) => {
   try {
-    // Fetch speakers
+    // Haal alle speakers op uit API
     const speakersResponse = await fetch(speakersEndpoint);
-    const speakersData = await speakersResponse.json();
-    
-    // Fetch bookmarks (messages) — filter for Julia or globally if needed
-    const bookmarksResponse = await fetch(`${messagesEndpoint}`);
-    const bookmarksData = await bookmarksResponse.json();
-    
-    // Create list of bookmarked speaker IDs (as strings)
-    // Filter to only include bookmarks that have format "Bookmark for X"
-    const bookmarkedSpeakerIds = bookmarksData.data
-      .filter(bookmark => bookmark.for && bookmark.for.startsWith("Bookmark for"))
-      .map(bookmark => String(bookmark.text));
-    
-    // Validate bookmarked IDs against actual speakers to prevent "stuck" bookmarks
-    const validSpeakerIds = speakersData.data.map(speaker => String(speaker.id));
-    const validBookmarkedIds = bookmarkedSpeakerIds.filter(id => 
-      validSpeakerIds.includes(id)
-    );
-    
-    // Convert speaker IDs to string to match bookmarks
-    const speakersWithStringIds = speakersData.data.map(speaker => ({
+    const speakersJSON = await speakersResponse.json();
+
+    // Zet alle id's om naar strings
+    const speakers = speakersJSON.data.map(speaker => ({
       ...speaker,
-      id: String(speaker.id)
+      id: String(speaker.id) 
     }));
-    
-    // Render the page with speakers and bookmarked IDs
+
+    // Haal alle bookmarks op (gepost-te speakers)
+    const bookmarksResponse = await fetch(`${messagesEndpoint}`);
+    const bookmarksJSON = await bookmarksResponse.json();
+
+    const bookmarkedSpeakerIds = bookmarksJSON.data
+      // Filter bookmarks die beginnen met 'Bookmark for Julia'
+      .filter(bookmark => bookmark.for && bookmark.for.startsWith("Bookmark for Julia"))
+
+      // Zet de id's om naar strings
+      .map(bookmark => String(bookmark.text))
+
+      // Filter id's op alleen bookmarks met een speaker
+      .filter(bookmarkedId => speakers.some(speaker => speaker.id === bookmarkedId));
+
+    // Render speaker en bookmarks naar 'speakers' view
     res.render("speakers.liquid", {
-      speakers: speakersWithStringIds,
-      bookmarkedIds: validBookmarkedIds // Only pass valid bookmarks
+      speakers,
+      bookmarkedIds: bookmarkedSpeakerIds
     });
   } catch (error) {
     console.error("Error loading speakers:", error);
@@ -175,79 +173,53 @@ app.get("/speakers", async (req, res) => {
 });
 
 app.post("/speakers", async (req, res) => {
+  // Haal waarden het formulier
   const { textField, forField, _method } = req.body;
-  console.log("Incoming method:", _method, "Speaker ID:", textField, "For:", forField);
-  
+  const speakerId = String(textField); // zet id om naar string
+  const userBookmarkLabel = forField;
+
   try {
+    // Haal bestaande bookmarks op
+    const bookmarksResponse = await fetch(`${messagesEndpoint}`);
+    const bookmarksJSON = await bookmarksResponse.json();
+    const bookmarks = bookmarksJSON.data;
+
     if (_method === "DELETE") {
-      // Get all current speaker bookmarks
-      const bookmarksResponse = await fetch(`${messagesEndpoint}`);
-      const bookmarksData = await bookmarksResponse.json();
-      
-      // Look for exact matches - both speaker ID and for field
-      const bookmarkToDelete = bookmarksData.data.find(
-        bookmark => String(bookmark.text) === String(textField) && 
-                   bookmark.for === forField
+      // Zoek naar match op id & for (Bookmark for Julia)
+      let bookmarkToDelete = bookmarks.find(
+        bookmark => String(bookmark.text) === speakerId && bookmark.for === userBookmarkLabel
       );
       
-      // If no exact match is found, try a more flexible approach
-      if (!bookmarkToDelete) {
-        // Look for any bookmark with this user that matches the speaker ID
-        const alternativeBookmark = bookmarksData.data.find(
-          bookmark => String(bookmark.text) === String(textField) && 
-                     bookmark.for && bookmark.for.includes(forField.split(" ").pop())
-        );
-        
-        if (alternativeBookmark) {
-          console.log("Found alternative bookmark to delete:", alternativeBookmark);
-          await fetch(`${messagesEndpoint}/${alternativeBookmark.id}`, {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json;charset=UTF-8"
-            }
-          });
-        } else {
-          console.log("No matching bookmark found to delete");
-        }
-      } else {
-        console.log("Deleting bookmark:", bookmarkToDelete);
+      // Als match gevonden, verwijder de bookmark 
+      if (bookmarkToDelete) {
         await fetch(`${messagesEndpoint}/${bookmarkToDelete.id}`, {
           method: "DELETE",
-          headers: {
-            "Content-Type": "application/json;charset=UTF-8"
-          }
+          headers: { "Content-Type": "application/json;charset=UTF-8" }
         });
-      }
+      } 
     } else {
-      // Before adding a new bookmark, check if one already exists (to prevent duplicates)
-      const existingBookmarksResponse = await fetch(`${messagesEndpoint}`);
-      const existingBookmarksData = await existingBookmarksResponse.json();
-      
-      const existingBookmark = existingBookmarksData.data.find(
-        bookmark => String(bookmark.text) === String(textField) && 
-                   bookmark.for === forField
+
+      // Check of de bookmark al bestaat (check op id en for (Bookmark for Julia))
+      const alreadyBookmarked = bookmarks.find(
+        bookmark => String(bookmark.text) === speakerId && bookmark.for === userBookmarkLabel
       );
-      
-      if (!existingBookmark) {
-        // Add a new speaker bookmark
+
+      // Als bookmark nog niet bestaat, POST deze dan
+      if (!alreadyBookmarked) {
         await fetch(`${messagesEndpoint}`, {
           method: "POST",
+          headers: { "Content-Type": "application/json;charset=UTF-8" },
           body: JSON.stringify({
-            text: textField, // this is speaker ID
-            for: forField    // this is like "Bookmark for Julia"
-          }),
-          headers: {
-            "Content-Type": "application/json;charset=UTF-8"
-          }
+            text: speakerId,
+            for: userBookmarkLabel
+          })
         });
-        console.log("Created new bookmark for speaker:", textField);
-      } else {
-        console.log("Bookmark already exists, skipping creation");
-      }
+      } 
     }
     
-    // Redirect back to where user came from (or /speakers)
+    // Redirect naar vorige pagina of naar "/speakers"
     res.redirect(303, req.get("Referer") || "/speakers");
+
   } catch (error) {
     console.error("Error handling speaker bookmark:", error);
     res.status(500).send("Something went wrong.");
