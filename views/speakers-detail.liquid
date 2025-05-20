@@ -5,6 +5,11 @@
     {% for speaker in speakers %}
         <main class="speaker-main components-alignment-vertical">
             <section class="speaker-introduction components-alignment-vertical">
+                <ul class="breadcrumbs-speakers-detail components-alignment-horizontal">
+                    <li><a href="/">Home &rsaquo;</a></li>
+                    <li><a href="/speakers">Speakers &rsaquo;</a></li>
+                    <li><a href="/speakers/{{ speaker.slug }}">{{ speaker.slug }}</a></li>
+                </ul>
                 <div class="speaker-introduction-titles components-alignment-vertical">
                     <span class="speaker-meet-highlight">Meet</span>
                     <h1 class="speaker-name">{{ speaker.fullname }}</h1>
@@ -42,7 +47,7 @@
                 </div>   
                 <div class="speaker-featured-webinars-overview">
                     {% for webinar in speaker.webinars %}
-                        <p>{{ webinar.avl_webinars_id.title }}</p>
+                        <a>{{ webinar.avl_webinars_id.title }}</a>
                     {% endfor %} 
                 </div>             
             </section>
