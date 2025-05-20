@@ -23,7 +23,7 @@
         <input type="hidden" name="_method" value="{% if bookmarkedIds contains speaker.id %}DELETE{% else %}POST{% endif %}">
 
         {% if bookmarkedIds contains speaker.id %}
-            <button type="submit" class="button-green button-speaker-bookmark components-alignment-horizontal">
+            <button type="submit" class="button-green button-bookmarked button-speaker-bookmark components-alignment-horizontal">
                 <span>Bookmarked</span>
                 {% render "public/assets-speakers/bookmark-icon.liquid" %}
             </button>

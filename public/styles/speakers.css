@@ -190,4 +190,42 @@ button {
         top: 0;
         right: 0;
     }
+
+    .button-bookmarked {
+        background-color: var(--primary-dark);
+        color: var(--secondary-text);
+
+        svg {
+            display: none; 
+        }
+
+        &::after {
+            content: url("/assets-speaker/bookmarked-icon.svg");
+            font-size: 14px; 
+        }
+    }
+
+    .speaker-bookmark.loading button span, .speaker-bookmark.loading button svg {
+        display: none; 
+    }
+
+    .speaker-bookmark.loading button::before {
+        content: "Loading";
+    }
+    
+    .speaker-bookmark.loading button::after {
+        content: url('/assets-webinars/icon-loading.svg');
+        font-size: 14px;
+        animation: rotation 1s ease-in infinite;
+    }
+    
+    @keyframes rotation {
+        0% {
+            transform: rotate(0deg);
+        }
+    
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 }

@@ -240,7 +240,6 @@ app.get("/speakers/:slug", async (req, res) => {
   });
 });
 
-
 // About us
 app.get("/about-us", async (req, res) => {
   res.render("about-us.liquid");
