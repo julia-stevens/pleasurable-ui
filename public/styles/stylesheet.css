@@ -148,3 +148,12 @@ a {
         color: var(--primary-highlight);
     }
 
+
+.menu {
+  translate:0 100%;
+   transition: .2s;
+}
+
+.uitbeeld .menu {
+  translate:0 0%;
+}
