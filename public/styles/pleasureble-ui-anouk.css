@@ -12,4 +12,9 @@
         background-color: var(--primary-dark);
         color: var(--secondary-text);
     }
+
+    &:focus {
+        outline: 2px solid;
+        outline-offset: .2em;
+    }
 }
