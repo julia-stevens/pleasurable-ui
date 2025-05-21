@@ -1,8 +1,174 @@
+/* MARK: ABOUT */
+.home-about {
+    padding: 3em 1em 6em 1em;
+    gap: .5em;
 
-.home-doctors {
-    background-color: var(--secondary-light);
+    @media screen and (min-width: 720px) {
+        padding: 5em 8em 6em 8em;
+    }
+
+    .home-about-position {
+        display: flex;
+        flex-direction: column;
+        gap: .5em;
+
+        p {
+            max-width: 80ch;
+            line-height: 1.6em;
+            padding-right: .5em;
+        }
+
+        img {
+            border-radius: var(--border-radius-sm);
+
+            @media (width > 65em) {
+                width: 500px;
+            }
+        }
+    
+        .green-button {
+            margin: 1em 0em 1em 0em;
+        }
+
+        @media (width > 75em) {
+            flex-direction: row;
+        }   
+    }
 }
 
+/* MARK: DOCTORS */
+.home-doctors {
+    background-color: var(--secondary-light);
+    padding: 3em 1em 6em 1em;
+    gap: .5em;
+
+    @media screen and (min-width: 720px) {
+        padding: 5em 8em 6em 8em;
+    }
+
+    .home-doctors-position {
+        display: flex;
+        flex-direction: column;
+        gap: 4em;
+
+        @media (width > 65em) {
+            flex-direction: row-reverse;
+        } 
+
+        .home-doctors-p {
+            max-width: 80ch;
+            min-width: 40ch;
+            line-height: 1.6em;
+            padding-right: .5em;
+        }
+
+        .home-team {
+            display: flex;
+            flex-direction: column;
+            gap:1em;
+            min-width: 40%;
+
+            @media (width > 65em) {
+                flex-direction: row;
+                max-width: 480px;
+                overflow: scroll;
+            }  
+            
+            .home-team-card {
+                width: 200px;
+                background-color: white;
+                padding: 3em 1em 3em 1em;
+                border-radius: var(--border-radius-sm);
+                justify-items: center;
+            }
+        }
+    }
+}
+
+/* MARK: PARTNERS */
+.home-partners {
+    padding: 3em 1em 6em 1em;
+    gap: .5em;
+
+    @media screen and (min-width: 720px) {
+        padding: 5em 8em 6em 8em;
+    }
+
+    .home-partners-postion {
+        display: flex;
+        flex-direction: column;
+        gap: 4em;
+
+        @media (width > 65em) {
+            flex-direction: row;
+        } 
+
+        p {
+            max-width: 80ch;
+            line-height: 1.6em;
+            padding-right: .5em;
+        }
+
+        .scroller {
+            width: 380px;
+            min-width: 40%;
+            height: 200px;
+            overflow: scroll;
+        }
+    }
+}
+
+/* MARK: WEBINARS */
 .home-webinars {
     background-color: var(--secondary-light);
+    padding: 3em 1em 6em 1em;
+    gap: .5em;
+
+    p {
+        max-width: 80ch;
+        line-height: 1.6em;
+        padding-right: .5em;
+    }
+
+    .green-button {
+        margin: 1em 0em 1em 0em;
+    }
+
+}
+
+.home-contourings {
+    padding: 3em 1em 6em 1em;
+    gap: .5em;
+
+    p {
+        max-width: 80ch;
+        line-height: 1.6em;
+        padding-right: .5em;
+    }
+
+    .green-button {
+        margin: 1em 0em 1em 0em;
+    }
+
+}
+
+@media screen and (min-width: 720px) {    
+    .home-webinars-contourings {
+        background-color: var(--secondary-light);
+        padding: 5em 8em 6em 8em;
+        gap: 5em;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .home-webinars {
+        background-color: white;
+        border-radius: var(--border-radius-sm);
+    }
+
+    .home-contourings {
+        background-color: white;
+        border-radius: var(--border-radius-sm);
+    }
+
 }
