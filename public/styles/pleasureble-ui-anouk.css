@@ -1,0 +1,15 @@
+.more-link {
+    background-color: var(--primary-highlight);
+    color: var(--primary-text);
+    padding: var(--padding-button);
+    border-radius: var(--border-radius-sm);
+    margin-top: 1em;
+    display: block;
+    width: fit-content;
+    transition: .3s ease-in-out;
+
+    &:hover {
+        background-color: var(--primary-dark);
+        color: var(--secondary-text);
+    }
+}
