@@ -30,7 +30,8 @@ const categoriesEndpoint = `${directusApiBaseUrl}/avl_categories`;
 const messagesEndpoint = `${directusApiBaseUrl}/avl_messages`;
 
 const slugFilter = "?filter[slug][_eq]=";
-const bookmarkFilter = "?filter[for][_eq]=Bookmark webinar"
+const bookmarkFilter = "?filter[for][_eq]=Bookmark webinar";
+const webIDFilter = "?fields=id&filter[slug][_eq]="
 
 // Routes
 // Home
@@ -98,18 +99,42 @@ app.get("/webinars/:slug", async (req, res) => {
   const webinarDetailResponse = await fetch(`${webinarsEndpoint}${slugFilter}${slug}&fields=*,speakers.*.*,resources.*.*,categories.*.*`);
   const { data: webinarDetailResponseJSON } = await webinarDetailResponse.json();
 
+  const webinarIDResponse = await fetch(`${webinarsEndpoint}${webIDFilter}${slug}`);
+  const { data: webinarIDResponseJSON } = await webinarIDResponse.json();
+  // const webID = webinarIDResponseJSON.data[].id;
+
   const categoriesDetailResponse = await fetch(`${categoriesEndpoint}`);
   const { data: categoriesDetailResponseJSON } = await categoriesDetailResponse.json();
 
-  const commentsDetailResponse = await fetch(`${commentsEndpoint}`);
+  const commentsDetailResponse = await fetch(`${commentsEndpoint} + webID`);
   const { data: commentsDetailResponseJSON } = await commentsDetailResponse.json();
 
   res.render("webinars-detail.liquid", {
     webinars: webinarDetailResponseJSON,
     categories: categoriesDetailResponseJSON,
     comments: commentsDetailResponseJSON,
+    webinarID: webinarIDResponseJSON,
   });
 });
+
+// Comments op de webinar
+app.post("/webinars/:slug/:id", async function (request, response) {
+ 
+  const results = await fetch('https://fdnd-agency.directus.app/items/avl_comments', {
+    method: 'POST',
+    body: JSON.stringify({
+      webinar_id: request.params.id,
+      content: request.body.comment
+    }),
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+ 
+  console.log(results);
+  response.redirect(303, `/webinars/${request.params.slug}`)
+})
+
 
 // Contourings
 app.get("/contourings", async (req, res) => {
