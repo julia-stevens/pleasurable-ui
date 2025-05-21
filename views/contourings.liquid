@@ -1,45 +1,25 @@
 {% render "partials/head.liquid" %}
 
-<body>
-    
-</body>
-<section class="contourings-wrapper">
-  <div class="contourings-grid">
-    {% for contouring in contourings %}
-      <article class="contouring-card">
-        {% if contouring.image_scan %}
-          <img
-            src="https://fdnd-agency.directus.app/assets/{{ contouring.image_scan }}"
-            alt="{{ contouring.title }}"
-            class="contouring-image"
-            loading="lazy"
-          >
-        {% endif %}
+<section class="wrapper">
+    <div class="contouring-grid">
+        {% for contouring in contourings %}
+            <article class="contouring-card">
+                {% if contouring.image_scan %}
+                    <picture>
+                     <source srcset="https://fdnd-agency.directus.app/assets/{{ contouring.image_scan }}?format=webp"
+                     type="image/webp"> 
+                     <img src="https://fdnd-agency.directus.app/assets/{{ contouring.image_scan }}" alt="{{ contouring.title }}" loading="lazy">
+                    </picture>
+                {% endif %}
 
-        <div class="contouring-content">
-          <h2 class="contouring-title">{{ contouring.title }}</h2>
+                <div class="contouring-content">
+                    <h2 class="contouring-title">{{ contouring.title }}</h2>
 
-          {% comment %} <div class="contouring-user">
-            {% if contouring.user_picture %}
-              <img
-                src="https://fdnd-agency.directus.app/assets/{{ contouring.user_picture }}"
-                alt="{{ contouring.user_fullname }}"
-                class="user-avatar"
-                loading="lazy"
-              >
-            {% endif %}
-            <p class="user-name">{{ contouring.user_fullname }}</p>
-          </div> {% endcomment %}
-
-          <a 
-            href="/contourings/{{ contouring.slug }}" 
-            class="look-now-button{% if request.path == '/contourings/' | append: contouring.slug %} active{% endif %}"
-          >
-            Look now
-          </a>
-        </div>
-      </article>
-    {% endfor %}
-  </div>
+                    <p>{{ contouring.user_id }}</p>
+                    <p>{{ contouring.categories }}</p>
+                  
+                </div>
+            </article>
+        {% endfor %}
+    </div>
 </section>
-

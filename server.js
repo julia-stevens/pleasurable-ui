@@ -64,23 +64,10 @@ app.get("/webinars/:slug", async (req, res) => {
   });
 });
 
-// Contourings
-// app.get("/contourings", async (req, res) => {
-//   const contouringsResponse = await fetch(
-//     contouringsEndpoint +
-//
-//   );
-//   const { data: contourings } = await contouringsResponse.json(); // fetch and json can be a helper function
-
-//   res.render("contourings.liquid", {
-//     contourings,
-//   });
-// });
-
 app.get("/contourings", async (req, res) => {
   try {
     const contouringsResponse = await fetch(
-      `${contouringsEndpoint}${"?fields=user_id,id,title,slug,image_scan,used_literature.*.*,categories.*.*"}`
+      `${contouringsEndpoint}${"?fields=user_id,id,title,slug,image_scan,used_literature,categories"}`
     );
 
     const { data: contourings } = await contouringsResponse.json();
