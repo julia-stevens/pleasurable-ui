@@ -25,10 +25,6 @@
                 width: 500px;
             }
         }
-    
-        .green-button {
-            margin: 1em 0em 1em 0em;
-        }
 
         @media (width > 75em) {
             flex-direction: row;
@@ -130,10 +126,6 @@
         padding-right: .5em;
     }
 
-    .green-button {
-        margin: 1em 0em 1em 0em;
-    }
-
 }
 
 .home-contourings {
@@ -144,10 +136,6 @@
         max-width: 80ch;
         line-height: 1.6em;
         padding-right: .5em;
-    }
-
-    .green-button {
-        margin: 1em 0em 1em 0em;
     }
 
 }
@@ -171,4 +159,26 @@
         border-radius: var(--border-radius-sm);
     }
 
+}
+
+.green-button {
+    padding: 1rem;
+    margin: 1em 0em 1em 0em;
+    background-color: var(--primary-highlight);
+    border-radius: 7em;
+    border: solid 1px var(--primary-dark);
+    color: var(--primary-dark);
+}
+
+.green-button:hover {
+    background-color: var(--primary-dark);
+    border: solid 1px var(--primary-highlight);
+    color: var(--primary-highlight);
+    transition: .2s;
+}
+
+.green-button:active {
+    background-color: #82ede2;
+    border: solid 1px var(--primary-dark);
+    color: var(--primary-dark);
 }
