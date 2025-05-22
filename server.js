@@ -65,20 +65,48 @@ app.get("/webinars/:slug", async (req, res) => {
 });
 
 app.get("/contourings", async (req, res) => {
-  try {
-    const contouringsResponse = await fetch(
-      `${contouringsEndpoint}${"?fields=user_id,id,title,slug,image_scan,used_literature,categories"}`
-    );
+  // fetch contourings
+  const contouringsResponse = await fetch(
+    `${contouringsEndpoint}?fields=user_id,id,title,slug,image_scan,used_literature,categories`
+  );
+  const { data: contourings } = await contouringsResponse.json();
 
-    const { data: contourings } = await contouringsResponse.json();
+  // fetch categories
+  const categoriesResponse = await fetch(
+    `${categoriesEndpoint}?fields=id,name`
+  );
+  const { data: categories } = await categoriesResponse.json();
 
-    res.render("contourings.liquid", {
-      contourings,
-    });
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    res.status(500).send("Server error");
-  }
+  const categoryMap = Object.fromEntries(
+    categories.map((category) => [category.id, category.name])
+  );
+
+  //fetch users
+  const usersResponse = await fetch(
+    `${usersEndpoint}?fields=id,fullname,profile_picture`
+  );
+  const { data: users } = await usersResponse.json();
+
+  const userMap = Object.fromEntries(
+    users.map((user) => [
+      user.id,
+      {
+        fullname: user.fullname,
+        profile_picture: user.profile_picture,
+      },
+    ])
+  );
+
+  const contouringsWithUserAndCategory = contourings.map((contouring) => ({
+    ...contouring,
+    categoryName: categoryMap[contouring.categories[0]],
+    user: userMap[contouring.user_id],
+  }));
+
+  res.render("contourings.liquid", {
+    contourings: contouringsWithUserAndCategory,
+    categories,
+  });
 });
 
 // Speakers
