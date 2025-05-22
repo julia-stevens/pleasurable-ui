@@ -16,15 +16,33 @@
                 <h2>Filter</h2>
             </div>
 
+            {% comment %} <form>
+                <label for="filter">Filter webinars</label>
+                
+                <select id="filter">
+                    <button>
+                    <selectedcontent></selectedcontent>
+                    </button>
+                    
+                    <option value="Head-Neck">Head & Neck</option>
+                    <option value="Lungs">Lungs</option>
+                    <option value="Skin">Skin</option>
+                </select>
+            </form> {% endcomment %}
+
             <!-- Filter formulier -->
             <form class="speakers-filter">
-                <label>
+                <label for="speakers-filter">
                     View all speakers or use the filter to view your bookmarked speakers.
-                    <select name="filter">
+                </label>
+                
+                    <select id="filter">
+                        <button>
+                            <selectedcontent></selectedcontent>
+                        </button>
                         <option value="all">All</option>
                         <option value="bookmarked-speakers">Bookmarked speakers</option>
                     </select>
-                </label>
                 <button type="submit" class="speakers-submit button-green">Filter speakers</button>
             </form>
         </section>
