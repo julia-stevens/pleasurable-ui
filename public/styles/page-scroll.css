@@ -1,0 +1,10 @@
+.main-header .menu {
+    position: fixed; 
+    bottom: 0; 
+    translate: 0 100%;
+    transition: .3s ease-out; 
+}
+
+.offscreen .main-header .menu {
+    translate: 0% 0%;
+}
