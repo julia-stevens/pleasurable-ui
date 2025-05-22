@@ -1,7 +1,41 @@
 <article class="speaker-card components-alignment-vertical">
     <div class="speaker-card-main components-alignment-horizontal">
         <div class="speaker-card-profile-picture">
-            <img src="https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}" alt="" width="200" height="200" style="object-fit:cover;">
+            <!-- picture element voor responsive images -->
+            <!-- in srcset worden afbeeldingen ingeladen van verschillende formats en breedtes -->
+            <!-- in sizes wordt breedte gekozen en afbeelding geselecteerd -->
+            <picture>
+                <source
+                    srcset="
+                        https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=avif&width=50&height=50 50w,   
+                        https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=avif&width=100&height=100 100w,   
+                        https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=avif&width=200&height=200 200w,   
+                        https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=avif&width=300&height=300 300w   
+                    "
+                    sizes="
+                        (max-width: 50px) 50px,
+                        (max-width: 100px) 100px,
+                        (max-width: 200px) 200px,
+                        (max-width: 300px) 300px
+                    "
+                />
+                <source
+                    srcset="
+                        https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=webp&width=50&height=50 50w,   
+                        https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=webp&width=100&height=100 100w,   
+                        https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=webp&width=200&height=200 200w,   
+                        https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=webp&width=300&height=300 300w   
+                    "
+                    sizes="
+                        (max-width: 50px) 50px,
+                        (max-width: 100px) 100px,
+                        (max-width: 200px) 200px,
+                        (max-width: 300px) 300px
+                    "
+                />     
+                <!-- fallback image met goed ondersteund format (jpg) -->           
+                <img src="https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=jpg" alt="" width="200" height="200" style="object-fit:cover;">
+            </picture>
         </div>
         <div class="speaker-card-name-entitle">
             <h3>{{ speaker.fullname }}</h3>
