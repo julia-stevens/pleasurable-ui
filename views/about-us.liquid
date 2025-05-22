@@ -1,36 +1,48 @@
 {% render "partials/head.liquid" %}
 
-<h1>About us</h1>
-
 {% comment %} Dit zorgt ervoor dat de key's uit de API worden opgesplitst ipv onder elkaar getoond. Hierdoor kan de team
 section ertussen worden weergeven. {% endcomment %}
 {%- assign top_item = aboutUsContent | where: "key", "about-us-top" | first -%}
 {%- assign bottom_item = aboutUsContent | where: "key", "about-us-bottom" | first -%}
 
 {% comment %} About us top content uit API {% endcomment %}
-<section id="about-us-intro-section">
-    <h2>{{ top_item.heading }}</h2>
+<h1>{{ top_item.heading }}</h1>
+<section class="about-us-intro-section">
     <p>{{ top_item.text }}</p>
+    <picture class="about-us-intro-picture">
+        <source srcset="assets-home/avl-team.avif" type="image/avif">
+        <img src="assets-home/avl-team.jpeg" alt="5 doctors talking to each other" loading="eager" width="400px">
+    </picture>
 </section>
 
 {% comment %} Team content uit API {% endcomment %}
+
 <section class="about-us-team-section">
-    {% for team in teams %}
-    <h2>{{ team.name }}</h2>
-    <p>{{ team.role }}</p>
-    <img src="https://fdnd-agency.directus.app/assets/{{ team.photo }}" width="200" height="200" alt=""
-        style="object-fit:cover;">
-    {% endfor %}
+    <h2>Meet our doctors</h2>
+    <div class="about-us-team-card-grid">
+        {% for team in teams %}
+        <div class="about-us-team-card">
+            <h2>{{ team.name }}</h2>
+            <p>{{ team.role }}</p>
+            <img src="https://fdnd-agency.directus.app/assets/{{ team.photo }}" alt="{{ team.name }}"
+                class="team-photo">
+        </div>
+        {% endfor %}
+    </div>
 </section>
 
+
 {% comment %} About us bottom content uit API {% endcomment %}
-<section id="about-us-partner-section">
-    <h2>{{ bottom_item.heading }}</h2>
-    <p>{{ bottom_item.text }}</p>
-    {% for logo in partnerLogos %}
-    <img src="https://fdnd-agency.directus.app/assets/{{ logo.logo }}" width="150" height="auto" alt=""
-        style="object-fit:cover;">
-    {% endfor %}
+<section class="about-us-partner-section">
+    <div>
+        <h2>{{ bottom_item.heading }}</h2>
+        <p>{{ bottom_item.text }}</p>
+    </div>
+    <div class="partner-logos">
+        {% for logo in partnerLogos %}
+        <img src="https://fdnd-agency.directus.app/assets/{{ logo.logo }}" alt="Partner logo">
+        {% endfor %}
+    </div>
 </section>
 
 {% render "partials/foot.liquid" %}
