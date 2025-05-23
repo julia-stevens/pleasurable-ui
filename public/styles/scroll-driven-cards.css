@@ -1,3 +1,7 @@
+@view-transition {
+    navigation: auto;
+}
+
 @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
         .speakers-container article, .webinar-cards li {
