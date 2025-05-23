@@ -51,11 +51,21 @@
     </div>
 
     <!-- Bookmark formulier -->
-    <form method="post" class="speaker-bookmark">
+    <form method="post" action="/speakers" class="speaker-bookmark" data-enhanced="form-{{ speaker.id }}">
         <input type="hidden" name="textField" value="{{ speaker.id }}">
-        <button type="submit" class="button-green button-speaker-bookmark components-alignment-horizontal">
-            <span>Bookmark speaker</span>
-            {% render "public/assets-speakers/bookmark-icon.liquid" %}
-        </button>
+        <input type="hidden" name="forField" value="Bookmark for Julia">
+        <input type="hidden" name="_method" value="{% if bookmarkedIds contains speaker.id %}DELETE{% else %}POST{% endif %}">
+
+        {% if bookmarkedIds contains speaker.id %}
+            <button type="submit" class="button-green button-bookmarked button-speaker-bookmark components-alignment-horizontal">
+                <span>Bookmarked</span>
+                {% render "public/assets-speakers/bookmark-icon.liquid" %}
+            </button>
+        {% else %}
+            <button type="submit" class="button-green button-speaker-bookmark components-alignment-horizontal">
+                <span>Bookmark speaker</span>
+                {% render "public/assets-speakers/bookmark-icon.liquid" %}
+            </button>
+        {% endif %}
     </form>
 </article>
