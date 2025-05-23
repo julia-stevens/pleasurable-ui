@@ -42,6 +42,11 @@ app.get("/", async function (req, res) {
   res.render("index.liquid");
 });
 
+app.get("/bookmark", async function (req, res) {
+  // req + res plss T-T
+  res.render("bookmark.liquid");
+});
+
 // webinars
 app.get("/webinars", async (req, res) => {
   const categoryFilter = req.query.category || "";
@@ -114,27 +119,60 @@ app.get("/webinars/:slug", async (req, res) => {
   });
 });
 
-// Contourings
 app.get("/contourings", async (req, res) => {
-  const contouringsResponse = await fetch(contouringsEndpoint);
-  const { data: contouringsResponseJSON } = await contouringsResponse.json(); // fetch and json can be a helper function
+  // fetch contourings
+  const contouringsResponse = await fetch(
+    `${contouringsEndpoint}?fields=user_id,id,title,slug,image_scan,used_literature,categories`
+  );
+  const { data: contourings } = await contouringsResponse.json();
+
+  // fetch categories
+  const categoriesResponse = await fetch(
+    `${categoriesEndpoint}?fields=id,name`
+  );
+  const { data: categories } = await categoriesResponse.json();
+
+  const categoryMap = Object.fromEntries(
+    categories.map((category) => [category.id, category.name])
+  );
+
+  //fetch users
+  const usersResponse = await fetch(
+    `${usersEndpoint}?fields=id,fullname,profile_picture`
+  );
+  const { data: users } = await usersResponse.json();
+
+  const userMap = Object.fromEntries(
+    users.map((user) => [
+      user.id,
+      {
+        fullname: user.fullname,
+        profile_picture: user.profile_picture,
+      },
+    ])
+  );
+
+  const contouringsWithUserAndCategory = contourings.map((contouring) => ({
+    ...contouring,
+    categoryName: categoryMap[contouring.categories[0]],
+    user: userMap[contouring.user_id],
+  }));
 
   res.render("contourings.liquid", {
-    contourings: contouringsResponseJSON,
+    contourings: contouringsWithUserAndCategory,
+    categories,
   });
 });
 
-// Contourings detail
 app.get("/contourings/:slug", async (req, res) => {
   const slug = req.params.slug;
-  const contouringsDetailResponse = await fetch(
+  const contouringsDetailRes = await fetch(
     `${contouringsEndpoint}${slugFilter}${slug}`
   );
-  const { data: contouringsDetailResponseJSON } =
-    await contouringsDetailResponse.json();
+  const { data: contouringsDetail } = await contouringsDetailRes.json();
 
   res.render("contourings-detail.liquid", {
-    contourings: contouringsDetailResponseJSON,
+    contouringsDetail,
   });
 });
 
