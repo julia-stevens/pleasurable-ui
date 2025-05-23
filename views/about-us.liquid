@@ -6,13 +6,15 @@ section ertussen worden weergeven. {% endcomment %}
 {%- assign bottom_item = aboutUsContent | where: "key", "about-us-bottom" | first -%}
 
 {% comment %} About us top content uit API {% endcomment %}
-<h1>{{ top_item.heading }}</h1>
-<section class="about-us-intro-section">
-    <p>{{ top_item.text }}</p>
-    <picture class="about-us-intro-picture">
-        <source srcset="assets-home/avl-team.avif" type="image/avif">
-        <img src="assets-home/avl-team.jpeg" alt="5 doctors talking to each other" loading="eager" width="400px">
-    </picture>
+<section>
+    <h1>{{ top_item.heading }}</h1>
+    <div class="about-us-intro-section">
+        <p>{{ top_item.text }}</p>
+        <picture class="about-us-intro-picture">
+            <source srcset="assets-home/avl-team.avif" type="image/avif">
+            <img src="assets-home/avl-team.jpeg" alt="5 doctors talking to each other" loading="eager" width="400px">
+        </picture>
+    </div>
 </section>
 
 {% comment %} Team content uit API {% endcomment %}
