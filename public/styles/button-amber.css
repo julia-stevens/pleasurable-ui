@@ -44,3 +44,7 @@
 .button-animated-amber:active {
     border: solid 2px var(--primary-highlight);
 }
+
+.button-animated-amber:active {
+    border: solid 2px var(--primary-highlight);
+}
