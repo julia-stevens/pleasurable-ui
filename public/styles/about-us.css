@@ -1,0 +1,102 @@
+h1 {
+    margin: 1rem 5rem;
+}
+
+.about-us-intro-section p {
+    line-height: 2;
+    width: 700px;
+    margin: 1rem 5rem;
+}
+
+.about-us-intro-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.about-us-intro-picture {
+    margin: 1rem;
+    width: 500px;
+    border-radius: 7px;
+}
+
+/* MARK: Styling speaker card */
+
+.about-us-team-section {
+    background-color: var(--secondary-light);
+    padding: 2rem;
+    text-align: center;
+}
+
+.about-us-team-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    justify-items: center;
+    gap: 1rem;
+}
+
+.about-us-team-card {
+    position: relative;
+    background-color: var(--secondary-text);
+    border-radius: var(--border-radius-md);
+    padding: 1rem;
+    width: 100%;
+    max-width: 300px;
+    max-height: 300px;
+    font-size: 0.95rem;
+    color: var(--primary-dark);
+    margin-bottom: 0.8rem;
+}
+
+.about-us-team-card h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-dark);
+    margin-bottom: 0.2rem;
+}
+
+.team-photo {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 1rem;
+}
+
+.about-us-partner-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.about-us-partner-section h2 {
+    margin: 1rem 5rem;
+}
+
+.about-us-partner-section p {
+    max-width: 700px;
+    margin: 1rem 5rem;
+    line-height: 2;
+    color: var(--primary-text);
+}
+
+.partner-logos {
+    background-color: #e8f0ff;
+    padding: 1.5rem;
+    border-radius: 16px;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 1rem;
+    justify-content: center;
+}
+
+.partner-logos img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    max-width: 150px;
+}
