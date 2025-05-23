@@ -172,3 +172,12 @@
     }
 
 }
+
+.menu {
+    translate:0 100%;
+     transition: .4s;
+  }
+  
+  .uitbeeld .menu {
+    translate:0 0%;
+  }
