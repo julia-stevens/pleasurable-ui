@@ -38,6 +38,11 @@ app.get("/", async function (req, res) {
   res.render("index.liquid");
 });
 
+app.get("/bookmark", async function (req, res) {
+  // req + res plss T-T
+  res.render("bookmark.liquid");
+});
+
 // webinars
 
 app.get("/webinars", async (req, res) => {
@@ -106,6 +111,18 @@ app.get("/contourings", async (req, res) => {
   res.render("contourings.liquid", {
     contourings: contouringsWithUserAndCategory,
     categories,
+  });
+});
+
+app.get("/contourings/:slug", async (req, res) => {
+  const slug = req.params.slug;
+  const contouringsDetailRes = await fetch(
+    `${contouringsEndpoint}${slugFilter}${slug}`
+  );
+  const { data: contouringsDetail } = await contouringsDetailRes.json();
+
+  res.render("contourings-detail.liquid", {
+    contouringsDetail,
   });
 });
 
