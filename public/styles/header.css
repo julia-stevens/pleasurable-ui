@@ -79,6 +79,7 @@
 
                     svg path {
                         fill: #fff;
+                        transition: 0.2s ease-in-out;
                     }
 
                     &:hover svg path {
@@ -91,7 +92,6 @@
 
                     &:hover {
                         color: var(--primary-highlight);
-                        transition: 0.2s ease-in-out;
                     }
 
                     svg {
