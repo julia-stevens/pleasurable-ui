@@ -119,6 +119,11 @@ ol {
         color: var(--secondary-text);
         transition: 0.2s ease-in-out;
     }
+    .button-green:active {
+        --highlight: #DBE001; 
+        background-color: var(--highlight);
+        color: var(--primary-dark);
+    }
 
 /* BUTTON WHITE & HOVER */
 .button-white {
@@ -136,6 +141,10 @@ ol {
         color: var(--primary-text);
         transition: 0.2s ease-in-out;
     }
+    .button-white:active {
+        --highlight: #DBE001; 
+        background-color: var(--highlight);
+    }
 
 /* LINKS */
 a {
@@ -143,8 +152,8 @@ a {
     font-size: var(--font-size-md);
     color: var(--primary-text);
     text-decoration: none;
+    transition: .2s ease-in-out;
   }
     a:hover {
         color: var(--primary-highlight);
     }
-
