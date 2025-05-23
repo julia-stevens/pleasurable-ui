@@ -1,0 +1,74 @@
+.bookmark-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #19b2a2;
+  color: #000000;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.bookmark-btn:hover {
+  background-color: #00193f;
+  color: #fff;
+  transform: scale(1.02);
+}
+
+.bookmark-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-icon-success {
+  display: none;
+}
+
+.bookmark-btn[data-state="success"] {
+  background-color: #d7ffc1;
+  color: #234114;
+}
+
+.bookmark-btn[data-state="success"] .icon-default {
+  display: none;
+}
+
+.bookmark-btn[data-state="success"] .icon-success {
+  display: inline;
+}
+
+.feedback {
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+  font-weight: 500;
+}
+
+.bookmark-btn[data-state="success"] + .feedback {
+  color: #4b7d14;
+}
+
+.bookmark-btn[data-state="error"] {
+  background-color: #ffe1e7;
+  color: #5f1a24;
+}
+
+.bookmark-btn[data-state="error"] .icon-default {
+  display: none;
+}
+
+.bookmark-btn[data-state="error"] + .feedback {
+  color: #b11228;
+}
+
+.btn-icon-default {
+  fill: #000;
+  transition: fill 0.3s ease;
+}
+
+.btn-icon-default:hover {
+  fill: #ffff;
+}
