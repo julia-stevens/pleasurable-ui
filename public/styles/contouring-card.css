@@ -1,23 +1,126 @@
-.contouring-card {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 0.5rem;
-  border: 1px solid green;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  background-color: #f9f9f9;
-  max-width: 18.75rem;
+li {
+  list-style: none;
 }
 
-.contouring-card img {
+.contouring-wrapper {
+  padding: 2rem;
+  max-width: 75rem;
+  margin: 0 auto;
+}
+
+.contouring-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+  /* grid-template-columns: repeat(3, 1fr); */
+  gap: 2rem;
+}
+
+.contouring-card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+  min-width: 0;
+}
+
+.contouring-card:hover {
+  transform: translateY(-0.25rem);
+}
+
+.contouring-image img {
   width: 100%;
   height: auto;
-  border-radius: 0.5rem;
+  display: block;
   object-fit: cover;
 }
 
-.contouring-card h2 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin: 0;
+.contouring-content {
+  padding: 1rem;
+}
+
+.contouring-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+  color: #002153;
+}
+
+.contouring-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.contouring-user-name {
+  font-style: italic;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #0021538f;
+}
+
+.contouring-see-more {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: #002153;
+  font-weight: 500;
+  margin-top: 0.25rem;
+  cursor: pointer;
+}
+
+.contouring-see-more svg {
+  margin-left: 0.25rem;
+}
+
+.contouring-category {
+  border: 1px solid white;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  font-weight: bolder;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: #002153;
+}
+
+.contouring-not-found {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #333;
+}
+
+.not-found-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.not-found-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.not-found-text {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.not-found-link {
+  color: #002153;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.not-found-icon svg {
+  margin-top: 1rem;
+  fill: #002153;
+}
+
+.see-more-btn {
+  margin-left: 0.5rem;
+  display: inline-flex;
+  align-items: center;
 }
