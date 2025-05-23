@@ -138,14 +138,95 @@ app.get("/contourings/:slug", async (req, res) => {
   });
 });
 
-// Speakers
 app.get("/speakers", async (req, res) => {
-  const speakersResponse = await fetch(speakersEndpoint);
-  const { data: speakersResponseJSON } = await speakersResponse.json();
+  try {
+    // Haal alle speakers op uit API
+    const speakersResponse = await fetch(speakersEndpoint);
+    const speakersJSON = await speakersResponse.json();
 
-  res.render("speakers.liquid", {
-    speakers: speakersResponseJSON,
-  });
+    // Zet alle id's om naar strings
+    const speakers = speakersJSON.data.map(speaker => ({
+      ...speaker,
+      id: String(speaker.id) 
+    }));
+
+    // Haal alle bookmarks op (gepost-te speakers)
+    const bookmarksResponse = await fetch(`${messagesEndpoint}`);
+    const bookmarksJSON = await bookmarksResponse.json();
+
+    const bookmarkedSpeakerIds = bookmarksJSON.data
+      // Filter bookmarks die beginnen met 'Bookmark for Julia'
+      .filter(bookmark => bookmark.for && bookmark.for.startsWith("Bookmark for Julia"))
+
+      // Zet de id's om naar strings
+      .map(bookmark => String(bookmark.text))
+
+      // Filter id's op alleen bookmarks met een speaker
+      .filter(bookmarkedId => speakers.some(speaker => speaker.id === bookmarkedId));
+
+    // Render speaker en bookmarks naar 'speakers' view
+    res.render("speakers.liquid", {
+      speakers,
+      bookmarkedIds: bookmarkedSpeakerIds
+    });
+  } catch (error) {
+    console.error("Error loading speakers:", error);
+    res.status(500).send("Error loading speakers.");
+  }
+});
+
+app.post("/speakers", async (req, res) => {
+  // Haal waarden het formulier
+  const { textField, forField, _method } = req.body;
+  const speakerId = String(textField); // zet id om naar string
+  const userBookmarkLabel = forField;
+
+  try {
+    // Haal bestaande bookmarks op
+    const bookmarksResponse = await fetch(`${messagesEndpoint}`);
+    const bookmarksJSON = await bookmarksResponse.json();
+    const bookmarks = bookmarksJSON.data;
+
+    if (_method === "DELETE") {
+      // Zoek naar match op id & for (Bookmark for Julia)
+      let bookmarkToDelete = bookmarks.find(
+        bookmark => String(bookmark.text) === speakerId && bookmark.for === userBookmarkLabel
+      );
+      
+      // Als match gevonden, verwijder de bookmark 
+      if (bookmarkToDelete) {
+        await fetch(`${messagesEndpoint}/${bookmarkToDelete.id}`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json;charset=UTF-8" }
+        });
+      } 
+    } else {
+
+      // Check of de bookmark al bestaat (check op id en for (Bookmark for Julia))
+      const alreadyBookmarked = bookmarks.find(
+        bookmark => String(bookmark.text) === speakerId && bookmark.for === userBookmarkLabel
+      );
+
+      // Als bookmark nog niet bestaat, POST deze dan
+      if (!alreadyBookmarked) {
+        await fetch(`${messagesEndpoint}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json;charset=UTF-8" },
+          body: JSON.stringify({
+            text: speakerId,
+            for: userBookmarkLabel
+          })
+        });
+      } 
+    }
+    
+    // Redirect naar vorige pagina of naar "/speakers"
+    res.redirect(303, req.get("Referer") || "/speakers");
+
+  } catch (error) {
+    console.error("Error handling speaker bookmark:", error);
+    res.status(500).send("Something went wrong.");
+  }
 });
 
 // Speakers detail
