@@ -5,6 +5,11 @@
     {% for speaker in speakers %}
         <main class="speaker-main components-alignment-vertical">
             <section class="speaker-introduction components-alignment-vertical">
+                <ul class="breadcrumbs-speakers-detail components-alignment-horizontal">
+                    <li><a href="/">Home &rsaquo;</a></li>
+                    <li><a href="/speakers">Speakers &rsaquo;</a></li>
+                    <li><a href="/speakers/{{ speaker.slug }}">{{ speaker.slug }}</a></li>
+                </ul>
                 <div class="speaker-introduction-titles components-alignment-vertical">
                     <span class="speaker-meet-highlight">Meet</span>
                     <h1 class="speaker-name">{{ speaker.fullname }}</h1>
@@ -13,7 +18,41 @@
 
                 <div class="speaker-picture-bookmark components-alignment-vertical">
                     <div class="speaker-picture">
-                        <img src="https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}" width="200" height="200" alt="" style="object-fit:cover;">
+                        <!-- picture element voor responsive images -->
+                        <!-- in srcset worden afbeeldingen ingeladen van verschillende formats en breedtes -->
+                        <!-- in sizes wordt breedte gekozen en afbeelding geselecteerd -->
+                        <picture>
+                            <source
+                                srcset="
+                                    https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=avif&width=100&height=100 100w,   
+                                    https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=avif&width=200&height=200 200w,   
+                                    https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=avif&width=300&height=300 300w,   
+                                    https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=avif&width=400&height=400 400w   
+                                "
+                                sizes="
+                                    (max-width: 100px) 100px,
+                                    (max-width: 200px) 200px,
+                                    (max-width: 300px) 300px,
+                                    (max-width: 400px) 400px
+                                "
+                            />
+                            <source
+                                srcset="
+                                    https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=webp&width=100&height=100 100w,   
+                                    https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=webp&width=200&height=200 200w,   
+                                    https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=webp&width=300&height=300 300w,   
+                                    https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=webp&width=400&height=400 400w   
+                                "
+                                sizes="
+                                    (max-width: 100px) 100px,
+                                    (max-width: 200px) 200px,
+                                    (max-width: 300px) 300px,
+                                    (max-width: 400px) 400px
+                                "
+                            />     
+                            <!-- fallback image met goed ondersteund format (jpg) -->           
+                            <img src="https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=jpg" alt="" width="200" height="200" style="object-fit:cover;">
+                        </picture>
                     </div>
 
                     <!-- Bookmark formulier -->
@@ -42,7 +81,7 @@
                 </div>   
                 <div class="speaker-featured-webinars-overview">
                     {% for webinar in speaker.webinars %}
-                        <p>{{ webinar.avl_webinars_id.title }}</p>
+                        <a>{{ webinar.avl_webinars_id.title }}</a>
                     {% endfor %} 
                 </div>             
             </section>
