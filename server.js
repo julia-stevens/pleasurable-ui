@@ -28,6 +28,9 @@ const commentsEndpoint = `${directusApiBaseUrl}/avl_comments`;
 const usersEndpoint = `${directusApiBaseUrl}/avl_users`;
 const categoriesEndpoint = `${directusApiBaseUrl}/avl_categories`;
 const messagesEndpoint = `${directusApiBaseUrl}/avl_messages`;
+const teamEndpoint = `${directusApiBaseUrl}/avl_team`;
+const partnerLogosEndpoint = `${directusApiBaseUrl}/avl_logos`;
+const contentEndpoint = `${directusApiBaseUrl}/avl_content`;
 
 const slugFilter = "?filter[slug][_eq]=";
 const bookmarkFilter = "?filter[for][_eq]=Bookmark webinar"
@@ -242,7 +245,21 @@ app.get("/speakers/:slug", async (req, res) => {
 
 // About us
 app.get("/about-us", async (req, res) => {
-  res.render("about-us.liquid");
+
+  const teamResponse = await fetch(teamEndpoint + "?fields=role,name,photo")
+  const { data: teams } = await teamResponse.json();
+
+  const logoResponse = await fetch(partnerLogosEndpoint)
+  const { data: partnerLogos } = await logoResponse.json();
+
+  const contentResponse = await fetch(contentEndpoint)
+  const { data: aboutUsContent } = await contentResponse.json();
+
+  // Filter de content op gewenste keys
+  const wantedKeys = ["about-us-top", "about-us-bottom"];
+  const filteredContent = aboutUsContent.filter(item => wantedKeys.includes(item.key));
+
+  res.render("about-us.liquid", { teams, partnerLogos, aboutUsContent: filteredContent });
 });
 
 // Profile
@@ -255,7 +272,7 @@ app.get("/profile/bookmarks", async (req, res) => {
   res.render("profile-bookmarks.liquid");
 });
 
-  // POST voor url /webinars
+// POST voor url /webinars
 app.post("/webinars", async function (req, res) {
   // Haal de textField (webinar.id) en forField uit de request body
   const { textField, forField } = req.body;
@@ -263,7 +280,7 @@ app.post("/webinars", async function (req, res) {
   try {
     // Haal de bookmarks op
     const bookmarkResponse = await fetch(`${messagesEndpoint}`)
-  const bookmarkResponseJSON = await bookmarkResponse.json()
+    const bookmarkResponseJSON = await bookmarkResponse.json()
 
     // Zoek in de bookmarks of het item al bestaat door te controleren op textField (webinar.id)
     const existingItem = bookmarkResponseJSON.data.find(item => item.text === textField);
