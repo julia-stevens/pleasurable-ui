@@ -1,3 +1,7 @@
+html {
+    interpolate-size: allow-keywords;
+}
+
 .hero-webinars {
     background-color: var(--secondary-light);
     padding: 3em 1em 6em 1em;
@@ -70,10 +74,64 @@
             border: solid 1px var(--primary-dark);
             width: 100%;
             font-size: 16px;
+            align-items: center;
+            appearance: base-select;
+            font-family: var(--font-paragraph);
 
-             @media screen and (min-width: 720px) {
-                 width: unset;
-             }
+            @media screen and (min-width: 720px) {
+                width: 15em;
+            }
+
+
+            &::picker(select) {
+                position: absolute;
+                height: 0;
+                min-height: 0;
+                border-radius: 8px;
+                transition: height 0.3s, display 0.3s allow-discrete, overlay 0.3s allow-discrete;
+                animation: bounceDown 0.5s forwards;
+                overflow: clip;
+                appearance: base-select;
+                position-try-fallbacks: unset;
+                position-area: bottom;
+            }
+
+            &:open::picker(select) {
+                height: auto;
+                animation: bounceDown 0.5s forwards;
+
+                @starting-style {
+                    height: 0;
+                }
+            }
+
+            &::picker-icon {
+                content: "";
+                width: .5em;
+                height: .5em;
+                background-color: currentcolor;
+                clip-path: polygon(0 .1em, 100% .1em, 50% 100%, 0 .1em);
+                transition: .3s;
+            }
+
+            &:open::picker-icon {
+                rotate: 180deg;
+            }
+
+            option {
+                padding: 1em;
+                border-bottom: solid 1px #d4d4d4;
+                z-index: 0;
+                position: relative;
+
+                &::checkmark {
+                    display: none;
+                }
+
+                &:hover {
+                    background-color: var(--secondary-light);
+                }
+            }
         }
 
         button {
