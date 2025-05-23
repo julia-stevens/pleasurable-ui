@@ -1,10 +1,11 @@
 {% render "partials/head.liquid" %}
 
-
-    <h1>Contourings detail</h1>
-
-    {% for contouring in contourings %}
-        <p>{{ contouring.slug }}</p>
-    {% endfor %}
+{% if contouring %}
+  <h1>{{ contouring.slug }}</h1>
+  <p>{{ contouring.description }}</p>
+{% else %}
+  {% render "partials/contouring-404.liquid" %}
+  
+{% endif %}
 
 {% render "partials/foot.liquid" %}

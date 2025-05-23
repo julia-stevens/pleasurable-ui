@@ -1,25 +1,45 @@
 {% render "partials/head.liquid" %}
 
-<section class="wrapper">
-    <div class="contouring-grid">
-        {% for contouring in contourings %}
-            <article class="contouring-card">
-                {% if contouring.image_scan %}
-                    <picture>
-                     <source srcset="https://fdnd-agency.directus.app/assets/{{ contouring.image_scan }}?format=webp"
-                     type="image/webp"> 
-                     <img src="https://fdnd-agency.directus.app/assets/{{ contouring.image_scan }}" alt="{{ contouring.title }}" loading="lazy">
-                    </picture>
-                {% endif %}
+<section class="contouring-wrapper">
+  <div class="contouring-grid">
+    {% if contourings.size == 0 %}
+      <p class="contouring-empty-message">No contourings available at the moment. Please check back later.</p>
+    {% else %}
+      {% for contouring in contourings %}
+        <article class="contouring-card" >
+        
+          {% if contouring.image_scan %}
+            <picture class="contouring-image" style="aspect-ratio: 4 / 3; display: block; width: 100%;">
+              <p class="contouring-category">{{ contouring.categoryName }}</p>
+              <source srcset="https://fdnd-agency.directus.app/assets/{{ contouring.image_scan }}?format=webp" type="image/webp">
+              <img 
+                src="https://fdnd-agency.directus.app/assets/{{ contouring.image_scan }}" 
+                alt="{{ contouring.title }}" 
+                loading="lazy" 
+                width="400" 
+                height="300" 
+              >
+            </picture>
+          {% endif %}
 
-                <div class="contouring-content">
-                    <h2 class="contouring-title">{{ contouring.title }}</h2>
+          <div class="contouring-content">
+            <h2 class="contouring-title">{{ contouring.title }}</h2>  
+            
+            <div class="contouring-user-info">
+              <p class="contouring-user-name">Uploaded by {{ contouring.user.fullname }}</p>
+              <li>
+                <a href="/contourings/{{ contouring.slug }}" class="see-more-link" style="margin-left: 8px; display: inline-flex; align-items: center;">
+                  See more
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#002153" style="margin-left: 4px;">
+                    <path d="M647-440H200q-17 0-28.5-11.5T160-480q0-17 11.5-28.5T200-520h447L451-716q-12-12-11.5-28t12.5-28q12-11 28-11.5t28 11.5l264 264q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L508-188q-11 11-27.5 11T452-188q-12-12-12-28.5t12-28.5l195-195Z"/>
+                  </svg>
+                </a>
+              </li>
+            </div>
+          </div>
 
-                    <p>{{ contouring.user_id }}</p>
-                    <p>{{ contouring.categories }}</p>
-                  
-                </div>
-            </article>
-        {% endfor %}
-    </div>
+        </article>
+      {% endfor %}
+    {% endif %}
+  </div>
 </section>
