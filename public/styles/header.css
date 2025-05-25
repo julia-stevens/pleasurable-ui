@@ -56,10 +56,12 @@
             li {
                 list-style-type: none;
                 display: flex;
+                width: 25%;
+                height: 50px;
 
-                 &:nth-of-type(4) {
+                &:nth-of-type(4) {
                     display: none;
-                 }
+                }
 
                 @media screen and (min-width: 1020px) {
                     &:nth-of-type(4) {
@@ -135,9 +137,9 @@
                     svg path {
                         fill: #fff;
 
-                         @media screen and (min-width: 1020px) {
+                        @media screen and (min-width: 1020px) {
                             fill: var(--primary-dark);
-                         }
+                        }
                     }
                 }
             }
