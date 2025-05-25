@@ -4,6 +4,10 @@
     <main class="main-speakers components-alignment-vertical">
         <section class="speakers-introduction">
             <div class="speakers-section-title">
+                <ul class="breadcrumbs-speakers components-alignment-horizontal">
+                    <li><a href="/">Home &rsaquo;</a></li>
+                    <li><a href="/speakers">Speakers</a></li>
+                </ul>
                 <h1>Speakers</h1>
             </div>
             <div class="speakers-introduction-description">
@@ -61,5 +65,6 @@
         </section>
     </main>
 
-    {% comment %} {% include "partials/footer.liquid" %} {% endcomment %}
+    <script src="/script-speaker.js" type="module"></script>
+    
 {% render "partials/foot.liquid" %}
