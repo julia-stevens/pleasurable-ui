@@ -45,7 +45,15 @@
 
     <div class="divider-webinars"></div>
 
+    {% if webinars.size > 0 %}
     {% render "partials/webinar-card.liquid", webinars: webinars, bookmarkIds: bookmarkIds %}
+    {% else %}
+    <div class="fallback-category">
+        <p>There are no webinars available for the <b>categorie: {{ selectedCategory }}</b>.
+            View other categories for your interests.
+        </p>
+    </div>
+    {% endif %}
 
 </section>
 
