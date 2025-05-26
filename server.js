@@ -39,6 +39,7 @@ const bookmarkFilter = "?filter[for][_eq]=Bookmark webinar"
 // Home
 app.get("/", async function (req, res) {
   // req + res plss T-T
+
   res.render("index.liquid");
 });
 
