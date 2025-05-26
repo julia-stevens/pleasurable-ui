@@ -162,6 +162,10 @@ a:hover {
         translate: 0 100%;
         transition: .2s;
     }
+
+     .uitbeeld .menu {
+         translate: 0 0%;
+     }
 }
 
 /* Button animation */
@@ -215,7 +219,4 @@ a:hover {
 
 .button-animated:active {
     border: solid 2px var(--primary-highlight);
-    .uitbeeld .menu {
-        translate: 0 0%;
-    }
 }
