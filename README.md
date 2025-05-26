@@ -22,7 +22,8 @@ De instructie vind je in: [INSTRUCTIONS.md](https://github.com/fdnd-task/pleasur
 <!-- Voeg een link toe naar Github Pages 🌐-->
 
 ### Webinars
-- Bookmark functionaliteit webinars
+
+#### **Bookmark functionaliteit webinars**
 
 De webinars hebben een bookmark functionaliteit. Dit houdt in dat de webinars toegevoegd en verwijderd kunnen worden aan/uit de bookmarks. Op deze manier kunnen gebruikers de favoriete webinars op een later moment terugkijken.
 
@@ -33,14 +34,17 @@ De webinars hebben een bookmark functionaliteit. Dit houdt in dat de webinars to
 
 https://github.com/user-attachments/assets/c81888a4-6d88-4df4-9ce2-953a6c339c87
 
-- Filter functionaliteit webinars
+#### **Filter functionaliteit webinars**
 
 De webinars zijn via de filter functionaliteit te filteren op categorie en datum. Op deze amneir kunnen gebruikers gemakkelijker een webinar vinden naar interesse.
 
-- **Toegankelijkheid (reliable):** De filteropties zijn opgebouwd met semantische HTML elementen: <select> en <option>. Daarnaast zijn de filters te navigeren met de tab-toets, door de verschillende `<option>` items is te navigeren met de spatie-toets. 
-- **Responsiveness: (Usable):** De filters zijn zo ontworpen dat ze zich aanpassen aan schermbreedte, deze zijn mobile first ontwikkeld met `@media queries`. En zijn hierdoor voor elke gebruiker te gebruiken op elk schermformaat.
-- **Performance (Reliable):** Resultaten verschijnen direct of met minimale vertraging, dit zorgt voor een snelle en betrouwbare gebruikerservaring.
-- **Progressive Enhancement (Pleaserable):** De core functionaliteit: het filteren van een webinar op categorie en datum blijft ook zonder JS en CSS werken. In moderne browsers wordt de filter enhanced (mooier gemaakt) met animaties en extra styling elementen.
+De webinars zijn via de filter functionaliteit te filteren op categorie en datum. Op deze manier kunnen gebruikers gemakkelijker een webinar vinden naar interesse.
+
+- **Toegankelijkheid (Reliable):** De filteropties zijn opgebouwd met semantische HTML elementen: `<select>` en `<option>`. Daarnaast zijn de filters te navigeren met de tab-toets, door de verschillende `<option>` items is te navigeren met de spatie-toets.
+- **Responsiveness (Usable):** De filters zijn zo ontworpen dat ze zich aanpassen aan schermbreedte. Deze zijn mobile first ontwikkeld met `@media queries` en zijn hierdoor voor elke gebruiker te gebruiken op elk schermformaat.
+- **Performance (Reliable):** Resultaten verschijnen direct of met minimale vertraging. Dit zorgt voor een snelle en betrouwbare gebruikerservaring.
+- **Progressive Enhancement (Pleasurable):** De core functionaliteit: het filteren van een webinar op categorie en datum, blijft ook zonder JavaScript en CSS werken. In moderne browsers wordt de filter enhanced (mooier gemaakt) met animaties en extra styling elementen.
+
 
 https://github.com/user-attachments/assets/3890dc21-2800-4a6a-b10a-edd7070f33cd
 
