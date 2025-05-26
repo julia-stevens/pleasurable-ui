@@ -21,16 +21,16 @@ body {
     --font-paragraph: 'Ubuntu', sans-serif;
 
     /* FONT WEIGHT */
-    --font-weight-300: 300; 
-    --font-weight-400: 400; 
-    --font-weight-500: 500; 
-    --font-weight-700: 700; 
+    --font-weight-300: 300;
+    --font-weight-400: 400;
+    --font-weight-500: 500;
+    --font-weight-700: 700;
 
     /* TEXT SIZES */
     --font-size-xs: 0.5em;
     --font-size-sm: 0.75em;
     --font-size-md: 1em;
-    
+
     --font-size-6: 1.1em;
     --font-size-5: 1.5em;
     --font-size-4: 1.8em;
@@ -46,9 +46,9 @@ body {
     /* BORDER RADIUS */
     --border-radius-sm: 7px;
     --border-radius-md: 15px;
-  }
+}
 
-    /* MARK: FOCUS */
+/* MARK: FOCUS */
 *:focus-visible {
     outline: 3px dashed var(--primary-highlight);
     outline-offset: 4px;
@@ -56,35 +56,40 @@ body {
 
 
 /* MARK: TEXT DECO */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--header-font);
     margin: 0em 0em 1em 0em;
     padding: 0;
 }
 
-    h1 {
-        font-size: var(--font-size-1);
-    }
+h1 {
+    font-size: var(--font-size-1);
+}
 
-    h2 {
-        font-size: var(--font-size-2);
-    }
+h2 {
+    font-size: var(--font-size-2);
+}
 
-    h3 {
-        font-size: var(--font-size-3);
-    }
+h3 {
+    font-size: var(--font-size-3);
+}
 
-    h4 {
-        font-size: var(--font-size-4);
-    }
+h4 {
+    font-size: var(--font-size-4);
+}
 
-    h5 {
-        font-size: var(--font-size-5);
-    }
+h5 {
+    font-size: var(--font-size-5);
+}
 
-    h6 {
-        font-size: var(--font-size-6);
-    }
+h6 {
+    font-size: var(--font-size-6);
+}
 
 p {
     font-family: var(--font-paragraph);
@@ -114,11 +119,12 @@ ol {
     transition: 0.2s ease-in-out;
     align-self: baseline;
 }
-    .button-green:hover {
-        background-color: var(--primary-dark);
-        color: var(--secondary-text);
-        transition: 0.2s ease-in-out;
-    }
+
+.button-green:hover {
+    background-color: var(--primary-dark);
+    color: var(--secondary-text);
+    transition: 0.2s ease-in-out;
+}
 
 /* BUTTON WHITE & HOVER */
 .button-white {
@@ -131,11 +137,12 @@ ol {
     transition: 0.2s ease-in-out;
     align-self: baseline;
 }
-    .button-white:hover {
-        background-color: var(--primary-highlight);
-        color: var(--primary-text);
-        transition: 0.2s ease-in-out;
-    }
+
+.button-white:hover {
+    background-color: var(--primary-highlight);
+    color: var(--primary-text);
+    transition: 0.2s ease-in-out;
+}
 
 /* LINKS */
 a {
@@ -143,10 +150,19 @@ a {
     font-size: var(--font-size-md);
     color: var(--primary-text);
     text-decoration: none;
-  }
-    a:hover {
-        color: var(--primary-highlight);
+}
+
+a:hover {
+    color: var(--primary-highlight);
+}
+
+
+@media screen and (max-width: 1020px) {
+    .menu {
+        translate: 0 100%;
+        transition: .2s;
     }
+}
 
 /* Button animation */
 .button-animated {
@@ -199,4 +215,7 @@ a {
 
 .button-animated:active {
     border: solid 2px var(--primary-highlight);
+    .uitbeeld .menu {
+        translate: 0 0%;
+    }
 }
