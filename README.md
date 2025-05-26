@@ -4,6 +4,7 @@ Ontwerp en maak met een team voor een opdrachtgever een interface waar gebruiker
 
 De instructie vind je in: [INSTRUCTIONS.md](https://github.com/fdnd-task/pleasurable-ui/blob/main/docs/INSTRUCTIONS.md)
 
+![poster oncollaboration](https://github.com/user-attachments/assets/a2db428b-6a3f-41c6-853d-abf2109516d5)
 
 
 ## Inhoudsopgave
