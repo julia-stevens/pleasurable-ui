@@ -2,8 +2,13 @@
 
 <div class="home-main">
 
+{% comment %} Dit zorgt ervoor dat de key's uit de API worden opgesplitst ipv onder elkaar getoond. Hierdoor kan de team
+section ertussen worden weergeven. {% endcomment %}
+{%- assign top_item = homeContent | where: "key", "home-top" | first -%}
+{%- assign bottom_item = homeContent | where: "key", "home-bottom" | first -%}
+
     <section class="home-about">
-        <h1>The platform where Radiotherapists connect and innovate</h1>
+        <h1> {{ home-about.heading  }} </h1>
 
         <div class="home-about-position">
             <p>

@@ -39,8 +39,14 @@ const bookmarkFilter = "?filter[for][_eq]=Bookmark webinar"
 // Home
 app.get("/", async function (req, res) {
   // req + res plss T-T
+  const contentResponse = await fetch(contentEndpoint)
+  const { data: homeContent } = await contentResponse.json();
 
-  res.render("index.liquid");
+  // Filter de content op gewenste keys
+  const wantedKeys = ["home-intro", "home-meet-our-doctors", "home-partners", "home-webinars", "home-contourings"];
+  const filteredContent = homeContent.filter(item => wantedKeys.includes(item.key));
+
+  res.render("index.liquid", {  homeContent: filteredContent });
 });
 
 // webinars
