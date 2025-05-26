@@ -1,6 +1,9 @@
 .main-header {
     width: 100%;
     display: flex;
+.menu-items li:nth-of-type(5) {
+    display: none;
+}
 
     @media screen and (min-width: 1020px) {
         position: sticky;
@@ -150,6 +153,9 @@
         background-color: var(--primary-dark);
         width: 100%;
         padding: 1em 1em .5em 1em;
+    .menu-items li:nth-of-type(5) {
+        display: unset;
+    }
         display: flex;
         justify-content: center;
         align-items: center;
