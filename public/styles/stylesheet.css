@@ -220,3 +220,26 @@ a:hover {
 .button-animated:active {
     border: solid 2px var(--primary-highlight);
 }
+
+/* Skiplink */
+.skiplink {
+    position: absolute;
+    z-index: 110;
+    top: -300px;
+    color: var(--primary-text-color);
+    background-color: var(--primary-highlight);
+    padding: 1em;
+    border-radius: 0em 0em 1em 1em;
+    transition: .2s ease-in-out;
+}
+
+.skiplink:hover {
+    background-color: var(--secondary-light);
+    color: var(--primary-text);
+}
+
+.skiplink:focus {
+    left: 7em;
+    top: 0px;
+    box-shadow: 0 0 0 3px var(--orange-button);
+}
