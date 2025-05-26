@@ -1,3 +1,5 @@
+
+https://github.com/user-attachments/assets/b2a6bb8b-ad1b-488e-b60c-3f595c388313
 # Pleasurable User Interface
 
 Ontwerp en maak met een team voor een opdrachtgever een interface waar gebruikers blij van worden.
@@ -43,10 +45,19 @@ De webinars zijn via de filter functionaliteit te filteren op categorie en datum
 - **Toegankelijkheid (Reliable):** De filteropties zijn opgebouwd met semantische HTML elementen: `<select>` en `<option>`. Daarnaast zijn de filters te navigeren met de tab-toets, door de verschillende `<option>` items is te navigeren met de spatie-toets.
 - **Responsiveness (Usable):** De filters zijn zo ontworpen dat ze zich aanpassen aan schermbreedte. Deze zijn mobile first ontwikkeld met `@media queries` en zijn hierdoor voor elke gebruiker te gebruiken op elk schermformaat.
 - **Performance (Reliable):** Resultaten verschijnen direct of met minimale vertraging. Dit zorgt voor een snelle en betrouwbare gebruikerservaring.
-- **Progressive Enhancement (Pleasurable):** De core functionaliteit: het filteren van een webinar op categorie en datum, blijft ook zonder JavaScript en CSS werken. In moderne browsers wordt de filter enhanced (mooier gemaakt) met animaties en extra styling elementen.
-
+- **Progressive Enhancement (Pleasurable):** De core functionaliteit: het filteren van een webinar op categorie en datum, blijft ook zonder JS en CSS werken. In moderne browsers wordt de filter enhanced (mooier gemaakt) met animaties en extra styling elementen.
 
 https://github.com/user-attachments/assets/3890dc21-2800-4a6a-b10a-edd7070f33cd
+
+### Header en footer
+
+De header bevat de main linkjes van de website. In de footer staan alle linkjes vermeld. Daarnaast bevatten de header en footer beiden de logo's van het AvL ziekenhuis en Kemenkes.
+
+- **Toegankelijkheid (Reliable):** De header en footer zijn opgebouwd met semantische HTML-elementen, zoals `<header>`, `<footer>` en `<nav>`, zodat screenreaders de structuur van de pagina correct interpreteren. Alle links zijn voorzien van duidelijke en beschrijvende teksten, en goed navigeerbaar met toetsenbord via de tab-toets.
+- **Responsiveness (Usable):** De layout van de header en footer is mobile first opgebouwd met behulp van `@media queries`
+- **Performance (Reliable):**  De header en footer laden snel doordat ze eenvoudig zijn opgebouwd en gebruikmaken van geoptimaliseerde afbeeldingen.
+- **Progressive Enhancement (Pleasurable):** In moderne browsers wordt de navigatie visueel verrijkt met animaties, hover-effecten en scroll animaties die de gebruikerservaring verbeteren. Tegelijk blijft de core functionaliteit: navigeren via de header en footer behouden blijft zonder JavaScript of CSS.
+
 
 ## Gebruik
 <!-- Bij Gebruik staat de user story, hoe het werkt en wat je er mee kan. -->
