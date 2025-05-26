@@ -56,8 +56,7 @@ De header bevat de main linkjes van de website. In de footer staan alle linkjes 
 - **Performance (Reliable):**  De header en footer laden snel doordat ze eenvoudig zijn opgebouwd en gebruikmaken van geoptimaliseerde afbeeldingen.
 - **Progressive Enhancement (Pleasurable):** In moderne browsers wordt de navigatie visueel verrijkt met animaties, hover-effecten en scroll animaties die de gebruikerservaring verbeteren. Tegelijk blijft de core functionaliteit: navigeren via de header en footer behouden blijft zonder JavaScript of CSS.
 
-
-https://github.com/user-attachments/assets/b2a6bb8b-ad1b-488e-b60c-3f595c388313
+https://github.com/user-attachments/assets/c436be47-9c8e-4c73-96e6-c383b82f95ee
 
 ## Gebruik
 <!-- Bij Gebruik staat de user story, hoe het werkt en wat je er mee kan. -->
