@@ -43,6 +43,14 @@
 <section class="webinars">
     <h2>Results</h2>
 
+    <p>
+        {% if webinars.size == 1 %}
+        1 webinar
+        {% else %}
+        {{ webinars.size }} webinars
+        {% endif %}
+    </p>
+
     <div class="divider-webinars"></div>
 
     {% if webinars.size > 0 %}
