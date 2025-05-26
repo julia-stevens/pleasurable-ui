@@ -4,6 +4,10 @@
     <main class="main-speakers components-alignment-vertical">
         <section class="speakers-introduction">
             <div class="speakers-section-title">
+                <ul class="breadcrumbs-speakers components-alignment-horizontal">
+                    <li><a href="/">Home &rsaquo;</a></li>
+                    <li><a href="/speakers">Speakers</a></li>
+                </ul>
                 <h1>Speakers</h1>
             </div>
             <div class="speakers-introduction-description">
@@ -16,15 +20,33 @@
                 <h2>Filter</h2>
             </div>
 
+            {% comment %} <form>
+                <label for="filter">Filter webinars</label>
+                
+                <select id="filter">
+                    <button>
+                    <selectedcontent></selectedcontent>
+                    </button>
+                    
+                    <option value="Head-Neck">Head & Neck</option>
+                    <option value="Lungs">Lungs</option>
+                    <option value="Skin">Skin</option>
+                </select>
+            </form> {% endcomment %}
+
             <!-- Filter formulier -->
             <form class="speakers-filter">
-                <label>
+                <label for="speakers-filter">
                     View all speakers or use the filter to view your bookmarked speakers.
-                    <select name="filter">
+                </label>
+                
+                    <select id="filter">
+                        <button>
+                            <selectedcontent></selectedcontent>
+                        </button>
                         <option value="all">All</option>
                         <option value="bookmarked-speakers">Bookmarked speakers</option>
                     </select>
-                </label>
                 <button type="submit" class="speakers-submit button-green">Filter speakers</button>
             </form>
         </section>
@@ -43,5 +65,6 @@
         </section>
     </main>
 
-    {% comment %} {% include "partials/footer.liquid" %} {% endcomment %}
+    <script src="/script-speaker.js" type="module"></script>
+    
 {% render "partials/foot.liquid" %}

@@ -4,12 +4,20 @@
     gap: 2rem;
     width: 85vw;
     margin: 0 auto;
+    padding: 0rem 0 5rem 0;
 }
 
 .speaker-introduction {
     padding: 2rem 0 2rem 0;
     position: relative; 
     width: 100%;
+
+    li {
+        list-style-type: none;
+        &:first-of-type, &:nth-of-type(2) {
+            font-weight: bold; 
+        }
+    }
 
     &::before {
         content: "";
@@ -84,4 +92,11 @@
 
 .speaker-about-content {
     max-width: 575px;
+}
+
+.speaker-featured-webinars-overview {
+    a {
+        cursor: pointer;
+        transition: .2s ease-in-out;
+    }
 }
