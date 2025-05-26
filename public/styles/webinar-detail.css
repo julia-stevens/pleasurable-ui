@@ -113,6 +113,9 @@
         display: flex;
         flex-direction: column;
         gap: .5em;
+        height: 300px;
+        overflow-y: scroll;
+        margin-bottom: 1.5em;
     }
 
     .comment {
@@ -122,9 +125,25 @@
         max-width: fit-content;
     }
 
+    .input-comment {
+        padding: var(--padding-button);
+        background-color: #fff;
+        border: 1px solid var(--primary-dark);
+        border-radius: var(--border-radius-sm);
+        font-size: var(--font-size-md);
+        margin-bottom: 1em;
+        margin-right: .5em;
+    }
+
 }
 
 .web-detail-geheel-speaker {
     background-color: var(--secondary-light);
-}
+    padding: 3em 1em 3em 1em;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: 720px) {
+        padding: 5em 8em 5em 8em;
+    }}
 

@@ -53,14 +53,18 @@
         <h3>Ask a question</h3>
         <section class="web-detail-q-en-a">
                 <form action="/webinars/{{ webinar.slug }}/{{ webinar.id }}" method="post" data-enhanced="form-{{ webinar.id }}">
-                    <input type="text" name="comment" placeholder="Ask your question here..." />
+                    <input class="input-comment" type="text" name="comment" placeholder="Ask your question here..." />
                     <button type="submit" class="button-green">Send</button>
                 </form>
         </section>
 
         <section class="web-detail-geheel-speaker">
             <h2>The speaker</h2>
-            <!-- Partial Speaker card mobile en desktop toevoegen zodra deze bestaan -->
+            <div>
+                {% for speaker in speakers %}
+                    {% include "partials/speaker-card.liquid" %}
+                {% endfor %}
+            </div>
         </section>
     </section>
 

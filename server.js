@@ -104,10 +104,15 @@ app.get("/webinars/:slug", async (req, res) => {
   const commentsDetailResponse = await fetch(`${commentsEndpoint}`);
   const { data: commentsDetailResponseJSON } = await commentsDetailResponse.json();
 
+  const speakersResponse = await fetch(speakersEndpoint);
+  const { data: speakersResponseJSON } = await speakersResponse.json();
+
+
   res.render("webinars-detail.liquid", {
     webinars: webinarDetailResponseJSON,
     categories: categoriesDetailResponseJSON,
     comments: commentsDetailResponseJSON,
+    speakers: speakersResponseJSON,
   });
 });
 
