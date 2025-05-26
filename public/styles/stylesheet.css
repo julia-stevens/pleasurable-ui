@@ -163,7 +163,60 @@ a:hover {
         transition: .2s;
     }
 
-    .uitbeeld .menu {
-        translate: 0 0%;
-    }
+     .uitbeeld .menu {
+         translate: 0 0%;
+     }
+}
+
+/* Button animation */
+.button-animated {
+    background-color: var(--primary-highlight);
+    color: var(--primary-dark);
+    font-family: var(--font-paragraph);
+    font-size: var(--border-radius-md);
+    padding: var(--padding-button);
+    border-radius: var(--border-radius-sm);
+    border: solid 2px var(--primary-highlight);
+    transition: 0.2s ease-in-out;
+    align-self: baseline;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.button-animated::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-40%, 50%) scale(0);
+    background-color: #00193F;
+    width: 32em;
+    height: 32em;
+    border-radius: 50%;
+    z-index: 0;
+    transition: transform .4s ease;
+}
+
+.button-animated:hover::before {
+    transform: translate(-50%, 50%) scale(0.5);
+    transition: transform .3s
+}
+
+.button-animated span {
+    position: relative;
+    z-index: 1;
+}
+
+.button-animated:hover {
+    color: var(--secondary-text);
+    border: solid 2px var(--primary-dark);
+}
+
+.button-animated:active {
+    border: solid 2px var(--primary-highlight);
+}
+
+.button-animated:active {
+    border: solid 2px var(--primary-highlight);
 }
