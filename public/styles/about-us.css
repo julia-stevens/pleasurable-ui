@@ -1,6 +1,6 @@
 /* h1 */
 .about-us-main-title {
-    margin: 1.5rem 2rem;
+    margin: 2rem 5rem;
 }
 
 /* div */
@@ -9,6 +9,7 @@
     flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 2rem;
+
 
     @media screen and (min-width: 720px) {
         justify-content: flex-start;
@@ -22,7 +23,7 @@
     .about-us-intro-p {
         line-height: 1.7rem;
         width: 700px;
-        margin: 1rem 2rem;
+        margin: 2rem 5rem;
 
         @media screen and (min-width: 720px) {
             width: 700px;
@@ -127,7 +128,7 @@
 
 /* h2 */
 .about-us-partner-title {
-    margin: 1.5rem 2rem;
+    margin: 2rem 5rem;
 }
 
 /* div */
@@ -150,7 +151,7 @@
     .about-us-partner-p {
         line-height: 1.7rem;
         width: 700px;
-        margin: 1rem 2rem;
+        margin: 2rem 5rem;
 
         @media screen and (min-width: 720px) {
             width: 700px;
