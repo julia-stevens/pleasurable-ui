@@ -290,16 +290,6 @@ app.get("/about-us", async (req, res) => {
   res.render("about-us.liquid", { teams, partnerLogos, aboutUsContent: filteredContent });
 });
 
-// Profile
-app.get("/profile", async (req, res) => {
-  res.render("profile.liquid");
-});
-
-// Profile bookmarks
-app.get("/profile/bookmarks", async (req, res) => {
-  res.render("profile-bookmarks.liquid");
-});
-
 // POST voor url /webinars
 app.post("/webinars", async function (req, res) {
   // Haal de textField (webinar.id) en forField uit de request body
@@ -344,6 +334,11 @@ app.post("/webinars", async function (req, res) {
     res.status(500).send("Er is een fout opgetreden.");
   }
 });
+
+// // 404 pagina als je de route niet werkt
+ app.use((req, res) => {
+   res.status(404).render("404.liquid", { })
+ })
 
 // Port
 app.set("port", process.env.PORT || 8000);
