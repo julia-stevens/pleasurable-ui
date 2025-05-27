@@ -55,71 +55,72 @@
         margin-bottom: 1.5rem;
     }
 
+
     /* div */
-    .about-us-team-card-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        justify-items: center;
-        gap: 1rem;
-
-        /* div */
-        .about-us-team-card {
-            display: flex;
-            gap: 0.5rem;
-            margin: 1rem;
-            position: relative;
-            background-color: var(--secondary-text);
-            border-radius: var(--border-radius-md);
-            padding: 1.3rem;
-            width: 100%;
-            max-width: 300px;
-            max-height: fit-content;
-            color: var(--primary-dark);
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-evenly;
-
-            /* h3 */
-            .about-us-team-card-title {
-                font-size: 1.2rem;
-                font-weight: bold;
-                color: var(--primary-text);
-                text-align: left;
-                overflow: hidden;
-                text-wrap: nowrap;
-                text-overflow: ellipsis;
-            }
-
-            /* p */
-            .about-us-team-role {
-                text-align: left;
-                color: var(--primary-highlight);
-            }
-
-            /* picture --> img */
-            .about-us-team-photo {
-                width: 150px;
-                height: 150px;
-                object-fit: cover;
-                margin-bottom: 0;
-            }
-
-            /* a */
-            a {
-                text-align: left;
-                margin: 1rem;
-                transition: .2s ease-in-out;
-            }
-        }
-    }
-}
-
-/* Fallback bij geen grid-ondersteuning */
-@supports not (display: grid) {
     .about-us-team-card-grid {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        gap: 1rem;
+    }
+
+    /* div */
+    .about-us-team-card {
+        display: flex;
+        gap: 0.5rem;
+        margin: 1rem;
+        position: relative;
+        background-color: var(--secondary-text);
+        border-radius: var(--border-radius-md);
+        padding: 1.3rem;
+        width: 100%;
+        max-width: 300px;
+        max-height: fit-content;
+        color: var(--primary-dark);
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+
+        /* h3 */
+        .about-us-team-card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-text);
+            text-align: left;
+            overflow: hidden;
+            text-wrap: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        /* p */
+        .about-us-team-role {
+            text-align: left;
+            color: var(--primary-highlight);
+        }
+
+        /* picture --> img */
+        .about-us-team-photo {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 0;
+        }
+
+        /* a */
+        a {
+            text-align: left;
+            margin: 1rem;
+            transition: .2s ease-in-out;
+        }
+    }
+}
+
+/* Alleen toepassen als grid wordt ondersteund */
+@supports (display: grid) {
+    .about-us-team-card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        justify-items: center;
         gap: 1rem;
     }
 }
