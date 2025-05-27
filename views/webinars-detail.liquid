@@ -4,16 +4,13 @@
 {% for webinar in webinars %}
 
     <section class="webinar-detail-hero">
-
         <ul class="webinar-detail-breadcrumb">
             <li><a href="/">Home &rsaquo;</a></li>
             <li><a href="/webinars">Webinars &rsaquo;</a></li>
             <li><a href="/webinar-detail"> {{ webinar.title }} </a></li>
-
         </ul>
 
         <h1>{{ webinar.title }}</h1>
-
     </section>
 
     {% if webinar.video %}
@@ -57,15 +54,11 @@
                     <button type="submit" class="button-green">Send</button>
                 </form>
         </section>
+    </section>
 
-        <section class="web-detail-geheel-speaker">
-            <h2>The speaker</h2>
-            <div>
-                {% for speaker in speakers %}
-                    {% include "partials/speaker-card.liquid" %}
-                {% endfor %}
-            </div>
-        </section>
+    <section class="web-detail-geheel-speaker">
+        <h2>The speaker</h2>
+        {% render "partials/speaker-card.liquid" %}        
     </section>
 
 {% endfor %}

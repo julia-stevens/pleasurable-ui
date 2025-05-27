@@ -28,6 +28,9 @@ const commentsEndpoint = `${directusApiBaseUrl}/avl_comments`;
 const usersEndpoint = `${directusApiBaseUrl}/avl_users`;
 const categoriesEndpoint = `${directusApiBaseUrl}/avl_categories`;
 const messagesEndpoint = `${directusApiBaseUrl}/avl_messages`;
+const teamEndpoint = `${directusApiBaseUrl}/avl_team`;
+const partnerLogosEndpoint = `${directusApiBaseUrl}/avl_logos`;
+const contentEndpoint = `${directusApiBaseUrl}/avl_content`;
 
 const slugFilter = "?filter[slug][_eq]=";
 const bookmarkFilter = "?filter[for][_eq]=Bookmark webinar"
@@ -36,7 +39,14 @@ const bookmarkFilter = "?filter[for][_eq]=Bookmark webinar"
 // Home
 app.get("/", async function (req, res) {
   // req + res plss T-T
-  res.render("index.liquid");
+  const contentResponse = await fetch(contentEndpoint)
+  const { data: homeContent } = await contentResponse.json();
+
+  // Filter de content op gewenste keys
+  const wantedKeys = ["home-intro", "home-meet-our-doctors", "home-partners", "home-webinars", "home-contourings"];
+  const filteredContent = homeContent.filter(item => wantedKeys.includes(item.key));
+
+  res.render("index.liquid", {  homeContent: filteredContent });
 });
 
 // webinars
@@ -142,12 +152,114 @@ app.get("/contourings/:slug", async (req, res) => {
 
 // Speakers
 app.get("/speakers", async (req, res) => {
-  const speakersResponse = await fetch(speakersEndpoint);
-  const { data: speakersResponseJSON } = await speakersResponse.json();
+  try {
+    const filter = req.query.filter || "all"; // default to 'all'
 
-  res.render("speakers.liquid", {
-    speakers: speakersResponseJSON,
-  });
+    // Haal alle speakers op uit API
+    const speakersResponse = await fetch(speakersEndpoint);
+    const speakersJSON = await speakersResponse.json();
+
+    const speakers = speakersJSON.data.map(speaker => ({
+      ...speaker,
+      id: String(speaker.id)
+    }));
+
+    // Haal alle bookmarks op (gepost-te speakers)
+    const bookmarksResponse = await fetch(`${messagesEndpoint}`);
+    const bookmarksJSON = await bookmarksResponse.json();
+
+    const bookmarkedSpeakerIds = bookmarksJSON.data
+      .filter(bookmark => bookmark.for && bookmark.for.startsWith("Bookmark for Julia"))
+      .map(bookmark => String(bookmark.text))
+      .filter(bookmarkedId => speakers.some(speaker => speaker.id === bookmarkedId));
+
+    let filteredSpeakers = speakers;
+    if (filter === "bookmarked") {
+      filteredSpeakers = speakers.filter(speaker => bookmarkedSpeakerIds.includes(speaker.id));
+    }
+
+    // Render speaker en bookmarks naar 'speakers' view
+    res.render("speakers.liquid", {
+      speakers: filteredSpeakers,
+      bookmarkedIds: bookmarkedSpeakerIds,
+      currentFilter: filter
+    });
+  } catch (error) {
+    console.error("Error loading speakers:", error);
+    res.status(500).send("Error loading speakers.");
+  }
+});
+
+app.post("/speakers", async (req, res) => {
+  // Haal waarden het formulier
+  const { textField, forField, _method } = req.body;
+  const speakerId = String(textField); // zet id om naar string
+  const userBookmarkLabel = forField;
+
+  try {
+    // Haal bestaande bookmarks op
+    const bookmarksResponse = await fetch(`${messagesEndpoint}`);
+    const bookmarksJSON = await bookmarksResponse.json();
+    const bookmarks = bookmarksJSON.data;
+
+    if (_method === "DELETE") {
+      // Zoek naar match op id & for (Bookmark for Julia)
+      let bookmarkToDelete = bookmarks.find(
+        bookmark => String(bookmark.text) === speakerId && bookmark.for === userBookmarkLabel
+      );
+      
+      // Als match gevonden, verwijder de bookmark 
+      if (bookmarkToDelete) {
+        await fetch(`${messagesEndpoint}/${bookmarkToDelete.id}`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json;charset=UTF-8" }
+        });
+      } 
+    } else {
+
+      // Check of de bookmark al bestaat (check op id en for (Bookmark for Julia))
+      const alreadyBookmarked = bookmarks.find(
+        bookmark => String(bookmark.text) === speakerId && bookmark.for === userBookmarkLabel
+      );
+
+      // Als bookmark nog niet bestaat, POST deze dan
+      if (!alreadyBookmarked) {
+        await fetch(`${messagesEndpoint}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json;charset=UTF-8" },
+          body: JSON.stringify({
+            text: speakerId,
+            for: userBookmarkLabel
+          })
+        });
+      } 
+    }
+    
+    // Redirect naar vorige pagina of naar "/speakers"
+    res.redirect(303, req.get("Referer") || "/speakers");
+
+  } catch (error) {
+    console.error("Error handling speaker bookmark:", error);
+    res.status(500).send("Something went wrong.");
+  }
+});
+
+app.post("/speakers/:id/unbookmark", async (req, res) => {
+  const speakerId = req.params.id;
+  const redirectFilter = req.body.filter || "all";
+
+  try {
+    // Verwijder bookmark
+    await fetch(`${messagesEndpoint}/${speakerId}`, {
+      method: "DELETE"
+    });
+
+    // Redirect naar filter pagina
+    res.redirect(`/speakers?filter=${redirectFilter}`);
+  } catch (error) {
+    console.error("Error unbookmarking speaker:", error);
+    res.status(500).send("Failed to unbookmark speaker.");
+  }
 });
 
 // Speakers detail
@@ -166,7 +278,21 @@ app.get("/speakers/:slug", async (req, res) => {
 
 // About us
 app.get("/about-us", async (req, res) => {
-  res.render("about-us.liquid");
+
+  const teamResponse = await fetch(teamEndpoint + "?fields=role,name,photo")
+  const { data: teams } = await teamResponse.json();
+
+  const logoResponse = await fetch(partnerLogosEndpoint)
+  const { data: partnerLogos } = await logoResponse.json();
+
+  const contentResponse = await fetch(contentEndpoint)
+  const { data: aboutUsContent } = await contentResponse.json();
+
+  // Filter de content op gewenste keys
+  const wantedKeys = ["about-us-top", "about-us-bottom"];
+  const filteredContent = aboutUsContent.filter(item => wantedKeys.includes(item.key));
+
+  res.render("about-us.liquid", { teams, partnerLogos, aboutUsContent: filteredContent });
 });
 
 // Profile
@@ -179,7 +305,7 @@ app.get("/profile/bookmarks", async (req, res) => {
   res.render("profile-bookmarks.liquid");
 });
 
-  // POST voor url /webinars
+// POST voor url /webinars
 app.post("/webinars", async function (req, res) {
   // Haal de textField (webinar.id) en forField uit de request body
   const { textField, forField } = req.body;
@@ -187,7 +313,7 @@ app.post("/webinars", async function (req, res) {
   try {
     // Haal de bookmarks op
     const bookmarkResponse = await fetch(`${messagesEndpoint}`)
-  const bookmarkResponseJSON = await bookmarkResponse.json()
+    const bookmarkResponseJSON = await bookmarkResponse.json()
 
     // Zoek in de bookmarks of het item al bestaat door te controleren op textField (webinar.id)
     const existingItem = bookmarkResponseJSON.data.find(item => item.text === textField);
