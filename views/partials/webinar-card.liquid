@@ -2,9 +2,33 @@
     {% for webinar in webinars %}
     <li class="card">
         <div class="wrapper-card">
-            <img class="banner"
-                src="https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}?width=450&height=338&fit=cover"
-                alt="{{ webinar.title }}" width="350" height="300">
+            <picture>
+                <source srcset="
+                                    https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}?format=avif&width=150 150w,
+                                    https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}?format=avif&width=250 250w,
+                                    https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}?format=avif&width=350 350w,
+                                    https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}?format=avif&width=400 400w"
+                    type="
+                                    image/avif" sizes="
+                                    (max-width: 150px) 150px,
+                                    (max-width: 250px) 250px,
+                                    (max-width: 350px) 350px,
+                                    (min-width: 400px) 400px">
+                <source srcset="
+                                    https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}?format=webp&width=150 150w,
+                                    https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}?format=webp&width=250 250w,
+                                    https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}?format=webp&width=350 350w,
+                                    https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}?format=webp&width=400 400w"
+                    type="
+                                    image/webp" sizes="
+                                    (max-width: 150px) 150px,
+                                    (max-width: 250px) 250px,
+                                    (max-width: 350px) 350px,
+                                    (min-width: 400px) 400px">
+                <img class="banner"
+                    src="https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}?width=450&height=338&fit=cover"
+                    alt="{{ webinar.title }}" width="350" height="300" loading="lazy">
+            </picture>
             <p class="duration">{{ webinar.duration }}</p>
             {% assign webinarIdString = webinar.id | string | strip %}
             <form class="bookmark-webinar-form" method="POST" action="/webinars" data-enhanced="form-{{ webinar.id}}">
