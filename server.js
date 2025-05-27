@@ -141,12 +141,14 @@ app.get("/contourings/:slug", async (req, res) => {
 // Speakers
 app.get("/speakers", async (req, res) => {
   try {
-    const filter = req.query.filter || "all"; // default to 'all'
+    // Haal filter op uit query (standaard is "all")
+    const filter = req.query.filter || "all"; 
 
     // Haal alle speakers op uit API
     const speakersResponse = await fetch(speakersEndpoint);
     const speakersJSON = await speakersResponse.json();
 
+    // Zet elke speaker ID om  naar een string
     const speakers = speakersJSON.data.map(speaker => ({
       ...speaker,
       id: String(speaker.id)
@@ -156,11 +158,13 @@ app.get("/speakers", async (req, res) => {
     const bookmarksResponse = await fetch(`${messagesEndpoint}`);
     const bookmarksJSON = await bookmarksResponse.json();
 
+    // Filter bookmarks die beginnen met "Bookmark for Julia" en matchen met bestaande speaker ID's
     const bookmarkedSpeakerIds = bookmarksJSON.data
       .filter(bookmark => bookmark.for && bookmark.for.startsWith("Bookmark for Julia"))
       .map(bookmark => String(bookmark.text))
       .filter(bookmarkedId => speakers.some(speaker => speaker.id === bookmarkedId));
 
+    // Pas filtering toe op de sprekers als 'bookmarked' is geselecteerd  
     let filteredSpeakers = speakers;
     if (filter === "bookmarked") {
       filteredSpeakers = speakers.filter(speaker => bookmarkedSpeakerIds.includes(speaker.id));
@@ -252,16 +256,21 @@ app.post("/speakers/:id/unbookmark", async (req, res) => {
 
 // Speakers detail
 app.get("/speakers/:slug", async (req, res) => {
-  const slug = req.params.slug;
-  const speakersDetailResponse = await fetch(
-    `${speakersEndpoint}${slugFilter}${slug}&fields=*,webinars.*.*`
-  );
-  const { data: speakersDetailResponseJSON } =
-    await speakersDetailResponse.json();
-
-  res.render("speakers-detail.liquid", {
-    speakers: speakersDetailResponseJSON,
-  });
+  try {
+    const slug = req.params.slug;
+    const speakersDetailResponse = await fetch(
+      `${speakersEndpoint}${slugFilter}${slug}&fields=*,webinars.*.*`
+    );
+    const { data: speakersDetailResponseJSON } =
+      await speakersDetailResponse.json();
+  
+    res.render("speakers-detail.liquid", {
+      speakers: speakersDetailResponseJSON,
+    });
+  } catch {
+    console.error("Error handling speaker detail page", error);
+    res.status(500).send("Something went wrong.");    
+  }
 });
 
 // About us
