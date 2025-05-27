@@ -9,3 +9,39 @@
 .web-detail-geheel-speaker {
     background-color: var(--secondary-light);
 }
+
+/* MARK: Loading state */
+
+/* tekst in de button */
+.send-button__text {
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+/* tekst wordt verborgen en spinner getoond */
+.send-button--loading .send-button__text {
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* spinner zelf */
+.send-button--loading::after {
+    content: "";
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    margin: auto;
+    border-radius: 50%;
+    animation: button-loading-spinner 1s ease infinite;
+}
+
+/* Spinner animatie */
+@keyframes button-loading-spinner {
+    from {
+        transform: rotate(0turn);
+    }
+
+    to {
+        transform: rotate(1turn);
+    }
+}

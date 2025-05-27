@@ -39,35 +39,115 @@
         </section>
 
         {% comment %} deze section is nieuw, hier worden de comments aangeroepen {% endcomment %}
-        <section>
-            {% if comments.length > 0 %}
-            <ul>
-                {% for comment in comments %}
-                <li>{{ comment.content }}</li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <p>Er zijn nog geen reacties.</p>
-            {% endif %}
+        <section class="web-detail-geheel-q-en-a">
+            <h2>Q & A</h2>
+
+            <div class="comment-section">
+                <h3><strong>Comments</strong></h3>
+                <div id="commentsContainer">
+                    {% if comments and comments.length > 0 %}
+                    {% for comment in comments %}
+                    {% if comment.parent_id == null %}
+                    <p class="comments">{{ comment.content }}</p>
+                    {% else %}
+                    <p class="replies">{{ comment.content }}</p>
+                    {% endif %}
+                    {% endfor %}
+                    {% else %}
+                    <div class="empty_state">
+                        <h3 class="h3-empty-state">No comments found</h3>
+                        <p class="p-empty-state">There have been no comments placed in this section yet</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <h3>Ask a question</h3>
+            <div class="form-section">
+                {% if webinar.slug and webinarID %}
+                <form method="post" action="/webinars/{{ webinar.slug }}/{{ webinarID }}"
+                    data-enhanced="form-{{ webinar.id }}" id="commentForm">
+                    {% else %}
+                    <form method="post" action="#" id="commentForm">
+                        {% endif %}
+                        <div class="input-container">
+                            <input type="text" name="comment" placeholder="Ask your question here..."
+                                id="commentInput" />
+                            <button type="submit" class="send-button button-green" id="sendButton">
+                                <span class="send-button__text">Send</span>
+                            </button>
+                        </div>
+                    </form>
+            </div>
+
+            <section class="web-detail-geheel-speaker">
+                <h2>The speaker</h2>
+                <!-- Partial Speaker card mobile en desktop toevoegen zodra deze bestaan -->
+            </section>
         </section>
 
 
-        <h3>Ask a question</h3>
-        <section class="web-detail-q-en-a">
-            {% comment %} deze regel hieronder heb ik gecheckt. volgensmij had deze een dubbele / ertussen waardoor hij een error
-            in de URL gaf {% endcomment %}
-            <form action="/webinars/{{ webinar.slug }}/{{ webinarID }}" method="post"
-                data-enhanced="form-{{ webinar.id }}">
-                <input type="text" name="comment" placeholder="Ask your question here..." />
-                <button type="submit" class="button-green">Send</button>
-            </form>
-        </section>
-
-        <section class="web-detail-geheel-speaker">
-            <h2>The speaker</h2>
-            <!-- Partial Speaker card mobile en desktop toevoegen zodra deze bestaan -->
-        </section>
     </section>
 
-</section>
-{% render "partials/foot.liquid" %}
+    <script type="module">
+        if ('fetch' in window && 'DOMParser' in window) {
+            document.addEventListener('submit', async function (event) {
+                const form = event.target;
+                if (form.id !== 'commentForm') return; // alleen ons commentformulier
+
+                event.preventDefault();
+
+                const button = document.getElementById("sendButton");
+                const buttonText = button.querySelector(".send-button__text");
+                const commentInput = form.querySelector('input[name="comment"]');
+                const commentsContainer = document.getElementById('commentsContainer');
+
+                // Toon loading state
+                button.classList.add("send-button--loading");
+                button.disabled = true;
+                buttonText.classList.add("hidden");
+
+                const newComment = {
+                    text: commentInput.value,
+                    date: new Date().toLocaleString(),
+                    isReply: false
+                };
+
+                // Voeg comment pas toe na succesvolle response, niet vooraf
+                // await response eerst, dan pas toevoegen
+
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: new URLSearchParams(new FormData(form))
+                });
+
+                if (response.ok) {
+                    // Voeg comment toe aan DOM
+                    addCommentToDOM(newComment);
+
+                    // Maak input veld weer leeg
+                    commentInput.value = '';
+                    console.log('Comment succesvol gepost');
+                } else {
+                    console.error("Er is een fout opgetreden bij het posten van de opmerking");
+                    alert("Er is iets misgegaan, probeer het nog eens.");
+                }
+
+                // Verberg de loading state
+                button.classList.remove("send-button--loading");
+                button.disabled = false;
+                buttonText.classList.remove("hidden");
+            });
+
+            function addCommentToDOM(comment) {
+                const commentsContainer = document.getElementById('commentsContainer');
+                const commentElement = document.createElement('p');
+                commentElement.textContent = comment.text;
+                commentElement.classList.add(comment.isReply ? 'replies' : 'comments');
+                commentsContainer.prepend(commentElement);
+            }
+        }
+    </script>
+
+
+    {% render "partials/foot.liquid" %}
