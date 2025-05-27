@@ -25,7 +25,7 @@ section ertussen worden weergeven. {% endcomment %}
     <div class="about-us-team-card-grid">
         {% for team in teams %}
         <div class="about-us-team-card">
-            <h2 class="about-us-team-card-title">{{ team.name }}</h2>
+            <h3 class="about-us-team-card-title">{{ team.name }}</h3>
             <p class="about-us-team-role">{{ team.role }}</p>
             <img src="https://fdnd-agency.directus.app/assets/{{ team.photo }}" alt="{{ team.name }}"
                 class="about-us-team-photo" loading="lazy" width="200px" height="200px">
