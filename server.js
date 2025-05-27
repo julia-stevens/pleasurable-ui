@@ -39,7 +39,14 @@ const bookmarkFilter = "?filter[for][_eq]=Bookmark webinar"
 // Home
 app.get("/", async function (req, res) {
   // req + res plss T-T
-  res.render("index.liquid");
+  const contentResponse = await fetch(contentEndpoint)
+  const { data: homeContent } = await contentResponse.json();
+
+  // Filter de content op gewenste keys
+  const wantedKeys = ["home-intro", "home-meet-our-doctors", "home-partners", "home-webinars", "home-contourings"];
+  const filteredContent = homeContent.filter(item => wantedKeys.includes(item.key));
+
+  res.render("index.liquid", {  homeContent: filteredContent });
 });
 
 // webinars
@@ -138,16 +145,18 @@ app.get("/contourings/:slug", async (req, res) => {
   });
 });
 
+// Speakers
 app.get("/speakers", async (req, res) => {
   try {
+    const filter = req.query.filter || "all"; // default to 'all'
+
     // Haal alle speakers op uit API
     const speakersResponse = await fetch(speakersEndpoint);
     const speakersJSON = await speakersResponse.json();
 
-    // Zet alle id's om naar strings
     const speakers = speakersJSON.data.map(speaker => ({
       ...speaker,
-      id: String(speaker.id) 
+      id: String(speaker.id)
     }));
 
     // Haal alle bookmarks op (gepost-te speakers)
@@ -155,19 +164,20 @@ app.get("/speakers", async (req, res) => {
     const bookmarksJSON = await bookmarksResponse.json();
 
     const bookmarkedSpeakerIds = bookmarksJSON.data
-      // Filter bookmarks die beginnen met 'Bookmark for Julia'
       .filter(bookmark => bookmark.for && bookmark.for.startsWith("Bookmark for Julia"))
-
-      // Zet de id's om naar strings
       .map(bookmark => String(bookmark.text))
-
-      // Filter id's op alleen bookmarks met een speaker
       .filter(bookmarkedId => speakers.some(speaker => speaker.id === bookmarkedId));
+
+    let filteredSpeakers = speakers;
+    if (filter === "bookmarked") {
+      filteredSpeakers = speakers.filter(speaker => bookmarkedSpeakerIds.includes(speaker.id));
+    }
 
     // Render speaker en bookmarks naar 'speakers' view
     res.render("speakers.liquid", {
-      speakers,
-      bookmarkedIds: bookmarkedSpeakerIds
+      speakers: filteredSpeakers,
+      bookmarkedIds: bookmarkedSpeakerIds,
+      currentFilter: filter
     });
   } catch (error) {
     console.error("Error loading speakers:", error);
@@ -229,6 +239,24 @@ app.post("/speakers", async (req, res) => {
   }
 });
 
+app.post("/speakers/:id/unbookmark", async (req, res) => {
+  const speakerId = req.params.id;
+  const redirectFilter = req.body.filter || "all";
+
+  try {
+    // Verwijder bookmark
+    await fetch(`${messagesEndpoint}/${speakerId}`, {
+      method: "DELETE"
+    });
+
+    // Redirect naar filter pagina
+    res.redirect(`/speakers?filter=${redirectFilter}`);
+  } catch (error) {
+    console.error("Error unbookmarking speaker:", error);
+    res.status(500).send("Failed to unbookmark speaker.");
+  }
+});
+
 // Speakers detail
 app.get("/speakers/:slug", async (req, res) => {
   const slug = req.params.slug;
@@ -260,16 +288,6 @@ app.get("/about-us", async (req, res) => {
   const filteredContent = aboutUsContent.filter(item => wantedKeys.includes(item.key));
 
   res.render("about-us.liquid", { teams, partnerLogos, aboutUsContent: filteredContent });
-});
-
-// Profile
-app.get("/profile", async (req, res) => {
-  res.render("profile.liquid");
-});
-
-// Profile bookmarks
-app.get("/profile/bookmarks", async (req, res) => {
-  res.render("profile-bookmarks.liquid");
 });
 
 // POST voor url /webinars
@@ -316,6 +334,11 @@ app.post("/webinars", async function (req, res) {
     res.status(500).send("Er is een fout opgetreden.");
   }
 });
+
+// // 404 pagina als je de route niet werkt
+ app.use((req, res) => {
+   res.status(404).render("404.liquid", { })
+ })
 
 // Port
 app.set("port", process.env.PORT || 8000);

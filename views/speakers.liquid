@@ -21,15 +21,20 @@
             </div>
 
             <!-- Filter formulier -->
-            <form class="speakers-filter">
-                <label>
+            <form class="speakers-filter" method="get" action="/speakers">
+                <label for="speakers-filter">
                     View all speakers or use the filter to view your bookmarked speakers.
-                    <select name="filter">
-                        <option value="all">All</option>
-                        <option value="bookmarked-speakers">Bookmarked speakers</option>
+                </label>
+                
+                    <select id="filter" name="filter">
+                        <button>
+                            <selectedcontent></selectedcontent>
+                        </button>
+                        <option value="all" {% if currentFilter == "all" %}selected{% endif %}>All</option>
+                        <option value="bookmarked" {% if currentFilter == "bookmarked" %}selected{% endif %}>Bookmarked speakers</option>
                     </select>
                 </label>
-                <button type="submit" class="speakers-submit button-green">Filter speakers</button>
+                <button type="submit" class="speakers-submit button-animated"><span>Filter speakers</span></button>
             </form>
         </section>
 
@@ -38,7 +43,7 @@
                 <h2>All</h2> 
             </div>
 
-            <div class="speakers-container components-alignment-vertical">
+            <div class="speakers-container components-alignment-vertical" >
                 <!-- Article voor elke speaker -->
                 {% for speaker in speakers %}
                     {% include "partials/speaker-card.liquid" %}

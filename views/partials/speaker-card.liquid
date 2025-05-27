@@ -52,6 +52,7 @@
 
     <!-- Bookmark formulier -->
     <form method="post" action="/speakers" class="speaker-bookmark" data-enhanced="form-{{ speaker.id }}">
+        <input type="hidden" name="filter" value="{{ currentFilter }}">
         <input type="hidden" name="textField" value="{{ speaker.id }}">
         <input type="hidden" name="forField" value="Bookmark for Julia">
         <input type="hidden" name="_method" value="{% if bookmarkedIds contains speaker.id %}DELETE{% else %}POST{% endif %}">
