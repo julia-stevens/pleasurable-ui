@@ -205,3 +205,8 @@
 
 }
 
+.button-home {
+    display: block;
+    width: fit-content;
+    margin-top: 1em;
+}
