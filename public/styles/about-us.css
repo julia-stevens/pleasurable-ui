@@ -172,7 +172,7 @@
 
 .logo-marquee {
     overflow: hidden;
-    background-color: var(--primary-highlight);
+    background-color: var(--secondary-light);
     border: 1px solid var(--primary-dark);
     border-radius: var(--border-radius-md);
     padding: 1.5rem 0;
