@@ -7,12 +7,13 @@ section ertussen worden weergeven. {% endcomment %}
 
 {% comment %} About us top content uit API {% endcomment %}
 <section>
-    <h1>{{ top_item.heading }}</h1>
+    <h1 class="about-us-main-title">{{ top_item.heading }}</h1>
     <div class="about-us-intro-section">
-        <p>{{ top_item.text }}</p>
-        <picture class="about-us-intro-picture">
+        <p class="about-us-intro-p">{{ top_item.text }}</p>
+        <picture>
             <source srcset="assets-home/avl-team.avif" type="image/avif">
-            <img src="assets-home/avl-team.jpeg" alt="5 doctors talking to each other" loading="eager" width="400px">
+            <img src="assets-home/avl-team.jpeg" alt="stock image" class="about-us-intro-picture" loading="eager"
+                width="400px" height="300px">
         </picture>
     </div>
 </section>
@@ -20,14 +21,15 @@ section ertussen worden weergeven. {% endcomment %}
 {% comment %} Team content uit API {% endcomment %}
 
 <section class="about-us-team-section">
-    <h2>Meet our doctors</h2>
+    <h2 class="about-us-team-title">Meet our doctors</h2>
     <div class="about-us-team-card-grid">
         {% for team in teams %}
         <div class="about-us-team-card">
-            <h2>{{ team.name }}</h2>
-            <p>{{ team.role }}</p>
+            <h2 class="about-us-team-card-title">{{ team.name }}</h2>
+            <p class="about-us-team-role">{{ team.role }}</p>
             <img src="https://fdnd-agency.directus.app/assets/{{ team.photo }}" alt="{{ team.name }}"
-                class="team-photo">
+                class="about-us-team-photo" loading="lazy" width="200px" height="200px">
+            <a href="#">View doctor →</a>
         </div>
         {% endfor %}
     </div>
@@ -35,16 +37,22 @@ section ertussen worden weergeven. {% endcomment %}
 
 
 {% comment %} About us bottom content uit API {% endcomment %}
-<section class="about-us-partner-section">
-    <div>
-        <h2>{{ bottom_item.heading }}</h2>
-        <p>{{ bottom_item.text }}</p>
-    </div>
-    <div class="partner-logos">
-        {% for logo in partnerLogos %}
-        <img src="https://fdnd-agency.directus.app/assets/{{ logo.logo }}" alt="Partner logo">
-        {% endfor %}
-    </div>
+<section>
+    <h2 class="about-us-partner-title">{{ bottom_item.heading }}</h2>
+    <div class="about-us-partner-section">
+        <p class="about-us-partner-p">{{ bottom_item.text }}</p>
+        <div class="logo-marquee">
+            <div class="logo-track">
+                {% for logo in partnerLogos %}
+                <img src="https://fdnd-agency.directus.app/assets/{{ logo.logo }}" alt="Partner logo" loading="lazy" width="150px" height="100px">
+                {% endfor %}
+
+                {% for logo in partnerLogos %}
+                <img src="https://fdnd-agency.directus.app/assets/{{ logo.logo }}" alt="Partner logo" loading="lazy" width="150px" height="100px">
+                {% endfor %}
+            </div>
+        </div>
+
 </section>
 
 {% render "partials/foot.liquid" %}
