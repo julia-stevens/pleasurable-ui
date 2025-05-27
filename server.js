@@ -145,16 +145,18 @@ app.get("/contourings/:slug", async (req, res) => {
   });
 });
 
+// Speakers
 app.get("/speakers", async (req, res) => {
   try {
+    const filter = req.query.filter || "all"; // default to 'all'
+
     // Haal alle speakers op uit API
     const speakersResponse = await fetch(speakersEndpoint);
     const speakersJSON = await speakersResponse.json();
 
-    // Zet alle id's om naar strings
     const speakers = speakersJSON.data.map(speaker => ({
       ...speaker,
-      id: String(speaker.id) 
+      id: String(speaker.id)
     }));
 
     // Haal alle bookmarks op (gepost-te speakers)
@@ -162,19 +164,20 @@ app.get("/speakers", async (req, res) => {
     const bookmarksJSON = await bookmarksResponse.json();
 
     const bookmarkedSpeakerIds = bookmarksJSON.data
-      // Filter bookmarks die beginnen met 'Bookmark for Julia'
       .filter(bookmark => bookmark.for && bookmark.for.startsWith("Bookmark for Julia"))
-
-      // Zet de id's om naar strings
       .map(bookmark => String(bookmark.text))
-
-      // Filter id's op alleen bookmarks met een speaker
       .filter(bookmarkedId => speakers.some(speaker => speaker.id === bookmarkedId));
+
+    let filteredSpeakers = speakers;
+    if (filter === "bookmarked") {
+      filteredSpeakers = speakers.filter(speaker => bookmarkedSpeakerIds.includes(speaker.id));
+    }
 
     // Render speaker en bookmarks naar 'speakers' view
     res.render("speakers.liquid", {
-      speakers,
-      bookmarkedIds: bookmarkedSpeakerIds
+      speakers: filteredSpeakers,
+      bookmarkedIds: bookmarkedSpeakerIds,
+      currentFilter: filter
     });
   } catch (error) {
     console.error("Error loading speakers:", error);
@@ -233,6 +236,24 @@ app.post("/speakers", async (req, res) => {
   } catch (error) {
     console.error("Error handling speaker bookmark:", error);
     res.status(500).send("Something went wrong.");
+  }
+});
+
+app.post("/speakers/:id/unbookmark", async (req, res) => {
+  const speakerId = req.params.id;
+  const redirectFilter = req.body.filter || "all";
+
+  try {
+    // Verwijder bookmark
+    await fetch(`${messagesEndpoint}/${speakerId}`, {
+      method: "DELETE"
+    });
+
+    // Redirect naar filter pagina
+    res.redirect(`/speakers?filter=${redirectFilter}`);
+  } catch (error) {
+    console.error("Error unbookmarking speaker:", error);
+    res.status(500).send("Failed to unbookmark speaker.");
   }
 });
 

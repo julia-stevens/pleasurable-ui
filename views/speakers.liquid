@@ -20,32 +20,18 @@
                 <h2>Filter</h2>
             </div>
 
-            {% comment %} <form>
-                <label for="filter">Filter webinars</label>
-                
-                <select id="filter">
-                    <button>
-                    <selectedcontent></selectedcontent>
-                    </button>
-                    
-                    <option value="Head-Neck">Head & Neck</option>
-                    <option value="Lungs">Lungs</option>
-                    <option value="Skin">Skin</option>
-                </select>
-            </form> {% endcomment %}
-
             <!-- Filter formulier -->
-            <form class="speakers-filter">
+            <form class="speakers-filter" method="get" action="/speakers">
                 <label for="speakers-filter">
                     View all speakers or use the filter to view your bookmarked speakers.
                 </label>
                 
-                    <select id="filter">
+                    <select id="filter" name="filter">
                         <button>
                             <selectedcontent></selectedcontent>
                         </button>
-                        <option value="all">All</option>
-                        <option value="bookmarked-speakers">Bookmarked speakers</option>
+                        <option value="all" {% if currentFilter == "all" %}selected{% endif %}>All</option>
+                        <option value="bookmarked" {% if currentFilter == "bookmarked" %}selected{% endif %}>Bookmarked speakers</option>
                     </select>
                 </label>
                 <button type="submit" class="speakers-submit button-animated"><span>Filter speakers</span></button>
@@ -57,7 +43,7 @@
                 <h2>All</h2> 
             </div>
 
-            <div class="speakers-container components-alignment-vertical">
+            <div class="speakers-container components-alignment-vertical" >
                 <!-- Article voor elke speaker -->
                 {% for speaker in speakers %}
                     {% include "partials/speaker-card.liquid" %}
