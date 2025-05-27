@@ -7,13 +7,13 @@
             <h1> {{ intro.heading }} </h1>
 
             <div class="home-about-position">
-                <p> {{ intro.text }} <br>
+                <p> {{ intro.text }} <br> <br>
                     <a href=" {{ intro.read_more_link }} " class="button-animated"><span> {{ intro.read_more_text }} </span></a>
                 </p>
                 
                 <picture class="home-about-picture">
                     <source srcset="assets-home/avl-team.avif" type="image/avif">
-                    <img src="assets-home/avl-team.jpeg" alt="5 doctors talking to each other" loading="eager" width="360px">
+                    <img src="assets-home/avl-team.jpeg" alt="5 doctors talking to each other" loading="eager" width="340px">
                 </picture>
             </div>
         </section>
@@ -70,13 +70,13 @@
                 <p> {{ partners.text }} </p>
 
                 <div class="scroller">
-                    <div class="scroller-content">
-                        <img src="assets-home/logo1.png" alt="Logo Universitas Gadjah Mada" width="160" height="160">
-                        <img src="assets-home/logo2.png" alt="Logo Departemen Kesahatan R.I." width="160" height="160">
-                        <img src="assets-home/logo3.png" alt="Logo IDGNH" width="160" height="160">
-                        <img src="assets-home/logo4.png" alt="Logo Nederlandse Vereniging voor Radiotherapie en Oncologie" width="160" height="160">
-                        <img src="assets-home/logo5.png" alt="Logo Amsterdam UMC" width="160" height="160">
-                        <img src="assets-home/logo6.svg" alt="Logo Antoni van Leeuwenhoek" width="160" height="160">
+                    <div class="scroller-inner">
+                        <img src="assets-home/logo1.png" alt="Logo Universitas Gadjah Mada" width="auto" height="160">
+                        <img src="assets-home/logo2.png" alt="Logo Departemen Kesahatan R.I." width="auto" height="160">
+                        <img src="assets-home/logo3.png" alt="Logo IDGNH" width="auto" height="160">
+                        <img src="assets-home/logo4.png" alt="Logo Nederlandse Vereniging voor Radiotherapie en Oncologie" width="auto" height="160">
+                        <img src="assets-home/logo5.png" alt="Logo Amsterdam UMC" width="auto" height="160">
+                        <img src="assets-home/logo6.svg" alt="Logo Antoni van Leeuwenhoek" width="auto" height="160">
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
             <section class="home-webinars">
                 <h2> {{ webinars.heading }} </h2>
                 <p>
-                    {{ webinars.text }}
+                    {{ webinars.text }} <br> <br>
                     <a href=" {{ webinars.read_more_link }}" class="button-animated"><span> {{ webinars.read_more_text }} </span></a>
                 </p>
             </section>
@@ -102,7 +102,7 @@
             <section class="home-contourings">
                 <h2> {{ contourings.heading }} </h2>
                 <p>
-                    {{ contourings.text }}
+                    {{ contourings.text }} <br> <br>
                     <a href=" {{ contourings.read_more_link }} " class="button-animated"><span> {{ contourings.read_more_text }} </span></a>
                 </p>
             </section>
