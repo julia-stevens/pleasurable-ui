@@ -12,11 +12,11 @@
                 <input type="hidden" name="forField" value="Bookmark webinar">
                 <button type="submit">
                     {% if bookmarkIds contains webinarIdString %}
-                    <span>Remove from bookmarks</span>
-                    <img src="/assets-webinars/icon-bookmarked.svg" width="15" height="15" alt="">
+                    <span>Bookmarked</span>
+                    {% render "public/assets-webinars/icon-bookmarked.liquid" %}
                     {% else %}
-                    <span>Add to bookmarks</span>
-                    <img src="/assets-webinars/icon-bookmark.svg" width="15" height="15" alt="">
+                    <span>Bookmark webinar</span>
+                    {% render "public/assets-webinars/icon-bookmark.liquid" %}
                     {% endif %}
                 </button>
             </form>
@@ -36,8 +36,7 @@
                 {{ speaker.avl_speakers_id.fullname }}
                 {% endfor %}
             </p>
-            <a href="/webinars/{{ webinar.slug }}">View webinar<img src="/assets-webinars/icon-arrow-right.svg"
-                    alt=""></a>
+            <a href="/webinars/{{ webinar.slug }}">View webinar{% render "public/assets-webinars/icon-arrow-right.liquid" %}</a>
         </section>
     </li>
     {% endfor %}
