@@ -62,16 +62,6 @@
         justify-items: center;
         gap: 1rem;
 
-        /* Fallback bij geen grid-ondersteuning */
-        @supports not (display: grid) {
-            .about-us-team-card-grid {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-            }
-        }
-
         /* div */
         .about-us-team-card {
             display: flex;
@@ -121,6 +111,16 @@
                 transition: .2s ease-in-out;
             }
         }
+    }
+}
+
+/* Fallback bij geen grid-ondersteuning */
+@supports not (display: grid) {
+    .about-us-team-card-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
     }
 }
 
