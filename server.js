@@ -92,7 +92,12 @@ app.get("/webinars", async (req, res) => {
   });
 });
 
-// Webinars detail
+// Ik heb in deze route wat dingen aangepast waardoor het nu goed wordt aangeroepen. 
+// Bv de + webID gaf een error, en moest op regel 114 tussen {} gezet worden.
+// Ook moest in de res.render de JSON [0] erachter worden gezet, anders was hij not defined. 
+// De 
+
+// Webinar detail
 app.get("/webinars/:slug", async (req, res) => {
   const slug = req.params.slug;
 
@@ -101,25 +106,31 @@ app.get("/webinars/:slug", async (req, res) => {
 
   const webinarIDResponse = await fetch(`${webinarsEndpoint}${webIDFilter}${slug}`);
   const { data: webinarIDResponseJSON } = await webinarIDResponse.json();
-  // const webID = webinarIDResponseJSON.data[].id;
+
+  const webID = webinarIDResponseJSON[0].id;
 
   const categoriesDetailResponse = await fetch(`${categoriesEndpoint}`);
   const { data: categoriesDetailResponseJSON } = await categoriesDetailResponse.json();
 
-  const commentsDetailResponse = await fetch(`${commentsEndpoint} + webID`);
+  // Haal comments op met filter op webinar_id
+  const commentsDetailResponse = await fetch(
+    `${commentsEndpoint}?filter[webinar_id][_eq]=${webID}`
+  );
   const { data: commentsDetailResponseJSON } = await commentsDetailResponse.json();
 
+  // Render met juiste objecten
+  // Hier is de comments array en de webID array toegevoegd, 
+  // Anders word deze data niet gerenderd en pakt liquid het niet.
   res.render("webinars-detail.liquid", {
-    webinars: webinarDetailResponseJSON,
+    webinar: webinarDetailResponseJSON[0],
     categories: categoriesDetailResponseJSON,
     comments: commentsDetailResponseJSON,
-    webinarID: webinarIDResponseJSON,
+    webinarID: webID, 
   });
 });
 
-// Comments op de webinar
+// Comments op de webinar page (op id)
 app.post("/webinars/:slug/:id", async function (request, response) {
- 
   const results = await fetch('https://fdnd-agency.directus.app/items/avl_comments', {
     method: 'POST',
     body: JSON.stringify({
@@ -130,10 +141,13 @@ app.post("/webinars/:slug/:id", async function (request, response) {
       'Content-Type': 'application/json;charset=UTF-8'
     }
   });
- 
-  console.log(results);
-  response.redirect(303, `/webinars/${request.params.slug}`)
-})
+
+  // deze regel logt de data die wordt opgehaald uit de database van de comments, 
+  // om te testen of het wordt opgehaald.
+  console.log(await results.json()); 
+  response.redirect(303, `/webinars/${request.params.slug}`);
+});
+
 
 
 // Contourings
@@ -199,7 +213,7 @@ app.get("/profile/bookmarks", async (req, res) => {
   res.render("profile-bookmarks.liquid");
 });
 
-  // POST voor url /webinars
+// POST voor url /webinars
 app.post("/webinars", async function (req, res) {
   // Haal de textField (webinar.id) en forField uit de request body
   const { textField, forField } = req.body;
@@ -207,7 +221,7 @@ app.post("/webinars", async function (req, res) {
   try {
     // Haal de bookmarks op
     const bookmarkResponse = await fetch(`${messagesEndpoint}`)
-  const bookmarkResponseJSON = await bookmarkResponse.json()
+    const bookmarkResponseJSON = await bookmarkResponse.json()
 
     // Zoek in de bookmarks of het item al bestaat door te controleren op textField (webinar.id)
     const existingItem = bookmarkResponseJSON.data.find(item => item.text === textField);
