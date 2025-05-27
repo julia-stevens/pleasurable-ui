@@ -140,8 +140,7 @@
 .web-detail-geheel-speaker {
     background-color: var(--secondary-light);
     padding: 3em 1em 3em 1em;
-    display: flex;
-    flex-direction: column;
+    gap: 1em;
 
     @media screen and (min-width: 720px) {
         padding: 5em 8em 5em 8em;

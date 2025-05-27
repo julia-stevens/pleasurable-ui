@@ -58,7 +58,9 @@
 
     <section class="web-detail-geheel-speaker">
         <h2>The speaker</h2>
-        {% render "partials/speaker-card.liquid" %}        
+            {% for speaker in speakers %}
+                {% include "partials/speaker-card.liquid" %}
+            {% endfor %}
     </section>
 
 {% endfor %}
