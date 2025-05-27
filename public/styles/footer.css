@@ -51,6 +51,10 @@ footer a:hover {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+
+    img {
+        width: auto;
+    }
 }
 
 .navigation-footer ul,
