@@ -27,7 +27,7 @@
                                     (min-width: 400px) 400px">
                 <img class="banner"
                     src="https://fdnd-agency.directus.app/assets/{{ webinar.thumbnail }}?width=450&height=338&fit=cover"
-                    alt="{{ webinar.title }}" width="350" height="300">
+                    alt="{{ webinar.title }}" width="350" height="300" loading="lazy">
             </picture>
             <p class="duration">{{ webinar.duration }}</p>
             {% assign webinarIdString = webinar.id | string | strip %}
