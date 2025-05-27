@@ -44,11 +44,38 @@ section ertussen worden weergeven. {% endcomment %}
         <div class="logo-marquee">
             <div class="logo-track">
                 {% for logo in partnerLogos %}
-                <img src="https://fdnd-agency.directus.app/assets/{{ logo.logo }}" alt="Partner logo" loading="lazy" width="150px" height="100px">
+                <picture>
+                    <source srcset="
+                https://fdnd-agency.directus.app/assets/{{ logo.logo }}?format=avif&width=75&height=50 75w,
+                https://fdnd-agency.directus.app/assets/{{ logo.logo }}?format=avif&width=150&height=100 150w,
+                https://fdnd-agency.directus.app/assets/{{ logo.logo }}?format=avif&width=300&height=200 300w"
+                        sizes="(max-width: 150px) 150px, (max-width: 300px) 300px" type="image/avif" />
+                    <source srcset="
+                https://fdnd-agency.directus.app/assets/{{ logo.logo }}?format=webp&width=75&height=50 75w,
+                https://fdnd-agency.directus.app/assets/{{ logo.logo }}?format=webp&width=150&height=100 150w,
+                https://fdnd-agency.directus.app/assets/{{ logo.logo }}?format=webp&width=300&height=200 300w"
+                        sizes="(max-width: 150px) 150px, (max-width: 300px) 300px" type="image/webp" />
+
+                    <img src="https://fdnd-agency.directus.app/assets/{{ logo.logo }}?format=jpg" alt="Partner logo"
+                        loading="lazy" width="150" height="100" style="object-fit: contain;" />
+                </picture>
                 {% endfor %}
 
                 {% for logo in partnerLogos %}
-                <img src="https://fdnd-agency.directus.app/assets/{{ logo.logo }}" alt="Partner logo" loading="lazy" width="150px" height="100px">
+                <picture>
+                    <source srcset="
+                https://fdnd-agency.directus.app/assets/{{ logo.logo }}?format=avif&width=75&height=50 75w,
+                https://fdnd-agency.directus.app/assets/{{ logo.logo }}?format=avif&width=150&height=100 150w,
+                https://fdnd-agency.directus.app/assets/{{ logo.logo }}?format=avif&width=300&height=200 300w
+            " sizes="(max-width: 150px) 150px, (max-width: 300px) 300px" type="image/avif" />
+                    <source srcset="
+                https://fdnd-agency.directus.app/assets/{{ logo.logo }}?format=webp&width=75&height=50 75w,
+                https://fdnd-agency.directus.app/assets/{{ logo.logo }}?format=webp&width=150&height=100 150w,
+                https://fdnd-agency.directus.app/assets/{{ logo.logo }}?format=webp&width=300&height=200 300w
+            " sizes="(max-width: 150px) 150px, (max-width: 300px) 300px" type="image/webp" />
+                    <img src="https://fdnd-agency.directus.app/assets/{{ logo.logo }}?format=jpg" alt="Partner logo"
+                        loading="lazy" width="150" height="100" style="object-fit: contain;" />
+                </picture>
                 {% endfor %}
             </div>
         </div>

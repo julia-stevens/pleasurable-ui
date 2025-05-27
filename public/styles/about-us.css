@@ -170,7 +170,6 @@
     }
 }
 
-/* div */
 .logo-marquee {
     overflow: hidden;
     background-color: var(--primary-highlight);
@@ -188,7 +187,6 @@
         width: 40%;
     }
 
-    /* div */
     .logo-track {
         display: flex;
         gap: 2rem;
@@ -196,10 +194,26 @@
         width: max-content;
     }
 
-    /* img */
-    .logo-track img {
+    .logo-track picture {
+        display: block;
+        flex-shrink: 0;
+    }
+
+    .logo-track picture img {
         height: 100px;
         width: 150px;
         object-fit: contain;
+        display: block;
+    }
+}
+
+/* Optional keyframes (als je een marquee effect wilt) */
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
     }
 }
