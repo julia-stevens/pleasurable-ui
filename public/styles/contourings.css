@@ -193,3 +193,14 @@
   color: #001d66;
   outline: none;
 }
+
+.breadcrumb-contourings {
+  padding: 1rem 0;
+  li {
+    list-style-type: none;
+
+    &:first-of-type {
+      font-weight: bold;
+    }
+  }
+}
