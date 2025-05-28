@@ -224,6 +224,48 @@ Om het werken makkelijker te maken is ook `nodemon` in dit project geïnstalleer
 Om met `nodemon` te werken, type `npm run dev` in de terminal.
 
 
+# About Us-pagina
+
+De About Us-pagina geeft users meer informatie over Oncollaboration. Ze kunnen hier lezen over het team en het doel van de organisatie, maar ook kennismaken met de doctoren die eraan meewerken en de partners waarmee wordt samengewerkt.
+
+De pagina bestaat uit drie delen: een introductietekst met afbeelding, een overzicht van het team, en een sectie waarin de partnerlogo's voorbij scrollen.
+
+https://github.com/user-attachments/assets/7749bf5a-ce0c-4533-aae8-17132ffb6d86
+
+## 1 - Functional (Functioneel)
+
+- Alle content op deze pagina wordt opgehaald via een API en dynamisch weergegeven met behulp van Liquid. Dat betekent dat teksten, teamleden en logo's automatisch verschijnen zonder dat ik dit handmatig hoef in te voeren, en kunnen worden aangepast in de database. Hierdoor wordt het automatisch op alle pagina's waar dit wordt aangeroepen dynamisch aangepast.
+- De pagina is mobielvriendelijk opgebouwd met het mobile-first principe. Op kleine schermen wordt de content netjes onder elkaar getoond, terwijl op grotere schermen de layout zich aanpast dankzij `flexbox` en `grid`.
+- Ook zonder styling blijft de pagina bruikbaar: de HTML-structuur is logisch opgebouwd en zorgt ervoor dat alle content gewoon leesbaar blijft als de CSS niet goed wordt geladen of browsers technieken niet ondersteunen.
+
+
+## 2 - Reliable (Betrouwbaar)
+
+- De pagina werkt goed op verschillende schermgroottes – van mobiel tot desktop. Door server-side rendering worden de API-gegevens elke keer goed opgehaald en direct op de pagina ingeladen.
+- De teamleden worden automatisch in een overzichtelijke layout geplaatst. Daarbij wordt standaard CSS `Grid` gebruikt voor moderne browsers, wat zorgt voor een nette verdeling van de kaarten. Voor oudere browsers die geen `grid` ondersteunen, is er een fallback naar `flexbox` ingesteld. Hierdoor blijft de content altijd correct uitgelijnd en bruikbaar.
+- De partnerlogo’s maken gebruik van een horizontale `scroll-animatie`. Als de animatie of `keyframes` niet worden ondersteund door een browser, blijven de logo’s alsnog zichtbaar op een vaste positie. Dit zorgt ervoor dat er nooit lege ruimte ontstaat of dat content verdwijnt.
+
+## 3 - Usable (Gebruiksvriendelijk)
+
+- De pagina is overzichtelijk opgebouwd: duidelijke titels, korte teksten en logische indeling. Bezoekers kunnen snel scannen wie er in het team zit, wat iemands functie is, en op de 'View doctor'-link klikken als ze meer willen weten.
+- Ook de partnerlogo’s worden op een toegankelijke manier weergegeven. Dankzij de rustige animatie scrollen ze automatisch voorbij, zonder dat de gebruiker iets hoeft te doen of interactie vereist is.
+- De layout past zich automatisch aan voor alle schermformaten, en is goed bruikbaar met alleen het toetsenbord, wat belangrijk is voor toegankelijkheid.
+
+## 4 - Pleasurable (Aangenaam)
+
+- Naast dat de pagina goed werkt, is er ook aandacht besteed aan styling. De kleuren, typografie en spacing zorgen voor een rustige en professionele sfeer. Deze sluit ook aan op de huisstijl, en vormt dus 1 geheel met de andere pagina's.
+- De scroll-animatie van de partnerlogo’s geeft net dat beetje extra dynamiek, zonder dat het druk of afleidend wordt. Afbeeldingen van teamleden worden netjes weergegeven, en de afgeronde hoeken en zachte kleuren maken het geheel vriendelijk en uitnodigend.
+- Ook wanneer animaties niet worden ondersteund, blijft het geheel er visueel verzorgd en compleet uitzien.
+
+## Gebruikte technieken
+
+- Liquid templates
+- Directus API
+- CSS (met custom properties)
+- CSS Grid met fallback naar flexbox (`@supports`)
+- Responsive images (AVIF, WebP, JPG)
+- Lazy loading van afbeeldingen
+- CSS animaties (voor scrollende logo's met `@keyframes`)
 
 
 
