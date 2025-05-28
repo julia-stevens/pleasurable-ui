@@ -183,29 +183,6 @@ app.get("/contourings/:slug", async (req, res) => {
   });
 });
 
-// fetch contourings
-// const contouringsResponse = await fetch(
-//   `${contouringsEndpoint}?fields=user_id,id,title,slug,image_scan,used_literature,categories`
-// );
-// const { data: contourings } = await contouringsResponse.json();
-
-// fetch categories
-// const categoriesResponse = await fetch(
-//   `${categoriesEndpoint}?fields=id,name`
-// );
-// const { data: categories } = await categoriesResponse.json();
-
-// const contouringsWithCategory = contourings.map((contouring) => ({
-//   ...contouring,
-//   categoryName: categoryMap[contouring.categories[0]],
-// }));
-
-//   res.render("contourings.liquid", {
-//     contourings,
-//     // categories,
-//   });
-// });
-
 app.get("/speakers", async (req, res) => {
   try {
     // Haal alle speakers op uit API
