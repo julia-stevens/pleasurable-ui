@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oncollaboration</title>
+    <title>{{ pageTitle | default: "Oncollaboration"}}</title> <!-- dynamische title -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
@@ -17,12 +17,14 @@
 
 <body>
 
+<a class="skiplink" href="#content">Skip to content</a>
+
 <header class="main-header">
 
-    <a class="logo-nav" href="/"><img src="/assets-amber/logo-avl.svg" width="150" height="50" alt="Back to homepage"></a>
-    <a class="logo-nav" href="/"><img src="/assets-amber/logo-kemenkes.avif" width="150" height="50" alt="Back to homepage"></a>
+    <a class="logo-nav" href="/"><img src="/assets-header-footer/logo-avl.svg" width="150" height="50" alt="Back to homepage"></a>
+    <a class="logo-nav" href="/"><img src="/assets-header-footer/logo-kemenkes.png" width="150" height="50" alt="Back to homepage"></a>
 
-    <nav class="menu">
+    <nav class="menu" height="50" width="100%">
         <ul class="menu-items">
             <li class="menu-item">
                 <a href="/">
@@ -53,8 +55,16 @@
                 <a href="/speakers">
                         <svg width="24" height="24" viewBox="0 0 16 21" xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="M14 0C15.0833 0 16 0.902344 16 1.96875V21L8 16.4062L0 21V1.96875C0 0.902344 0.875 0 2 0H14ZM14 17.5957V2.21484C14 2.0918 13.875 1.96875 13.75 1.96875H2.25C2.08333 1.96875 2 2.0918 2 2.21484V17.5957L8 14.1504L14 17.5957Z">
+                                d="M14 0C15.0833 0 16 0.902344 16 1.96875V21L8 16.4062L0 21V1.96875C0 0.902344 0.875 0 2 0H14ZM14 17.5957V2.21484C14 2.0918 13.875 1.96875 13.75 1.96875H2.25C2.08333 1.96875 2 2.0918 2 2.21484V17.5957L8 14.1504L14 17.5957Z" />
                         </svg>Speakers
+                </a>
+            </li>
+            <li>
+                <a href="/about-us">
+                    <svg width="24" height="24" viewBox="0 0 16 21" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M14 0C15.0833 0 16 0.902344 16 1.96875V21L8 16.4062L0 21V1.96875C0 0.902344 0.875 0 2 0H14ZM14 17.5957V2.21484C14 2.0918 13.875 1.96875 13.75 1.96875H2.25C2.08333 1.96875 2 2.0918 2 2.21484V17.5957L8 14.1504L14 17.5957Z" />
+                    </svg>About us
                 </a>
             </li>
             <li>
@@ -62,17 +72,16 @@
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
                             <path
                                 d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z" />
-                        </svg>
-                    </div>Profile
+                        </svg>Profile
                 </a>
             </li>
         </ul>
     </nav>
 
     <nav class="nav-logo-mobile">
-        <a class="logo" href="/"><img src="/assets-amber/logo-avl.svg" width="150" height="50"
+        <a class="logo" href="/"><img src="/assets-header-footer/logo-avl.svg" width="150" height="50"
                 alt="Logo Antoni van Leeuwenhoek Ziekenhuis"></a>
-        <a class="logo" href="/"><img src="/assets-amber/logo-kemenkes.avif" width="150" height="50"
+        <a class="logo" href="/"><img src="/assets-header-footer/logo-kemenkes.png" width="50" height="50"
                 alt="Logo Antoni van Leeuwenhoek Ziekenhuis"></a>
     </nav>
 

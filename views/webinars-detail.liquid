@@ -1,6 +1,7 @@
-{% render "partials/head.liquid" %}
+{% assign pageTitle = "Webinars | Oncollaboration" %}
+{% include "partials/head.liquid" %}
 
-<section class="web-detail-main">
+<section class="web-detail-main" id="content">
 {% for webinar in webinars %}
 
     <section class="webinar-detail-hero">

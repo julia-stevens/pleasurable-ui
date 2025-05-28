@@ -1,7 +1,8 @@
-{% render "partials/head.liquid" %}
+{% assign pageTitle = "Speakers | Oncollaboration" %}
+{% include "partials/head.liquid" %}
     {% comment %} {% include "partials/header.liquid" %} {% endcomment %}
 
-    <main class="main-speakers components-alignment-vertical">
+    <main class="main-speakers components-alignment-vertical" id="content">
         <section class="speakers-introduction">
             <div class="speakers-section-title">
                 <ul class="breadcrumbs-speakers components-alignment-horizontal">
@@ -22,7 +23,7 @@
 
             <!-- Filter formulier -->
             <form class="speakers-filter" method="get" action="/speakers">
-                <label for="speakers-filter">
+                <label for="filter">
                     View all speakers or use the filter to view your bookmarked speakers.
                 </label>
                 
