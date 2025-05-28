@@ -7,7 +7,7 @@ section ertussen worden weergeven. {% endcomment %}
 {%- assign bottom_item = aboutUsContent | where: "key", "about-us-bottom" | first -%}
 
 {% comment %} About us top content uit API {% endcomment %}
-<section>
+<section id="content">
     <h1 class="about-us-main-title">{{ top_item.heading }}</h1>
     <div class="about-us-intro-section">
         <p class="about-us-intro-p">{{ top_item.text }}</p>

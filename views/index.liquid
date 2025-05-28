@@ -1,7 +1,7 @@
 {% assign pageTitle = "Home | Oncollaboration" %}
 {% include "partials/head.liquid" %}
 
-<div class="home-main">
+<div class="home-main" id="content">
     {% assign intro = homeContent | where: "key", "home-intro" | first %}
     {% if intro %}
         <section class="home-about">
@@ -19,7 +19,6 @@
             </div>
         </section>
     {% endif %}
-
 
     {% assign doctors = homeContent | where: "key", "home-meet-our-doctors" | first %}
     {% if doctors %}
