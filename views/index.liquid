@@ -1,4 +1,5 @@
-{% render "partials/head.liquid" %}
+{% assign pageTitle = "Home | Oncollaboration" %}
+{% include "partials/head.liquid" %}
 
 <div class="home-main">
     {% assign intro = homeContent | where: "key", "home-intro" | first %}
