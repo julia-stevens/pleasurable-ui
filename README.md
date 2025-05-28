@@ -9,6 +9,8 @@ De instructie vind je in: [INSTRUCTIONS.md](https://github.com/fdnd-task/pleasur
 
 ## Inhoudsopgave
 
+  * [Wat is er gemaakt?](#eindproduct)
+  * [Opdrachtbeschrijving](#Opdrachtbeschrijving)
   * [Beschrijving](#beschrijving)
   * [Gebruik](#gebruik)
   * [Kenmerken](#kenmerken)
@@ -16,7 +18,29 @@ De instructie vind je in: [INSTRUCTIONS.md](https://github.com/fdnd-task/pleasur
   * [Bronnen](#bronnen)
   * [Licentie](#licentie)
 
-## Beschrijving
+# Oncollaboration 
+
+## Eindproduct
+
+Voor dit project hebben wij een interactieve en informatieve webapplicatie ontwikkeld voor het Antoni van Leeuwenhoek en het Kenemkes ziekenhuis. De website is specifiek ontworpen voor artsen uit Nederland en Indonesië, met als doel kennisdeling en samenwerking over landsgrenzen heen te verbeteren.
+
+Gebruikers van de website (voornamelijk medisch specialisten) kunnen live of opgenomen webinars bekijken, deze opslaan in hun persoonlijke kijklijst (bookmarkfunctie) en actief deelnemen door reacties te plaatsen. Daarnaast bevat het platform profielen van sprekers en artsen, waardoor gebruikers meer context en achtergrondinformatie krijgen bij de sessies.
+
+Een unieke functie van de applicatie is het delen van contouring beelden. Dit zijn medische afbeeldingen waarop andere artsen feedback kunnen geven of vragen kunnen stellen. Deze interactie draagt bij aan verdieping van kennis en verbetering van medische vaardigheden.
+
+Het platform fungeert als een digitaal leer- en samenwerkingscentrum, waar medische professionals ervaringen kunnen uitwisselen, kennis kunnen verdiepen en verschillende culturen en werkwijzen kunnen toepassen.
+
+Live link: https://edu.nl/xyg48
+
+## Opdrachtbeschrijving
+
+De opdracht was om samen met een team, voor een echte opdrachtgever, een gebruiksvriendelijke interface te ontwerpen en te bouwen waar gebruikers blij van worden.
+
+Ons project richtte zich op het ontwikkelen van een online platform voor radiotherapeuten uit Nederland en Indonesië. Dit platform moest samenwerking en kennisdeling makkelijker maken. De basis hiervoor was een ontwerp uit een afstudeerproject van oud-CMD student Sergio Eijben, in samenwerking met het Antoni van Leeuwenhoek ziekenhuis.
+
+--------
+
+## Beschrijving 
 ### Home
 De `home` pagina geeft de gebruiker het allereerste beeld van de website, daarom is het belangrijk dat ze een vertrouwd gevoel krijgen op deze pagina en geïnteresseerd zijn of worden om verder te kijken op de website. Op de home pagina staat de belangerijkste informatie over Oncollaboration met linkjes naar de andere pagina's als de gebruiker hier meer over wilt lezen. <br>
 Met het ontwerpen en maken van deze pagina heb ik rekening gehouden met de **Hierarchy of User Needs**. Hieronder leg ik stap voor stap uit hoe ik dit heb toegepast.
@@ -198,6 +222,10 @@ Ga in je browser naar `http://localhost:8000` om het project te bekijken.
 Om het werken makkelijker te maken is ook `nodemon` in dit project geïnstalleerd. Hiermee wordt de server automatisch opnieuw opgestart bij wijzigingen en hoeft dit niet meer handmatig gedaan te worden met `npm start`. 
 
 Om met `nodemon` te werken, type `npm run dev` in de terminal.
+
+
+
+
 
 ## Bronnen
 
