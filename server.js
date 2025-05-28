@@ -39,14 +39,22 @@ const bookmarkFilter = "?filter[for][_eq]=Bookmark webinar";
 // Home
 app.get("/", async function (req, res) {
   // req + res plss T-T
-  const contentResponse = await fetch(contentEndpoint)
+  const contentResponse = await fetch(contentEndpoint);
   const { data: homeContent } = await contentResponse.json();
 
   // Filter de content op gewenste keys
-  const wantedKeys = ["home-intro", "home-meet-our-doctors", "home-partners", "home-webinars", "home-contourings"];
-  const filteredContent = homeContent.filter(item => wantedKeys.includes(item.key));
+  const wantedKeys = [
+    "home-intro",
+    "home-meet-our-doctors",
+    "home-partners",
+    "home-webinars",
+    "home-contourings",
+  ];
+  const filteredContent = homeContent.filter((item) =>
+    wantedKeys.includes(item.key)
+  );
 
-  res.render("index.liquid", {  homeContent: filteredContent });
+  res.render("index.liquid", { homeContent: filteredContent });
 });
 
 // webinars
@@ -194,19 +202,16 @@ app.get("/contourings/:slug", async (req, res) => {
 app.get("/speakers", async (req, res) => {
   try {
     // Haal filter op uit query (standaard is "all")
-    const filter = req.query.filter || "all"; 
+    const filter = req.query.filter || "all";
 
     // Haal alle speakers op uit API
     const speakersResponse = await fetch(speakersEndpoint);
     const speakersJSON = await speakersResponse.json();
 
-    // Zet alle id's om naar strings
-    const speakers = speakersJSON.data.map((speaker) => ({
     // Zet elke speaker ID om  naar een string
-    const speakers = speakersJSON.data.map(speaker => ({
+    const speakers = speakersJSON.data.map((speaker) => ({
       ...speaker,
       id: String(speaker.id),
-      id: String(speaker.id)
     }));
 
     // Haal alle bookmarks op (gepost-te speakers)
@@ -215,36 +220,28 @@ app.get("/speakers", async (req, res) => {
 
     // Filter bookmarks die beginnen met "Bookmark for Julia" en matchen met bestaande speaker ID's
     const bookmarkedSpeakerIds = bookmarksJSON.data
-      .filter(bookmark => bookmark.for && bookmark.for.startsWith("Bookmark for Julia"))
-      .map(bookmark => String(bookmark.text))
-      .filter(bookmarkedId => speakers.some(speaker => speaker.id === bookmarkedId));
-      // Filter bookmarks die beginnen met 'Bookmark for Julia'
       .filter(
         (bookmark) =>
           bookmark.for && bookmark.for.startsWith("Bookmark for Julia")
       )
-
-      // Zet de id's om naar strings
       .map((bookmark) => String(bookmark.text))
-
-      // Filter id's op alleen bookmarks met een speaker
       .filter((bookmarkedId) =>
         speakers.some((speaker) => speaker.id === bookmarkedId)
       );
 
-    // Pas filtering toe op de sprekers als 'bookmarked' is geselecteerd  
+    // Pas filtering toe op de sprekers als 'bookmarked' is geselecteerd
     let filteredSpeakers = speakers;
     if (filter === "bookmarked") {
-      filteredSpeakers = speakers.filter(speaker => bookmarkedSpeakerIds.includes(speaker.id));
+      filteredSpeakers = speakers.filter((speaker) =>
+        bookmarkedSpeakerIds.includes(speaker.id)
+      );
     }
 
     // Render speaker en bookmarks naar 'speakers' view
     res.render("speakers.liquid", {
-      speakers,
-      bookmarkedIds: bookmarkedSpeakerIds,
       speakers: filteredSpeakers,
       bookmarkedIds: bookmarkedSpeakerIds,
-      currentFilter: filter
+      currentFilter: filter,
     });
   } catch (error) {
     console.error("Error loading speakers:", error);
@@ -315,7 +312,7 @@ app.post("/speakers/:id/unbookmark", async (req, res) => {
   try {
     // Verwijder bookmark
     await fetch(`${messagesEndpoint}/${speakerId}`, {
-      method: "DELETE"
+      method: "DELETE",
     });
 
     // Redirect naar filter pagina
@@ -335,13 +332,13 @@ app.get("/speakers/:slug", async (req, res) => {
     );
     const { data: speakersDetailResponseJSON } =
       await speakersDetailResponse.json();
-  
+
     res.render("speakers-detail.liquid", {
       speakers: speakersDetailResponseJSON,
     });
   } catch {
     console.error("Error handling speaker detail page", error);
-    res.status(500).send("Something went wrong.");    
+    res.status(500).send("Something went wrong.");
   }
 });
 
@@ -422,9 +419,9 @@ app.use((req, res) => {
 });
 
 // // 404 pagina als je de route niet werkt
- app.use((req, res) => {
-   res.status(404).render("404.liquid", { })
- })
+app.use((req, res) => {
+  res.status(404).render("404.liquid", {});
+});
 
 // Port
 app.set("port", process.env.PORT || 8000);
