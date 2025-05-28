@@ -1,6 +1,7 @@
-{% render "partials/head.liquid" %}
+{% assign pageTitle = "Webinars | Oncollaboration" %}
+{% include "partials/head.liquid" %}
 
-<section class="web-detail-main">
+<section class="web-detail-main" id="content">
 {% for webinar in webinars %}
 
         <h1>{{ webinar.title }}</h1>
@@ -43,7 +44,7 @@
             <section class="web-detail-q-en-a">
                     <form action="/webinars/{{ webinar.slug }}/{{ webinar.id }}" method="post" data-enhanced="form-{{ webinar.id }}">
                         <input type="text" name="comment" placeholder="Ask your question here..." />
-                        <button type="submit" class="button-green">Send</button>
+                        <button type="submit" class="button-animated"><span>Send</span></button>
                     </form>
             </section>
 

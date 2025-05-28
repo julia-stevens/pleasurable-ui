@@ -1,9 +1,10 @@
-{% render "partials/head.liquid" %}
+{% assign pageTitle = "Speakers | Oncollaboration" %}
+{% include "partials/head.liquid" %}
 
     {% comment %} {% include "partials/header.liquid" %} {% endcomment %}
 
     {% for speaker in speakers %}
-        <main class="speaker-main components-alignment-vertical">
+        <main class="speaker-main components-alignment-vertical" id="content">
             <section class="speaker-introduction components-alignment-vertical">
                 <ul class="breadcrumbs-speakers-detail components-alignment-horizontal">
                     <li><a href="/">Home &rsaquo;</a></li>
@@ -51,7 +52,7 @@
                                 "
                             />     
                             <!-- fallback image met goed ondersteund format (jpg) -->           
-                            <img src="https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=jpg" alt="" width="200" height="200" style="object-fit:cover;">
+                            <img src="https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=jpg" alt="" width="200" height="200" loading="eager" style="object-fit:cover;">
                         </picture>
                     </div>
 

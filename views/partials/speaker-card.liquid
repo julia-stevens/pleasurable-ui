@@ -34,7 +34,7 @@
                     "
                 />     
                 <!-- fallback image met goed ondersteund format (jpg) -->           
-                <img src="https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=jpg" alt="" width="200" height="200" style="object-fit:cover;">
+                <img src="https://fdnd-agency.directus.app/assets/{{ speaker.profile_picture }}?format=jpg" alt="" width="200" height="200" loading="lazy" style="object-fit:cover;">
             </picture>
         </div>
         <div class="speaker-card-name-entitle">
@@ -52,6 +52,7 @@
 
     <!-- Bookmark formulier -->
     <form method="post" action="/speakers" class="speaker-bookmark" data-enhanced="form-{{ speaker.id }}">
+        <input type="hidden" name="filter" value="{{ currentFilter }}">
         <input type="hidden" name="textField" value="{{ speaker.id }}">
         <input type="hidden" name="forField" value="Bookmark for Julia">
         <input type="hidden" name="_method" value="{% if bookmarkedIds contains speaker.id %}DELETE{% else %}POST{% endif %}">

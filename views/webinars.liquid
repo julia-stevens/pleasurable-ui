@@ -1,6 +1,7 @@
-{% render "partials/head.liquid" %}
+{% assign pageTitle = "Webinars | Oncollaboration" %}
+{% include "partials/head.liquid" %}
 
-<section class="hero-webinars">
+<section class="hero-webinars" id="content">
 
     <ul class="breadcrumb-webinars">
         <li><a href="/">Home &rsaquo;</a></li>
@@ -36,16 +37,32 @@
             <option value="old-new" {% if selectedSort=="old-new" %}selected{% endif %}>Old to New</option>
         </select>
 
-        <button class="button-green" type="submit">Filter webinars</button>
+        <button class="button-animated" type="submit"><span>Filter webinars</span></button>
     </form>
 </section>
 
 <section class="webinars">
     <h2>Results</h2>
 
+    <p>
+        {% if webinars.size == 1 %}
+        1 webinar
+        {% else %}
+        {{ webinars.size }} webinars
+        {% endif %}
+    </p>
+
     <div class="divider-webinars"></div>
 
+    {% if webinars.size > 0 %}
     {% render "partials/webinar-card.liquid", webinars: webinars, bookmarkIds: bookmarkIds %}
+    {% else %}
+    <div class="fallback-category">
+        <p>There are no webinars available for the <b>categorie: {{ selectedCategory }}</b>.
+            View other categories for your interests.
+        </p>
+    </div>
+    {% endif %}
 
 </section>
 

@@ -1,111 +1,113 @@
-{% render "partials/head.liquid" %}
+{% assign pageTitle = "Home | Oncollaboration" %}
+{% include "partials/head.liquid" %}
 
-<div class="home-main">
+<div class="home-main" id="content">
+    {% assign intro = homeContent | where: "key", "home-intro" | first %}
+    {% if intro %}
+        <section class="home-about">
+            <h1> {{ intro.heading }} </h1>
 
-    <section class="home-about">
-        <h1>The platform where Radiotherapists connect and innovate</h1>
-
-        <div class="home-about-position">
-
-            <p>Oncollaboration is a digital platform dedicated to fostering international collaboration and knowledge exchange between radiation oncology professionals in the Netherlands and Indonesia. The platform was established with the aim of building bridges between medical experts, researchers, and healthcare professionals in both countries, working together to improve the quality of cancer care.</p>
-            
-            <picture class="home-about-picture">
-                <source srcset="assets-home/avl-team.avif" type="image/avif">
-                <img src="assets-home/avl-team.jpeg" alt="5 doctors talking to each other" loading="eager" width="360px">
-            </picture>
-
-        </div>
-        
-        <a href="/about-us" class="green-button">More about Oncollaboration</a>
-
-    </section>
-
-    <section class="home-doctors">
-        <h2>Meet our doctors</h2>
-
-        <div class="home-doctors-position">
-
-            <p class="home-doctors-p">
-                The doctors at the Antoni van Leeuwenhoek Hospital in Amsterdam are leading experts in cancer treatment and research. They combine advanced medical knowledge with compassionate care, working closely with researchers to provide cutting-edge therapies.
-                At the same time, the doctors of the 's Lands Hospitaal (Sardjo Hospital) in Suriname play a vital role in providing essential healthcare services to their community. They are dedicated professionals who work with limited resources but deliver quality care through commitment and expertise.
-                Both teams share a strong focus on patient-centered care, collaboration, and continuous improvement. Together, they represent the heart of modern and compassionate medicine.
-            </p>
-    
-            <div class="home-team">
+            <div class="home-about-position">
+                <p> {{ intro.text }} 
+                    <a href=" {{ intro.read_more_link }} " class="button-animated button-home"><span> {{ intro.read_more_text }} </span></a>
+                </p>
                 
-                <div class="home-team-card">
-                    <picture>
-                        <source srcset="" type="">
-                        <img src="assets-home/judie-van-driesen.png" alt="" loading="lazy">
-                    </picture>
-                    <p><strong>Judie van Driesen</strong></p>
-                    <p>Radiation oncologist</p>
-                </div> 
-
-                <div class="home-team-card">
-                    <picture>
-                        <source srcset="" type="">
-                        <img src="assets-home/judie-van-driesen.png" alt="" loading="lazy">
-                    </picture>
-                    <p><strong>Judie van Driesen</strong></p>
-                    <p>Radiation oncologist</p>
-                </div>
-
-                <div class="home-team-card">
-                    <picture>
-                        <source srcset="" type="">
-                        <img src="assets-home/judie-van-driesen.png" alt="" loading="lazy">
-                    </picture>
-                    <p><strong>Judie van Driesen</strong></p>
-                    <p>Radiation oncologist</p>
-                </div>
-
+                <picture class="home-about-picture">
+                    <source srcset="assets-home/avl-team.avif" type="image/avif">
+                    <img src="assets-home/avl-team.jpeg" alt="5 doctors talking to each other" loading="eager" width="340px">
+                </picture>
             </div>
-        </div>   
-    </section>
+        </section>
+    {% endif %}
 
-    <section class="home-partners">
-        <h2>A Global Partnership</h2>
-        <div class="home-partners-postion">
-            <p>
-                Partnership is essential for sharing information about different types of cancer because it promotes collaboration among researchers, healthcare professionals, and institutions worldwide. By working together, they can pool knowledge, compare findings, and develop a more comprehensive understanding of cancer.
-                This collaboration leads to faster breakthroughs in treatment, earlier diagnosis, and more effective prevention strategies. Furthermore, partnerships help reduce duplication of effort and ensure that valuable data and insights are accessible to everyone involved in cancer care and research, ultimately improving outcomes for patients globally.
-            </p>
+    {% assign doctors = homeContent | where: "key", "home-meet-our-doctors" | first %}
+    {% if doctors %}
+        <section class="home-doctors">
+            <h2> {{ doctors.heading }} </h2>
 
-            <div class="scroller">
-                <div class="scroller-content">
-                    <img src="assets-home/logo1.png" alt="Logo Universitas Gadjah Mada" width="160" height="160">
-                    <img src="assets-home/logo2.png" alt="Logo Departemen Kesahatan R.I." width="160" height="160">
-                    <img src="assets-home/logo3.png" alt="Logo IDGNH" width="160" height="160">
-                    <img src="assets-home/logo4.png" alt="Logo Nederlandse Vereniging voor Radiotherapie en Oncologie" width="160" height="160">
-                    <img src="assets-home/logo5.png" alt="Logo Amsterdam UMC" width="160" height="160">
-                    <img src="assets-home/logo6.svg" alt="Logo Antoni van Leeuwenhoek" width="160" height="160">
+            <div class="home-doctors-position">
+
+                <p class="home-doctors-p"> {{ doctors.text }} </p>
+        
+                <div class="home-team">
+                    <div class="home-team-card">
+                        <picture>
+                            <source srcset="" type="">
+                            <img src="assets-home/judie-van-driesen.png" alt="" loading="lazy">
+                        </picture>
+                        <p><strong>Judie van Driesen</strong></p>
+                        <p>Radiation oncologist</p>
+                    </div> 
+
+                    <div class="home-team-card">
+                        <picture>
+                            <source srcset="" type="">
+                            <img src="assets-home/judie-van-driesen.png" alt="" loading="lazy">
+                        </picture>
+                        <p><strong>Judie van Driesen</strong></p>
+                        <p>Radiation oncologist</p>
+                    </div>
+
+                    <div class="home-team-card">
+                        <picture>
+                            <source srcset="" type="">
+                            <img src="assets-home/judie-van-driesen.png" alt="" loading="lazy">
+                        </picture>
+                        <p><strong>Judie van Driesen</strong></p>
+                        <p>Radiation oncologist</p>
+                    </div>
+                </div>
+            </div>   
+        </section>
+    {% endif %}
+
+
+    {% assign partners = homeContent | where: "key", "home-partners" | first %}
+    {% if partners %}
+        <section class="home-partners">
+            <h2> {{ partners.heading }} </h2>
+            <div class="home-partners-postion">
+                <p> {{ partners.text }} </p>
+
+                <div class="scroller">
+                    <div class="scroller-inner">
+                        <img src="assets-home/logo1.png" alt="Logo Universitas Gadjah Mada" width="auto" height="160">
+                        <img src="assets-home/logo2.png" alt="Logo Departemen Kesahatan R.I." width="auto" height="160">
+                        <img src="assets-home/logo3.png" alt="Logo IDGNH" width="auto" height="160">
+                        <img src="assets-home/logo4.png" alt="Logo Nederlandse Vereniging voor Radiotherapie en Oncologie" width="auto" height="160">
+                        <img src="assets-home/logo5.png" alt="Logo Amsterdam UMC" width="auto" height="160">
+                        <img src="assets-home/logo6.svg" alt="Logo Antoni van Leeuwenhoek" width="auto" height="160">
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    {% endif %}
+
 
     <div class="home-webinars-contourings">
-        <section class="home-webinars">
-            <h2>The webinars</h2>
-            <p>
-                Webinars have become an essential tool for learning, communication, and collaboration. They allow people from around the world to connect in real-time, share knowledge, and engage with experts—without the need for travel.
-                One of the main benefits of webinars is accessibility. Participants can join from any location, making it easier for organizations to reach a broader audience. Webinars are also cost-effective, saving time and money for both hosts and attendees.
-                In addition, webinars often include interactive features like Q&A sessions, polls, and chat functions, which encourage active participation and enhance the learning experience.
-            </p>
-            <a href="/webinars" class="green-button">See all webinars</a>
-        </section>
+        {% assign webinars = homeContent | where: "key", "home-webinars" | first %}
+        {% if webinars %}    
+            <section class="home-webinars">
+                <h2> {{ webinars.heading }} </h2>
+                <p>
+                    {{ webinars.text }} 
+                    <a href=" {{ webinars.read_more_link }}" class="button-animated button-home"><span> {{ webinars.read_more_text }} </span></a>
+                </p>
+            </section>
+        {% endif %}
 
-        <section class="home-contourings">
-            <h2>The contourings</h2>
-            <p>
-                Contouring is a crucial step in radiation therapy planning. It involves outlining the tumor and surrounding healthy tissues on medical images, such as CT or MRI scans. This helps doctors target the cancer accurately while protecting nearby organs.
-                Precise contouring ensures that the radiation dose is delivered exactly where it's needed, reducing side effects and improving treatment outcomes. It requires teamwork between radiation oncologists, radiologists, and medical physicists.
-                Thanks to advanced imaging and software, contouring has become more accurate, helping patients receive safer and more effective cancer treatment.
-            </p>
-            <a href="/contourings" class="green-button">See all contourings</a>
-        </section>
+
+        {% assign contourings = homeContent | where: "key", "home-contourings" | first %}
+        {% if contourings %}    
+            <section class="home-contourings">
+                <h2> {{ contourings.heading }} </h2>
+                <p>
+                    {{ contourings.text }}
+                    <a href=" {{ contourings.read_more_link }} " class="button-animated button-home"><span> {{ contourings.read_more_text }} </span></a>
+                </p>
+            </section>
+        {% endif %}
+
     </div>
-
 </div>
 {% render "partials/foot.liquid" %}

@@ -1,6 +1,8 @@
 {% assign pageTitle = "Contourings | Oncollaboration" %}
 {% include "partials/head.liquid" %}
 
+
+    <h1>Contourings</h1>
 <h1 class="section-title">Contourings</h1>
 
 <div class="contourings-grid">
@@ -9,5 +11,10 @@
   {% endfor %}
 </div>
 
+    {% for contouring in contourings %}
+        <ul>
+            <li><a href="/contourings/{{ contouring.slug }}">{{ contouring.slug }}</a></li>
+        </ul>
+    {% endfor %}
 
 {% render "partials/foot.liquid" %}
