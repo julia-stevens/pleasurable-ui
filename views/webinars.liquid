@@ -44,9 +44,25 @@
 <section class="webinars">
     <h2>Results</h2>
 
+    <p>
+        {% if webinars.size == 1 %}
+        1 webinar
+        {% else %}
+        {{ webinars.size }} webinars
+        {% endif %}
+    </p>
+
     <div class="divider-webinars"></div>
 
+    {% if webinars.size > 0 %}
     {% render "partials/webinar-card.liquid", webinars: webinars, bookmarkIds: bookmarkIds %}
+    {% else %}
+    <div class="fallback-category">
+        <p>There are no webinars available for the <b>categorie: {{ selectedCategory }}</b>.
+            View other categories for your interests.
+        </p>
+    </div>
+    {% endif %}
 
 </section>
 

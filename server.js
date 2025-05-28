@@ -39,7 +39,14 @@ const bookmarkFilter = "?filter[for][_eq]=Bookmark webinar"
 // Home
 app.get("/", async function (req, res) {
   // req + res plss T-T
-  res.render("index.liquid");
+  const contentResponse = await fetch(contentEndpoint)
+  const { data: homeContent } = await contentResponse.json();
+
+  // Filter de content op gewenste keys
+  const wantedKeys = ["home-intro", "home-meet-our-doctors", "home-partners", "home-webinars", "home-contourings"];
+  const filteredContent = homeContent.filter(item => wantedKeys.includes(item.key));
+
+  res.render("index.liquid", {  homeContent: filteredContent });
 });
 
 // webinars
@@ -292,16 +299,6 @@ app.get("/about-us", async (req, res) => {
   res.render("about-us.liquid", { teams, partnerLogos, aboutUsContent: filteredContent });
 });
 
-// Profile
-app.get("/profile", async (req, res) => {
-  res.render("profile.liquid");
-});
-
-// Profile bookmarks
-app.get("/profile/bookmarks", async (req, res) => {
-  res.render("profile-bookmarks.liquid");
-});
-
 // POST voor url /webinars
 app.post("/webinars", async function (req, res) {
   // Haal de textField (webinar.id) en forField uit de request body
@@ -346,6 +343,11 @@ app.post("/webinars", async function (req, res) {
     res.status(500).send("Er is een fout opgetreden.");
   }
 });
+
+// // 404 pagina als je de route niet werkt
+ app.use((req, res) => {
+   res.status(404).render("404.liquid", { })
+ })
 
 // Port
 app.set("port", process.env.PORT || 8000);
