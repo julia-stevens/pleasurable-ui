@@ -17,6 +17,27 @@ De instructie vind je in: [INSTRUCTIONS.md](https://github.com/fdnd-task/pleasur
   * [Licentie](#licentie)
 
 ## Beschrijving
+### Home
+De `home` pagina geeft de gebruiker het allereerste beeld van de website, daarom is het belangrijk dat ze een vertrouwd gevoel krijgen op deze pagina en geïnteresseerd zijn of worden om verder te kijken op de website. Op de home pagina staat de belangerijkste informatie over Oncollaboration met linkjes naar de andere pagina's als de gebruiker hier meer over wilt lezen. <br>
+Met het ontwerpen en maken van deze pagina heb ik rekening gehouden met de **Hierarchy of User Needs**. Hieronder leg ik stap voor stap uit hoe ik dit heb toegepast.
+
+#### 1  -  Functional (Functioneel)
+Ik heb ervoor gezorgd dat alle data op deze pagina ook zichtbaar / bruikbaar is als er alleen HTML wordt ingeladen in de browser. Ook heb ik gewerkt volgens het **mobile first** principe, dit houd in dat de pagina gebouwd is voor een mobiel scherm. Door de juiste HTML structuur is de pagina ook volledig toegankelijk voor gebruikers die via het toetsenbord navigeren.
+Vanaf hier ben ik verder gaan werken aan de styling van de website, om zo verder in de Hierarchy of User Needs driehoek te komen.
+![image](https://github.com/user-attachments/assets/1b23dca7-1457-4957-a3d1-1304b328a813)
+
+#### 2  -  Reliable (Betrouwbaar)
+De pagina bied snel de content die word ingeladen uit de database, de links naar andere pagina's werken zoals de gebruiker dit zal verwachten. Kortom de pagina zal niet voor gekke verassingen zorgen. 
+
+#### 3  -  Usable (Gebruiksvriendelijk)
+Door het uiterlijk van de pagina in de huisstijl van Oncollaboration krijgt de gebruiker een fijne indruk van de webpagina. In de huisstijl is rekening gehouden met het contrast van de kleuren, zo is de website voor iedere gebruiker goed toegankelijk. Om het voor de gebruikers die met een toestenbord over de pagina navigeren duidelijk te maken waar ze zich bevinden op de pagina is de focus state op de buttons/links opvallender gemaakt.
+<br> ![image](https://github.com/user-attachments/assets/d646dd06-5492-43a0-b628-b5110810b066)
+
+#### 4  -  Pleasurable (Aangenaam)
+De hover states op de buttons/links geven de gebruiker het gevoel dat de interface "leeft" en met hen communiceert. Door de speelse styling hiervan maakt dit de pagina meer aantrekkelijk voor de gebruikers.
+https://github.com/user-attachments/assets/8fbcc7a0-380f-4317-bedf-b517917bc338
+
+*** 
 ### Webinars
 
 #### **Bookmark functionaliteit webinars**
@@ -43,6 +64,26 @@ De webinars zijn via de filter functionaliteit te filteren op categorie en datum
 
 https://github.com/user-attachments/assets/3890dc21-2800-4a6a-b10a-edd7070f33cd
 
+*** 
+### Webinar detail
+De `webinar detail` pagina is de pagina waar de gebruiker komt om een webinar terug te kijken, of om hier informatie over te verkrijgen. Dit kan door beschrijving te lezen, de speakers van de webinar te bekijken of door een vraag in de comments achter te laten.
+
+#### 1  -  Functional (Functioneel)
+Ik heb ervoor gezorgd dat alle data op deze pagina ook zichtbaar / bruikbaar is als er geen CSS wordt ingeladen in de browser. Ook heb ik gewerkt volgens het **mobile first** principe, dit houd in dat de pagina gebouwd is voor een mobiel scherm. Door de juiste HTML structuur is de pagina ook volledig toegankelijk voor gebruikers die via het toetsenbord navigeren. <br>
+Ook de chat/comment functie is volledig te bedienen via het toetsenbord en blijft werkend zonder dat er styling voor nodig is.
+![image](https://github.com/user-attachments/assets/da8b3a39-21f8-473b-a2e4-107eeb0350f7)
+
+#### 2  -  Reliable (Betrouwbaar)
+De pagina is ook toegankelijk op grotere schermen. De data wordt efficiënt ingeladen uit de database waardoor dit altijd snel te zien is op de pagina. De chat/comment functie blijft ook werken op verschillende scherm groottes.  
+
+#### 3  -  Usable (Gebruiksvriendelijk)
+De chat/comment functie geeft aan wanneer er een comment wordt verzonden dat de browser aan het laden is en de gebruiker dus niet ongeduldig hoeft te worden. Ook refresht niet de gehele pagina maar alleen het stukje van de comments zodat de gebruiker niet zelf de gehele pagina hoeft te refreshen, maar ook geen last heeft van de pagina die automatisch refresht.
+**FILMPJE LOADING STATE**
+
+#### 4  -  Pleasurable (Aangenaam)
+De basis van de chatfunctie blijft het altijd doen, door de styling die in alle nieuwe browsers wordt ondersteund wordt de gebruikers ervaring voor de gebruiker een stuk fijner. 
+
+*** 
 ### Header en footer
 
 De header bevat de main linkjes van de website. In de footer staan alle linkjes vermeld. Daarnaast bevatten de header en footer beiden de logo's van het AvL ziekenhuis en Kemenkes.
@@ -54,6 +95,7 @@ De header bevat de main linkjes van de website. In de footer staan alle linkjes 
 
 https://github.com/user-attachments/assets/c436be47-9c8e-4c73-96e6-c383b82f95ee
 
+*** 
 ### Speakers
 Op de `speakers` pagina krijgt de gebruiker een overzicht van alle sprekers die een webinar hebben gegeven. De sprekers kunnen vanaf deze pagina ge-bookmarked worden én de gebruiker kan doorklikken voor meer informatie over de betreffende spreker. 
 
