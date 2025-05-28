@@ -33,7 +33,7 @@ const partnerLogosEndpoint = `${directusApiBaseUrl}/avl_logos`;
 const contentEndpoint = `${directusApiBaseUrl}/avl_content`;
 
 const slugFilter = "?filter[slug][_eq]=";
-const bookmarkFilter = "?filter[for][_eq]=Bookmark webinar"
+const bookmarkFilter = "?filter[for][_eq]=Bookmark webinar";
 
 // Routes
 // Home
@@ -90,7 +90,7 @@ app.get("/webinars", async (req, res) => {
     selectedCategory: categoryFilter,
     selectedSort: sortOption,
     filtersActive,
-    bookmarkIds: bookmarkArray
+    bookmarkIds: bookmarkArray,
   });
 });
 
@@ -98,14 +98,19 @@ app.get("/webinars", async (req, res) => {
 app.get("/webinars/:slug", async (req, res) => {
   const slug = req.params.slug;
 
-  const webinarDetailResponse = await fetch(`${webinarsEndpoint}${slugFilter}${slug}&fields=*,speakers.*.*,resources.*.*,categories.*.*`);
-  const { data: webinarDetailResponseJSON } = await webinarDetailResponse.json();
+  const webinarDetailResponse = await fetch(
+    `${webinarsEndpoint}${slugFilter}${slug}&fields=*,speakers.*.*,resources.*.*,categories.*.*`
+  );
+  const { data: webinarDetailResponseJSON } =
+    await webinarDetailResponse.json();
 
   const categoriesDetailResponse = await fetch(`${categoriesEndpoint}`);
-  const { data: categoriesDetailResponseJSON } = await categoriesDetailResponse.json();
+  const { data: categoriesDetailResponseJSON } =
+    await categoriesDetailResponse.json();
 
   const commentsDetailResponse = await fetch(`${commentsEndpoint}`);
-  const { data: commentsDetailResponseJSON } = await commentsDetailResponse.json();
+  const { data: commentsDetailResponseJSON } =
+    await commentsDetailResponse.json();
 
   res.render("webinars-detail.liquid", {
     webinars: webinarDetailResponseJSON,
@@ -116,27 +121,90 @@ app.get("/webinars/:slug", async (req, res) => {
 
 // Contourings
 app.get("/contourings", async (req, res) => {
-  const contouringsResponse = await fetch(contouringsEndpoint);
-  const { data: contouringsResponseJSON } = await contouringsResponse.json(); // fetch and json can be a helper function
+  const contouringsResponse = await fetch(
+    `${contouringsEndpoint}?fields=user_id,id,title,slug,image_scan,used_literature,categories`
+  );
+  const { data: contourings } = await contouringsResponse.json();
+
+  const categoriesResponse = await fetch(
+    `${categoriesEndpoint}?fields=id,name`
+  );
+  const { data: categories } = await categoriesResponse.json();
+
+  const categoryMap = Object.fromEntries(
+    categories.map((category) => [category.id, category.name])
+  );
+
+  const contouringsWithCategory = contourings.map((contouring) => ({
+    ...contouring,
+    categoryName: categoryMap[contouring.categories?.[0]] || "Uncategorized",
+  }));
 
   res.render("contourings.liquid", {
-    contourings: contouringsResponseJSON,
+    contourings: contouringsWithCategory,
+    categories,
   });
 });
 
-// Contourings detail
 app.get("/contourings/:slug", async (req, res) => {
-  const slug = req.params.slug;
-  const contouringsDetailResponse = await fetch(
-    `${contouringsEndpoint}${slugFilter}${slug}`
-  );
-  const { data: contouringsDetailResponseJSON } =
-    await contouringsDetailResponse.json();
+  const { slug } = req.params;
 
-  res.render("contourings-detail.liquid", {
-    contourings: contouringsDetailResponseJSON,
+  // Fetch the contouring by slug (should return an array with one or zero items)
+  const contouringResponse = await fetch(
+    `${contouringsEndpoint}?filter[slug][_eq]=${slug}&fields=user_id,id,title,slug,image_scan,used_literature,categories`
+  );
+  const { data: contourings } = await contouringResponse.json();
+
+  if (!contourings.length) {
+    return res.status(404).send("Contouring not found");
+  }
+
+  const contouring = contourings[0];
+
+  // Fetch categories to map IDs to names
+  const categoriesResponse = await fetch(
+    `${categoriesEndpoint}?fields=id,name`
+  );
+  const { data: categories } = await categoriesResponse.json();
+
+  const categoryMap = Object.fromEntries(
+    categories.map((category) => [category.id, category.name])
+  );
+
+  // Map categories to their names
+  const categoryNames = (contouring.categories || []).map(
+    (catId) => categoryMap[catId] || "Uncategorized"
+  );
+
+  // Render detail page
+  res.render("contouring-detail.liquid", {
+    contouring,
+    categoryNames,
   });
 });
+
+// fetch contourings
+// const contouringsResponse = await fetch(
+//   `${contouringsEndpoint}?fields=user_id,id,title,slug,image_scan,used_literature,categories`
+// );
+// const { data: contourings } = await contouringsResponse.json();
+
+// fetch categories
+// const categoriesResponse = await fetch(
+//   `${categoriesEndpoint}?fields=id,name`
+// );
+// const { data: categories } = await categoriesResponse.json();
+
+// const contouringsWithCategory = contourings.map((contouring) => ({
+//   ...contouring,
+//   categoryName: categoryMap[contouring.categories[0]],
+// }));
+
+//   res.render("contourings.liquid", {
+//     contourings,
+//     // categories,
+//   });
+// });
 
 app.get("/speakers", async (req, res) => {
   try {
@@ -145,9 +213,9 @@ app.get("/speakers", async (req, res) => {
     const speakersJSON = await speakersResponse.json();
 
     // Zet alle id's om naar strings
-    const speakers = speakersJSON.data.map(speaker => ({
+    const speakers = speakersJSON.data.map((speaker) => ({
       ...speaker,
-      id: String(speaker.id) 
+      id: String(speaker.id),
     }));
 
     // Haal alle bookmarks op (gepost-te speakers)
@@ -156,18 +224,23 @@ app.get("/speakers", async (req, res) => {
 
     const bookmarkedSpeakerIds = bookmarksJSON.data
       // Filter bookmarks die beginnen met 'Bookmark for Julia'
-      .filter(bookmark => bookmark.for && bookmark.for.startsWith("Bookmark for Julia"))
+      .filter(
+        (bookmark) =>
+          bookmark.for && bookmark.for.startsWith("Bookmark for Julia")
+      )
 
       // Zet de id's om naar strings
-      .map(bookmark => String(bookmark.text))
+      .map((bookmark) => String(bookmark.text))
 
       // Filter id's op alleen bookmarks met een speaker
-      .filter(bookmarkedId => speakers.some(speaker => speaker.id === bookmarkedId));
+      .filter((bookmarkedId) =>
+        speakers.some((speaker) => speaker.id === bookmarkedId)
+      );
 
     // Render speaker en bookmarks naar 'speakers' view
     res.render("speakers.liquid", {
       speakers,
-      bookmarkedIds: bookmarkedSpeakerIds
+      bookmarkedIds: bookmarkedSpeakerIds,
     });
   } catch (error) {
     console.error("Error loading speakers:", error);
@@ -190,21 +263,24 @@ app.post("/speakers", async (req, res) => {
     if (_method === "DELETE") {
       // Zoek naar match op id & for (Bookmark for Julia)
       let bookmarkToDelete = bookmarks.find(
-        bookmark => String(bookmark.text) === speakerId && bookmark.for === userBookmarkLabel
+        (bookmark) =>
+          String(bookmark.text) === speakerId &&
+          bookmark.for === userBookmarkLabel
       );
-      
-      // Als match gevonden, verwijder de bookmark 
+
+      // Als match gevonden, verwijder de bookmark
       if (bookmarkToDelete) {
         await fetch(`${messagesEndpoint}/${bookmarkToDelete.id}`, {
           method: "DELETE",
-          headers: { "Content-Type": "application/json;charset=UTF-8" }
+          headers: { "Content-Type": "application/json;charset=UTF-8" },
         });
-      } 
+      }
     } else {
-
       // Check of de bookmark al bestaat (check op id en for (Bookmark for Julia))
       const alreadyBookmarked = bookmarks.find(
-        bookmark => String(bookmark.text) === speakerId && bookmark.for === userBookmarkLabel
+        (bookmark) =>
+          String(bookmark.text) === speakerId &&
+          bookmark.for === userBookmarkLabel
       );
 
       // Als bookmark nog niet bestaat, POST deze dan
@@ -214,15 +290,14 @@ app.post("/speakers", async (req, res) => {
           headers: { "Content-Type": "application/json;charset=UTF-8" },
           body: JSON.stringify({
             text: speakerId,
-            for: userBookmarkLabel
-          })
+            for: userBookmarkLabel,
+          }),
         });
-      } 
+      }
     }
-    
+
     // Redirect naar vorige pagina of naar "/speakers"
     res.redirect(303, req.get("Referer") || "/speakers");
-
   } catch (error) {
     console.error("Error handling speaker bookmark:", error);
     res.status(500).send("Something went wrong.");
@@ -245,21 +320,26 @@ app.get("/speakers/:slug", async (req, res) => {
 
 // About us
 app.get("/about-us", async (req, res) => {
-
-  const teamResponse = await fetch(teamEndpoint + "?fields=role,name,photo")
+  const teamResponse = await fetch(teamEndpoint + "?fields=role,name,photo");
   const { data: teams } = await teamResponse.json();
 
-  const logoResponse = await fetch(partnerLogosEndpoint)
+  const logoResponse = await fetch(partnerLogosEndpoint);
   const { data: partnerLogos } = await logoResponse.json();
 
-  const contentResponse = await fetch(contentEndpoint)
+  const contentResponse = await fetch(contentEndpoint);
   const { data: aboutUsContent } = await contentResponse.json();
 
   // Filter de content op gewenste keys
   const wantedKeys = ["about-us-top", "about-us-bottom"];
-  const filteredContent = aboutUsContent.filter(item => wantedKeys.includes(item.key));
+  const filteredContent = aboutUsContent.filter((item) =>
+    wantedKeys.includes(item.key)
+  );
 
-  res.render("about-us.liquid", { teams, partnerLogos, aboutUsContent: filteredContent });
+  res.render("about-us.liquid", {
+    teams,
+    partnerLogos,
+    aboutUsContent: filteredContent,
+  });
 });
 
 // Profile
@@ -279,19 +359,21 @@ app.post("/webinars", async function (req, res) {
 
   try {
     // Haal de bookmarks op
-    const bookmarkResponse = await fetch(`${messagesEndpoint}`)
-    const bookmarkResponseJSON = await bookmarkResponse.json()
+    const bookmarkResponse = await fetch(`${messagesEndpoint}`);
+    const bookmarkResponseJSON = await bookmarkResponse.json();
 
     // Zoek in de bookmarks of het item al bestaat door te controleren op textField (webinar.id)
-    const existingItem = bookmarkResponseJSON.data.find(item => item.text === textField);
+    const existingItem = bookmarkResponseJSON.data.find(
+      (item) => item.text === textField
+    );
 
     if (existingItem) {
       // Als het item al bestaat in de bookmarks, verwijder het dan
       await fetch(`${messagesEndpoint}/${existingItem.id}`, {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json;charset=UTF-8"
-        }
+          "Content-Type": "application/json;charset=UTF-8",
+        },
       });
       console.log(`Verwijderd uit bookmarks webinars: ${textField}`);
     } else {
@@ -300,11 +382,11 @@ app.post("/webinars", async function (req, res) {
         method: "POST",
         body: JSON.stringify({
           text: textField,
-          for: forField
+          for: forField,
         }),
         headers: {
-          "Content-Type": "application/json;charset=UTF-8"
-        }
+          "Content-Type": "application/json;charset=UTF-8",
+        },
       });
       console.log(`Toegevoegd aan bookmarks webinar: ${textField}`);
     }
