@@ -1,0 +1,54 @@
+
+{% render "partials/head.liquid" %}
+
+
+<article class="detail-container">
+  <h1>{{ contouring.title }}</h1>
+
+  {% if contouring.image_scan %}
+    <figure class="detail-image-wrapper">
+      <picture>
+        <source srcset="https://fdnd-agency.directus.app/assets/{{ contouring.image_scan }}?format=webp" type="image/webp" />
+        <img 
+          src="https://fdnd-agency.directus.app/assets/{{ contouring.image_scan }}" 
+          alt="{{ contouring.title }}" 
+          loading="lazy"
+          width="640"
+          height="480"
+        />
+      </picture>
+      {% if categoryNames and categoryNames.size > 0 %}
+        <span class="detail-badge">{{ categoryNames[0] | upcase }}</span>
+      {% endif %}
+    </figure>
+  {% endif %}
+
+  <section class="detail-info">
+    <h2>Categories</h2>
+    <ul>
+      {% if categoryNames and categoryNames.size > 0 %}
+        {% for category in categoryNames %}
+          <li>{{ category }}</li>
+        {% endfor %}
+      {% else %}
+        <li>Uncategorized</li>
+      {% endif %}
+    </ul>
+
+    {% if contouring.used_literature and contouring.used_literature.size > 0 %}
+      <h2>Used Literature IDs</h2>
+      <ul>
+        {% for litId in contouring.used_literature %}
+          <li>ID: {{ litId }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No literature info available.</p>
+    {% endif %}
+  </section>
+
+  <a href="/contourings" class="back-link">← Back to contourings</a>
+</article>
+
+{% render "partials/foot.liquid" %} 
+
