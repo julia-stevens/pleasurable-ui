@@ -1,0 +1,28 @@
+<article class="contouring-card">
+  {% if contouring.image_scan %}
+    <figure class="contouring-media">
+      <picture class="contouring-image">
+        <source srcset="https://fdnd-agency.directus.app/assets/{{ contouring.image_scan }}?format=webp" type="image/webp">
+        <img 
+          src="https://fdnd-agency.directus.app/assets/{{ contouring.image_scan }}" 
+          alt="{{ contouring.title }}" 
+          loading="lazy" 
+          width="320" 
+          height="240"
+        >
+      </picture>
+
+      {% if contouring.categoryName %}
+        <span class="contouring-category">
+          {{ contouring.categoryName }}
+        </span>
+      {% endif %}
+    </figure>
+  {% endif %}
+
+  <section class="contouring-content">
+    <h2>{{ contouring.title }}</h2>
+    <p>Prof. R.P. (Rob) Coppes, PhD</p>
+    <a href="/contourings/{{ contouring.slug }}" class="contouring-link">Bekijk contouring →</a>
+  </section>
+</article>
