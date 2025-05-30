@@ -131,10 +131,10 @@ De bookmark functie op de `speaker` pagina geeft de gebruiker de mogelijkheid sp
 
 **1 & 2 - Functional & Reliable**
 
-De bookmark functie is gebouwd met semantisch correcte HTML. Dit wil zeggen dat de functie toegankelijk is en dus gebruikt kan worden door gebruikers die met het toetsenbord navigeren en ook voor gebruiker die afhankelijk zijn van een screenreader, dit is getest in #47.
+De bookmark functie is gebouwd met semantisch correcte HTML. Dit wil zeggen dat de functie toegankelijk is en dus gebruikt kan worden door gebruikers die met het toetsenbord navigeren en ook voor gebruiker die afhankelijk zijn van een screenreader, dit is getest in [#47](https://github.com/julia-stevens/pleasurable-ui/issues/47).
 Daarnaast draagt het bij aan de SEO, oftewel zoekmachines begrijpen de inhoud van de code beter. Ook maakt het code beter onderhoudbaar en past is het een best practice. 
 
-In deze laag is ook de eerste stap zichtbaar van het _progressive enhancement_ principe. Dit principe houdt in dat je een functie eerst bouwt met pure, eenvoudige code, waarmee de functie in de basis werkt. Vervolgens, in de volgende lagen, wordt de functie uitgebreid (enhanced). Voor de bookmark functie betekent dit bijvoorbeeld dat de functie ook functioneert als een gebruiker een verouderde browser heeft, waarin sommige nieuwe code bijvoorbeeld niet ondersteund wordt. Dit is getest in #50. 
+In deze laag is ook de eerste stap zichtbaar van het _progressive enhancement_ principe. Dit principe houdt in dat je een functie eerst bouwt met pure, eenvoudige code, waarmee de functie in de basis werkt. Vervolgens, in de volgende lagen, wordt de functie uitgebreid (enhanced). Voor de bookmark functie betekent dit bijvoorbeeld dat de functie ook functioneert als een gebruiker een verouderde browser heeft, waarin sommige nieuwe code bijvoorbeeld niet ondersteund wordt. Dit is getest in [#50](https://github.com/julia-stevens/pleasurable-ui/issues/50). 
 
 **3 - Usable**
 
@@ -155,7 +155,7 @@ Op zowel de `webinars` pagina als de `speakers` pagina heeft de gebruiker de mog
 
 **1 & 2 - Functional & Reliable**
 
-De bookmark functie is gebouwd met semantisch correcte HTML. Dit wil zeggen dat de functie toegankelijk is en dus gebruikt kan worden door gebruikers die met het toetsenbord navigeren en ook voor gebruiker die afhankelijk zijn van een screenreader, dit is getest in #47.
+De bookmark functie is gebouwd met semantisch correcte HTML. Dit wil zeggen dat de functie toegankelijk is en dus gebruikt kan worden door gebruikers die met het toetsenbord navigeren en ook voor gebruiker die afhankelijk zijn van een screenreader, dit is getest in [#47](https://github.com/julia-stevens/pleasurable-ui/issues/47).
 Daarnaast draagt het bij aan de SEO, oftewel zoekmachines begrijpen de inhoud van de code beter. Ook maakt het code beter onderhoudbaar en past is het een best practice. 
 
 In deze laag is ook de eerste stap zichtbaar van het _progressive enhancement_ principe. Dit principe houdt in dat je een functie eerst bouwt met pure, eenvoudige code, waarmee de functie in de basis werkt. Vervolgens, in de volgende lagen, wordt de functie uitgebreid (enhanced). Voor het filter betekent dit de functie op elk apparaat in elke browser werkt. Dit is getest in #50.
@@ -178,21 +178,21 @@ https://github.com/user-attachments/assets/a0c0e4ba-bdee-4b13-9f4f-e8a5ac45bcfe
 In dit project is gebruikt gemaakt van Node.js en Express om een webserver op te zetten. Ik gebruik Liquid als template-engine voor het genereren van dynamische HTML-pagina's.
 
 ### Routes en dataverwerking [links worden aangevuld wanneer server klaar is]
-* [`app.get("/")`](#): Laadt de homepage en rendert de `index.liquid`.
+* [`app.get("/")`](https://github.com/julia-stevens/pleasurable-ui/blob/8fc7138fc3fea61b9104f8a3883c27a5629c0a5f/server.js#L39-L50): Laadt de homepage en rendert de `index.liquid`.
 
-* [`app.get("/webinars")`](#): Haalt alle webinars op via de Directus API en past filters toe op categorie en sorteervolgorde. Bookmark-data wordt opgehaald via `messages`, en alles wordt gerenderd in `webinars.liquid`.
-* [`app.get("/webinars/:slug")`](#): Haalt detailgegevens op van één specifieke webinar (inclusief sprekers, categorieën en resources) op basis van de slug en toont dit in `webinars-detail.liquid`.
-* [`app.post("/webinars")`](#): Verwerkt het toevoegen of verwijderen van een webinar uit de bookmarks. Dit gebeurt via `messages` in de Directus API.
+* [`app.get("/webinars")`](https://github.com/julia-stevens/pleasurable-ui/blob/8fc7138fc3fea61b9104f8a3883c27a5629c0a5f/server.js#L52-L102): Haalt alle webinars op via de Directus API en past filters toe op categorie en sorteervolgorde. Bookmark-data wordt opgehaald via `messages`, en alles wordt gerenderd in `webinars.liquid`.
+* [`app.get("/webinars/:slug")`](https://github.com/julia-stevens/pleasurable-ui/blob/8fc7138fc3fea61b9104f8a3883c27a5629c0a5f/server.js#L104-L127): Haalt detailgegevens op van één specifieke webinar (inclusief sprekers, categorieën en resources) op basis van de slug en toont dit in `webinars-detail.liquid`.
+* [`app.post("/webinars")`](https://github.com/julia-stevens/pleasurable-ui/blob/8fc7138fc3fea61b9104f8a3883c27a5629c0a5f/server.js#L307-L350): Verwerkt het toevoegen of verwijderen van een webinar uit de bookmarks. Dit gebeurt via `messages` in de Directus API.
 
-* [`app.get("/contourings")`](#): Haalt een lijst van alle contourings op en toont deze in `contourings.liquid`.
-* [`app.get("/contourings/:slug")`](#): Haalt de detailgegevens van een contouring op via de slug en toont dit in `contourings-detail.liquid`.
+* [`app.get("/contourings")`](https://github.com/julia-stevens/pleasurable-ui/blob/8fc7138fc3fea61b9104f8a3883c27a5629c0a5f/server.js#L129-L137): Haalt een lijst van alle contourings op en toont deze in `contourings.liquid`.
+* [`app.get("/contourings/:slug")`](https://github.com/julia-stevens/pleasurable-ui/blob/8fc7138fc3fea61b9104f8a3883c27a5629c0a5f/server.js#L139-L151): Haalt de detailgegevens van een contouring op via de slug en toont dit in `contourings-detail.liquid`.
 
-* [`app.get("/speakers")`](#): Haalt alle sprekers op, toont bookmarks (op basis van `Bookmark for Julia`) en ondersteunt filtering op "all" of "bookmarked". Wordt weergegeven in `speakers.liquid`.
-* [`app.get("/speakers/:slug")`](#): Laadt de detailpagina van een specifieke spreker (inclusief gerelateerde webinars) in `speakers-detail.liquid`.
-* [`app.post("/speakers")`](#): Verwerkt het bookmarken of unbookmaken van een spreker. Controleert op duplicatie en gebruikt `_method=DELETE` voor verwijderacties.
-* [`app.post("/speakers/:id/unbookmark")`](#): Verwijdert expliciet een bookmark voor een spreker op basis van ID, met redirect naar de juiste filter.
+* [`app.get("/speakers")`](https://github.com/julia-stevens/pleasurable-ui/blob/8fc7138fc3fea61b9104f8a3883c27a5629c0a5f/server.js#L153-L195): Haalt alle sprekers op, toont bookmarks (op basis van `Bookmark for Julia`) en ondersteunt filtering op "all" of "bookmarked". Wordt weergegeven in `speakers.liquid`.
+* [`app.get("/speakers/:slug")`](https://github.com/julia-stevens/pleasurable-ui/blob/8fc7138fc3fea61b9104f8a3883c27a5629c0a5f/server.js#L269-L286): Laadt de detailpagina van een specifieke spreker (inclusief gerelateerde webinars) in `speakers-detail.liquid`.
+* [`app.post("/speakers")`](https://github.com/julia-stevens/pleasurable-ui/blob/8fc7138fc3fea61b9104f8a3883c27a5629c0a5f/server.js#L197-L249): Verwerkt het bookmarken of unbookmaken van een spreker. Controleert op duplicatie en gebruikt `_method=DELETE` voor verwijderacties.
+* [`app.post("/speakers/:id/unbookmark")`](https://github.com/julia-stevens/pleasurable-ui/blob/8fc7138fc3fea61b9104f8a3883c27a5629c0a5f/server.js#L251-L267): Verwijdert expliciet een bookmark voor een spreker op basis van ID, met redirect naar de juiste filter.
 
-* [`app.get("/about-us")`](#): Haalt teamleden, partnerlogo’s en contentblokken op en rendert deze op de `about-us.liquid` pagina.
+* [`app.get("/about-us")`](https://github.com/julia-stevens/pleasurable-ui/blob/8fc7138fc3fea61b9104f8a3883c27a5629c0a5f/server.js#L288-L305): Haalt teamleden, partnerlogo’s en contentblokken op en rendert deze op de `about-us.liquid` pagina.
 
 ### Data ophalen en HTML renderen
 
