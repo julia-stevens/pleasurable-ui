@@ -152,7 +152,6 @@ app.get("/contourings/:slug", async (req, res) => {
 
 // Speakers
 app.get("/speakers", async (req, res) => {
-  try {
     // Haal filter op uit query (standaard is "all")
     const filter = req.query.filter || "all"; 
 
@@ -188,10 +187,6 @@ app.get("/speakers", async (req, res) => {
       bookmarkedIds: bookmarkedSpeakerIds,
       currentFilter: filter
     });
-  } catch (error) {
-    console.error("Error loading speakers:", error);
-    res.status(500).send("Error loading speakers.");
-  }
 });
 
 app.post("/speakers", async (req, res) => {
@@ -200,7 +195,6 @@ app.post("/speakers", async (req, res) => {
   const speakerId = String(textField); // zet id om naar string
   const userBookmarkLabel = forField;
 
-  try {
     // Haal bestaande bookmarks op
     const bookmarksResponse = await fetch(`${messagesEndpoint}`);
     const bookmarksJSON = await bookmarksResponse.json();
@@ -241,18 +235,12 @@ app.post("/speakers", async (req, res) => {
     
     // Redirect naar vorige pagina of naar "/speakers"
     res.redirect(303, req.get("Referer") || "/speakers");
-
-  } catch (error) {
-    console.error("Error handling speaker bookmark:", error);
-    res.status(500).send("Something went wrong.");
-  }
 });
 
 app.post("/speakers/:id/unbookmark", async (req, res) => {
   const speakerId = req.params.id;
   const redirectFilter = req.body.filter || "all";
 
-  try {
     // Verwijder bookmark
     await fetch(`${messagesEndpoint}/${speakerId}`, {
       method: "DELETE"
@@ -260,15 +248,10 @@ app.post("/speakers/:id/unbookmark", async (req, res) => {
 
     // Redirect naar filter pagina
     res.redirect(`/speakers?filter=${redirectFilter}`);
-  } catch (error) {
-    console.error("Error unbookmarking speaker:", error);
-    res.status(500).send("Failed to unbookmark speaker.");
-  }
 });
 
 // Speakers detail
 app.get("/speakers/:slug", async (req, res) => {
-  try {
     const slug = req.params.slug;
     const speakersDetailResponse = await fetch(
       `${speakersEndpoint}${slugFilter}${slug}&fields=*,webinars.*.*`
@@ -279,10 +262,6 @@ app.get("/speakers/:slug", async (req, res) => {
     res.render("speakers-detail.liquid", {
       speakers: speakersDetailResponseJSON,
     });
-  } catch {
-    console.error("Error handling speaker detail page", error);
-    res.status(500).send("Something went wrong.");    
-  }
 });
 
 // About us
